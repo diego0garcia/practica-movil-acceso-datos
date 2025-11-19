@@ -19,3 +19,8 @@ captures
 !*.xcworkspace/contents.xcworkspacedata
 **/xcshareddata/WorkspaceSettings.xcsettings
 node_modules/
+composeApp/logs
+composeApp/derby.log
+composeApp/bbdd/derby.log
+composeApp/bbdd/logs
+composeApp/bbdd/log
