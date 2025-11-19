@@ -1,5 +1,6 @@
-package ies.sequeros.com.dam.pmdm.administrador.ui.dependientes
+package ies.sequeros.com.dam.pmdm.administrador.ui.categorias
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -20,7 +21,6 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
-
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -30,28 +30,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavHostController
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.DependienteDTO
-
-import ies.sequeros.com.dam.pmdm.administrador.ui.AdminRoutes
-import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
-
+import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependienteCard
 
 @Composable
-fun Dependientes(
-    mainAdministradorViewModel: MainAdministradorViewModel,
-    dependientesViewModel: DependientesViewModel,
-    onSelectItem:(DependienteDTO?)->Unit
-){
-    val items by dependientesViewModel.items.collectAsState()
-    var searchText by remember { mutableStateOf("")}
+fun Categorias (
+
+) {
+    //val items by dependientesViewModel.items.collectAsState()
+    var searchText by remember { mutableStateOf("") }
+    /*
     val filteredItems = items.filter {
         if (searchText.isNotBlank()) {
-            it.name.contains(searchText, ignoreCase = true) ||  it.email.contains(searchText, ignoreCase = true)
-        }else{
+            it.name.contains(searchText, ignoreCase = true) || it.email.contains(searchText, ignoreCase = true)
+        } else {
             true
         }
     }
+    */
 
     // Contenedor principal
     Column(
@@ -61,7 +56,7 @@ fun Dependientes(
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Text(
-            text = "DEPENDIENTES",
+            text = "CATEGORIAS",
             color = MaterialTheme.colorScheme.primary
         )
         // 🔹 Barra superior fija con buscador y botón añadir
@@ -76,7 +71,7 @@ fun Dependientes(
                 onValueChange = { searchText = it },
                 shape = RoundedCornerShape(16.dp),
                 placeholder = { Text("Buscar...") },
-                leadingIcon = { Icon(Icons.Default.Search, contentDescription ="Search" ) },
+                leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
                 modifier = Modifier
                     .weight(1f)
                     .padding(8.dp)
@@ -84,58 +79,57 @@ fun Dependientes(
             Spacer(Modifier.width(8.dp))
             OutlinedButton(
                 onClick = {
-                    dependientesViewModel.setSelectedDependiente(null)
-                    onSelectItem(null);
+                    //dependientesViewModel.setSelectedDependiente(null)
+                    //onSelectItem(null);
 
                 },
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary)
-            ) {  Icon(
-                imageVector = Icons.Default.Add,
-                contentDescription = "Add",
-                modifier = Modifier
-                    .size(ButtonDefaults.IconSize)
-            ) }
+            ) {
+                Icon(
+                    imageVector = Icons.Default.Add,
+                    contentDescription = "Add",
+                    modifier = Modifier
+                        .size(ButtonDefaults.IconSize)
+                )
+            }
 
         }
         LazyVerticalGrid(
             columns = GridCells.Adaptive(
                 minSize = 512.dp
             )
-        ){
+        ) {
+            /*
             items(filteredItems.size) { item ->
-                DependienteCard(filteredItems.get(item),
+                DependienteCard(
+                    filteredItems.get(item),
                     {
 
-                        val element=it.copy(
-                            enabled = !it.enabled
-                        )
-                       dependientesViewModel.switchEnableDependiente(element)
-                    },{
-
-                        val element=it.copy(
+                        val element = it.copy(
                             enabled = !it.enabled
                         )
                         dependientesViewModel.switchEnableDependiente(element)
-                    },{},{
+                    }, {
+
+                        val element = it.copy(
+                            enabled = !it.enabled
+                        )
+                        dependientesViewModel.switchEnableDependiente(element)
+                    }, {}, {
                         onSelectItem(it);
 
-                    },{
+                    }, {
                         dependientesViewModel.delete(it)
                     },
                     {
-                        val element=it.copy(
+                        val element = it.copy(
                             isAdmin = !it.isAdmin
                         )
                         dependientesViewModel.switchAdmin(element)
 
 
-
                     })
 
-            }
-        }
+            */}
     }
-
-
-
 }

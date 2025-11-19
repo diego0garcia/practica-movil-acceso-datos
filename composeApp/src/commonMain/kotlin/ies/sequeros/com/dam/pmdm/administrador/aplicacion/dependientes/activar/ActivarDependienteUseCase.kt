@@ -11,6 +11,7 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 
 class ActivarDependienteUseCase(private val repositorio: IDependienteRepositorio,private val almacenDatos: AlmacenDatos){
 
+    //Es una corrutina, invoke es como se llaman todos los casos de uso
     suspend fun invoke(command: ActivarDependienteCommand ): DependienteDTO {
         val item: Dependiente?=repositorio.getById(command.id)
         if (item==null) {

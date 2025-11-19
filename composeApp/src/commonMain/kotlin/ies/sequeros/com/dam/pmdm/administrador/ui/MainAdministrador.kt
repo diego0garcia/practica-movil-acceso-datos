@@ -42,10 +42,13 @@ import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
 import ies.sequeros.com.dam.pmdm.administrador.AdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.Categorias
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.Dependientes
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteForm
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.Pedidos
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.Productos
 
 
 @Suppress("ViewModelConstructorInComposable")
@@ -93,11 +96,11 @@ fun MainAdministrador(
                     navController.navigate(AdminRoutes.Categorias) {
                         //
                         launchSingleTop = true
-                        popUpTo(AdminRoutes.Main)
+                        popUpTo(AdminRoutes.Categorias)
                     }
                 },
-                "Users  Admin",
-                true
+                "",
+                false
             ),
             ItemOption(
                 Icons.Default.Fastfood,
@@ -105,22 +108,22 @@ fun MainAdministrador(
                     navController.navigate(AdminRoutes.Productos) {
                         //
                         launchSingleTop = true
-                        popUpTo(AdminRoutes.Main)
+                        popUpTo(AdminRoutes.Productos)
                     }
                 },
-                "Users  Admin",
+                "",
                 true
             ),
             ItemOption(
                 Icons.AutoMirrored.Filled.FactCheck,
                 {
-                    navController.navigate(AdminRoutes.Pedido) {
+                    navController.navigate(AdminRoutes.Pedidos) {
                         //
                         launchSingleTop = true
-                        popUpTo(AdminRoutes.Main)
+                        popUpTo(AdminRoutes.Pedidos)
                     }
                 },
-                "Users  Admin",
+                "",
                 true
             ),
 
@@ -154,7 +157,6 @@ fun MainAdministrador(
             startDestination = AdminRoutes.Main
         ) {
             composable(AdminRoutes.Main) {
-
                 PrincipalAdministrador()
             }
             composable(AdminRoutes.Dependientes){
@@ -176,7 +178,15 @@ fun MainAdministrador(
                     }
                 )
             }
-
+            composable (AdminRoutes.Categorias){
+                Categorias()
+            }
+            composable (AdminRoutes.Productos){
+                Productos()
+            }
+            composable (AdminRoutes.Pedidos){
+                Pedidos()
+            }
         }
     }
 

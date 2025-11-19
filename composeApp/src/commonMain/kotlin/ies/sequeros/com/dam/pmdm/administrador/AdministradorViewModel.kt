@@ -10,12 +10,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 class AdministradorViewModel: ViewModel() {
-
-
-
-
     fun exit(){
     }
-
-
 }
