@@ -9,6 +9,8 @@ local.properties
 .vscode
 .kotlin
 .DS_Store
+.mysql/mysql-data/
+./bbdd/*
 captures
 .externalNativeBuild
 .cxx
