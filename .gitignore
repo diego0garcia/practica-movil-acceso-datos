@@ -24,3 +24,4 @@ composeApp/derby.log
 composeApp/bbdd/derby.log
 composeApp/bbdd/logs
 composeApp/bbdd/log
+mysql/mysql-data/

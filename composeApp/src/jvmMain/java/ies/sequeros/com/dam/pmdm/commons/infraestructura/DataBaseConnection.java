@@ -27,12 +27,10 @@ public class DataBaseConnection {
            ex.printStackTrace();
         }
 
+        String database = props.getProperty("database.path");
         String user = props.getProperty("database.user");
         String password = props.getProperty("database.password");
-        this.connection_string = props.getProperty("database.path")
-                + ";user=" + user + ";password=" + password;
-        this.conexion =
-                DriverManager.getConnection(this.connection_string);
+        this.conexion = DriverManager.getConnection(database, user, password);
     }
 
     public Connection getConnection() {

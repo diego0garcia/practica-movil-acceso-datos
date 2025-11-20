@@ -64,7 +64,7 @@ kotlin {
         jvmMain.dependencies {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
-            implementation("org.apache.derby:derby:10.16.1.1")
+            implementation("com.mysql:mysql-connector-j:9.5.0")
         }
     }
 }
