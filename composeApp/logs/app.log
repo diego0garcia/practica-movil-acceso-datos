@@ -239,3 +239,17 @@ java.sql.SQLSyntaxErrorException: Table 'vegaburguer.dependiente' doesn't exist
 	at java.desktop/java.awt.EventDispatchThread.pumpEvents(Unknown Source)
 	at java.desktop/java.awt.EventDispatchThread.run(Unknown Source)
 
+nov 21, 2025 6:55:45 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+nov 21, 2025 6:56:52 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao insert
+INFO: Ejecutando SQL: INSERT INTO DEPENDIENTE (id, name, email, password, image_path, enabled, is_admin) VALUES (?, ?, ?, ?, ?, ?, ?) | Params: [1]=f1429460-88f0-4084-b160-559318bddda4, [2]=jose, [3]=vrverv@gmail.com, [4]=Aa12345678, [5]=f1429460-88f0-4084-b160-559318bddda4.jpg, [6]=true, [7]=false]
+nov 21, 2025 6:57:20 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getById
+INFO: Ejecutando SQL: select * from DEPENDIENTE where id=? | Parametros: [id=f1429460-88f0-4084-b160-559318bddda4]
+nov 21, 2025 6:57:20 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao update
+INFO: Ejecutando SQL: UPDATE DEPENDIENTE SET name = ?, email = ?, password = ?, image_path = ?, enabled = ?, is_admin = ? WHERE id = ? | Params: [1]=jose, [2]=vtrbt@gmail.com, [3]=Aa12345678, [4]=f1429460-88f0-4084-b160-559318bddda4.jpg, [5]=true, [6]=true, [7]=f1429460-88f0-4084-b160-559318bddda4]
+nov 21, 2025 6:57:30 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getById
+INFO: Ejecutando SQL: select * from DEPENDIENTE where id=? | Parametros: [id=f1429460-88f0-4084-b160-559318bddda4]
+nov 21, 2025 6:57:30 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao update
+INFO: Ejecutando SQL: UPDATE DEPENDIENTE SET name = ?, email = ?, password = ?, image_path = ?, enabled = ?, is_admin = ? WHERE id = ? | Params: [1]=jose, [2]=jiujyth@gmail.com, [3]=Aa12345678, [4]=f1429460-88f0-4084-b160-559318bddda4.jpg, [5]=true, [6]=true, [7]=f1429460-88f0-4084-b160-559318bddda4]
+nov 21, 2025 7:19:32 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
