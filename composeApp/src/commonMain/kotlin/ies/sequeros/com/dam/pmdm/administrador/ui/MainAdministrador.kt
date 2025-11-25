@@ -42,7 +42,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
 import ies.sequeros.com.dam.pmdm.administrador.AdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.Categorias
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaForm
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.Dependientes
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
@@ -58,8 +60,7 @@ fun MainAdministrador(
     mainViewModel: MainAdministradorViewModel,
     administradorViewModel: AdministradorViewModel,
     dependientesViewModel: DependientesViewModel,
-
-
+    categoriaViewModel: CategoriaViewModel,
     onExit: () -> Unit
 ) {
     val navController = rememberNavController()
@@ -131,15 +132,12 @@ fun MainAdministrador(
                 Icons.Default.DarkMode,
                 {
                     appViewModel.swithMode()
-
-
                 },
                 "Darkmode",
                 true
             ),
 
             ItemOption(Icons.Default.Close, {
-
                 onExit()
             }, "Close", false)
             )
@@ -179,7 +177,24 @@ fun MainAdministrador(
                 )
             }
             composable (AdminRoutes.Categorias){
-                Categorias()
+                Categorias(
+                    mainViewModel, categoriaViewModel,{
+                        categoriaViewModel.setSelectedCategoria(it)
+                        navController.navigate(AdminRoutes.Categoria) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
+            }
+            composable (AdminRoutes.Categoria){
+                CategoriaForm(
+                    categoriaViewModel,{
+                        navController.popBackStack()
+                    },{
+                        categoriaViewModel.save(it)
+                        navController.popBackStack()
+                    }
+                )
             }
             composable (AdminRoutes.Productos){
                 Productos()

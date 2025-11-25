@@ -1,4 +1,4 @@
-package ies.sequeros.com.dam.pmdm.administrador.ui.dependientes
+package ies.sequeros.com.dam.pmdm.administrador.ui.categorias
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
@@ -43,6 +43,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.commons.ui.ImagenDesdePath
 
@@ -53,19 +54,18 @@ import vegaburguer.composeapp.generated.resources.hombre
 
 @Suppress("UnrememberedMutableState")
 @Composable
-fun DependienteCard(
-    item: DependienteDTO,
-    onActivate: (item:DependienteDTO) -> Unit,
-    onDeactivate: (item:DependienteDTO) -> Unit,
+fun CategoriaCard(
+    item: CategoriaDTO,
+    onActivate: (item:CategoriaDTO) -> Unit,
+    onDeactivate: (item:CategoriaDTO) -> Unit,
     onView: () -> Unit,
-    onEdit: (DependienteDTO) -> Unit,
-    onDelete: (item: DependienteDTO) -> Unit,
-    onChangeAdmin: (item:DependienteDTO) -> Unit,
+    onEdit: (CategoriaDTO) -> Unit,
+    onDelete: (item: CategoriaDTO) -> Unit,
 ) {
     val cardAlpha by animateFloatAsState(if (item.enabled) 1f else 0.5f)
     val imagePath =mutableStateOf(if(item.imagePath!=null && item.imagePath.isNotEmpty()) item.imagePath else "")
     val borderColor = when {
-        item.isAdmin -> MaterialTheme.colorScheme.primary
+        item.enabled -> MaterialTheme.colorScheme.primary
         !item.enabled -> MaterialTheme.colorScheme.outline
         else -> MaterialTheme.colorScheme.secondary
     }
@@ -110,7 +110,7 @@ fun DependienteCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
-                    text = item.email,
+                    text = item.descripcion,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
@@ -140,19 +140,6 @@ fun DependienteCard(
                         containerColor = MaterialTheme.colorScheme.surfaceVariant
                     )
                 )
-
-                if (item.isAdmin) {
-                    AssistChip(
-                        onClick = { onChangeAdmin(item)},
-                        label = { Text("Administrador") },
-                        leadingIcon = {
-                            Icon(Icons.Default.AdminPanelSettings, contentDescription = null)
-                        },
-                        colors = AssistChipDefaults.assistChipColors(
-                            containerColor = MaterialTheme.colorScheme.primaryContainer
-                        )
-                    )
-                }
             }
 
             HorizontalDivider(
@@ -183,19 +170,6 @@ fun DependienteCard(
                         if (item.enabled) Icons.Default.VisibilityOff else Icons.Default.Visibility,
                         contentDescription = if (item.enabled) "Desactivar" else "Activar"
                     )
-                }
-
-                // Cambiar admin
-                OutlinedIconButton(
-                    onClick ={ onChangeAdmin(item)},
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = if (item.isAdmin)
-                            MaterialTheme.colorScheme.primaryContainer
-                        else
-                            MaterialTheme.colorScheme.surfaceVariant
-                    )
-                ) {
-                    Icon(Icons.Default.ManageAccounts, contentDescription = "Admin")
                 }
 
                 // Ver detalles

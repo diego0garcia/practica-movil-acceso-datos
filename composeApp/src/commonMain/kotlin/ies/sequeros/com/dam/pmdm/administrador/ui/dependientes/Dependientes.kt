@@ -31,7 +31,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.DependienteDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.AdminRoutes
 import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
@@ -45,6 +45,7 @@ fun Dependientes(
 ){
     val items by dependientesViewModel.items.collectAsState()
     var searchText by remember { mutableStateOf("")}
+
     val filteredItems = items.filter {
         if (searchText.isNotBlank()) {
             it.name.contains(searchText, ignoreCase = true) ||  it.email.contains(searchText, ignoreCase = true)

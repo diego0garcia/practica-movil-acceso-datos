@@ -1,7 +1,7 @@
 package ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.activar
 
 
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.DependienteDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.toDTO
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 

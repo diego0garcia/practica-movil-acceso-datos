@@ -11,11 +11,11 @@ import androidx.compose.ui.graphics.Color
 import kotlinx.coroutines.flow.MutableStateFlow
 
 private val LightColors = lightColorScheme(
-    primary = Color(0xFF00A461), //Color(0xFF0061A4),
+    primary = Color(0xFFFF00AC), //Color(0xFF0061A4),
     onPrimary = Color.White,
-    secondary = Color(0xFF006D3E),
+    secondary = Color(0xFF8F00FF),
     onSecondary = Color.White,
-    background = Color(0xFFFDFDFD),
+    background = Color(0x22B6AFBF),
     onBackground = Color(0xFF1C1B1F)
 
 )
@@ -26,7 +26,7 @@ private val DarkColors = darkColorScheme(
     secondary = Color(0xFF8CDDA9),
     onSecondary = Color(0xFF00391F),
     background = Color(0xFF1C1B1F),
-    onBackground = Color(0xFFE5E1E6),
+    onBackground = Color(0x2CFFFFFF),
 )
 
 @Composable

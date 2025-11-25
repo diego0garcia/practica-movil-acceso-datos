@@ -1,11 +1,11 @@
 package ies.sequeros.com.dam.pmdm.administrador.modelo
 
 interface IProductosRepositorio {
-    suspend fun add(item: Productos):Unit
-    suspend fun remove(item: Productos): Boolean
+    suspend fun add(item: Producto):Unit
+    suspend fun remove(item: Producto): Boolean
     suspend fun remove(id:String): Boolean
-    suspend fun update(item: Productos): Boolean
-    suspend fun getAll():List<Productos>
-    suspend fun findByName(name:String): Productos?
-    suspend fun getById(id:String):Productos?
+    suspend fun update(item: Producto): Boolean
+    suspend fun getAll():List<Producto>
+    suspend fun findByName(name:String): Producto?
+    suspend fun getById(id:String):Producto?
 }

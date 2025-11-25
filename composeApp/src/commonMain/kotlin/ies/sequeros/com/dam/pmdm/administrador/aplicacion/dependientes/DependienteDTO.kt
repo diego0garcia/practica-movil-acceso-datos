@@ -1,4 +1,4 @@
-package ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar
+package ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes
 
 data class DependienteDTO (val id:String,
                            val name:String,
