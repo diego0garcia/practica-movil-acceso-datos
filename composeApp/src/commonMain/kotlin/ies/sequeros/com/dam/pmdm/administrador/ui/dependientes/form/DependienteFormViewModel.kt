@@ -2,7 +2,7 @@ package ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.DependienteDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -33,7 +33,6 @@ class DependienteFormViewModel (private val item: DependienteDTO?,
                 state.imagePathError ==null &&
                 state.passwordError == null &&
                 state.confirmPasswordError == null &&
-                state.imagePathError==null &&
 
                 !state.nombre.isBlank() &&
                 !state.email.isBlank() &&

@@ -1,6 +1,7 @@
 package ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar
 
 
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 

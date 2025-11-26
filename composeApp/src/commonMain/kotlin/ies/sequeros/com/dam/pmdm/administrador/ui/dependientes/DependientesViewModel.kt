@@ -14,7 +14,7 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.cambiarpe
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.cambiarpermisos.CambiarPermisosUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.crear.CrearDependienteCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.crear.CrearDependienteUseCase
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.DependienteDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.ListarDependientesUseCase
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.memoria.FileDependienteRepository
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
@@ -107,7 +107,7 @@ class DependientesViewModel(
 
     fun delete(item: DependienteDTO) {
         viewModelScope.launch {
-          //  borrarDependienteUseCase.invoke(item.id)
+            borrarDependienteUseCase.invoke(item.id)
             _items.update { current ->
                 current.filterNot { it.id == item.id }.toMutableList()
             }

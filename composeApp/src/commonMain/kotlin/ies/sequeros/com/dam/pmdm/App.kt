@@ -25,11 +25,13 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.crear.Cre
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.ListarDependientesUseCase
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.memoria.FileDependienteRepository
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.memoria.MemDependienteRepository
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministrador
 import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
 
 import org.jetbrains.compose.resources.painterResource
@@ -40,7 +42,7 @@ import vegaburguer.composeapp.generated.resources.compose_multiplatform
 
 @Suppress("ViewModelConstructorInComposable")
 @Composable
-fun App( dependienteRepositorio : IDependienteRepositorio,almacenImagenes:AlmacenDatos) {
+fun App( dependienteRepositorio : IDependienteRepositorio,categroiaRepositorio : ICategoriaRepositorio, almacenImagenes:AlmacenDatos) {
 
     //VIEW MODELS
     val appViewModel = viewModel {  AppViewModel() }
@@ -48,6 +50,9 @@ fun App( dependienteRepositorio : IDependienteRepositorio,almacenImagenes:Almace
     val administradorViewModel = viewModel { AdministradorViewModel() }
     val dependientesViewModel = viewModel{ DependientesViewModel(
         dependienteRepositorio, almacenImagenes
+    )}
+    val categoriasViewModel = viewModel{ CategoriaViewModel(
+        categroiaRepositorio, almacenImagenes
     )}
 
     appViewModel.setWindowsAdatativeInfo( currentWindowAdaptiveInfo())
@@ -68,7 +73,7 @@ fun App( dependienteRepositorio : IDependienteRepositorio,almacenImagenes:Almace
             //ADMINISTARTOR VIEW
             composable (AppRoutes.Administrador){
                 MainAdministrador(appViewModel,mainViewModel,administradorViewModel,
-                    dependientesViewModel,{
+                    dependientesViewModel,categoriasViewModel,{
                     navController.popBackStack()
                 })
             }

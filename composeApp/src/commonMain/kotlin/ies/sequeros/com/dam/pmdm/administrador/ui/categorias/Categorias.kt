@@ -1,52 +1,37 @@
 package ies.sequeros.com.dam.pmdm.administrador.ui.categorias
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependienteCard
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
+import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 
 @Composable
 fun Categorias (
-
+    mainAdministradorViewModel: MainAdministradorViewModel,
+    categoriaViewModel: CategoriaViewModel,
+    onSelectItem:(CategoriaDTO?)->Unit
 ) {
-    //val items by dependientesViewModel.items.collectAsState()
+    val items by categoriaViewModel.items.collectAsState()
     var searchText by remember { mutableStateOf("") }
-    /*
+
     val filteredItems = items.filter {
         if (searchText.isNotBlank()) {
-            it.name.contains(searchText, ignoreCase = true) || it.email.contains(searchText, ignoreCase = true)
+            it.name.contains(searchText, ignoreCase = true)
         } else {
             true
         }
     }
-    */
+
 
     // Contenedor principal
     Column(
@@ -79,8 +64,8 @@ fun Categorias (
             Spacer(Modifier.width(8.dp))
             OutlinedButton(
                 onClick = {
-                    //dependientesViewModel.setSelectedDependiente(null)
-                    //onSelectItem(null);
+                    categoriaViewModel.setSelectedCategoria(null)
+                    onSelectItem(null);
 
                 },
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary)
@@ -99,37 +84,30 @@ fun Categorias (
                 minSize = 512.dp
             )
         ) {
-            /*
+
             items(filteredItems.size) { item ->
-                DependienteCard(
+                CategoriaCard(
                     filteredItems.get(item),
                     {
 
                         val element = it.copy(
                             enabled = !it.enabled
                         )
-                        dependientesViewModel.switchEnableDependiente(element)
+                        categoriaViewModel.switchEnableCategoria(element)
                     }, {
 
                         val element = it.copy(
                             enabled = !it.enabled
                         )
-                        dependientesViewModel.switchEnableDependiente(element)
+                        categoriaViewModel.switchEnableCategoria(element)
                     }, {}, {
                         onSelectItem(it);
 
                     }, {
-                        dependientesViewModel.delete(it)
-                    },
-                    {
-                        val element = it.copy(
-                            isAdmin = !it.isAdmin
-                        )
-                        dependientesViewModel.switchAdmin(element)
-
-
+                        categoriaViewModel.delete(it)
                     })
 
-            */}
+            }
+        }
     }
 }
