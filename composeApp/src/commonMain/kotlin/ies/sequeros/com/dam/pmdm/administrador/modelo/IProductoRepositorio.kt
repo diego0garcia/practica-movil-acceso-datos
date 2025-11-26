@@ -1,6 +1,6 @@
 package ies.sequeros.com.dam.pmdm.administrador.modelo
 
-interface IProductosRepositorio {
+interface IProductoRepositorio {
     suspend fun add(item: Producto):Unit
     suspend fun remove(item: Producto): Boolean
     suspend fun remove(id:String): Boolean
