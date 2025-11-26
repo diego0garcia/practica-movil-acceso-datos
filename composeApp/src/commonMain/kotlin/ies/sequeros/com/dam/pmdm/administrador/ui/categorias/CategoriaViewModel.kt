@@ -80,7 +80,7 @@ class CategoriaViewModel(
 
     fun delete(item: CategoriaDTO) {
         viewModelScope.launch {
-            //  borrarDependienteUseCase.invoke(item.id)
+            borrarCategoriaUseCase.invoke(item.id)
             _items.update { current ->
                 current.filterNot { it.id == item.id }.toMutableList()
             }

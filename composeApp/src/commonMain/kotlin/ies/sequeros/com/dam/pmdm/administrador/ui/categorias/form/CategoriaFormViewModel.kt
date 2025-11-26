@@ -31,14 +31,14 @@ class CategoriaFormViewModel (private val item: CategoriaDTO?,
                     state.imagePathError == null &&
                     state.descripcionError == null &&
 
-                    !state.nombre.isBlank() &&
+                    state.nombre.isNotBlank() &&
                     state.imagePath.isNotBlank() &&
                     state.descripcion.isNotBlank()
         }else{
             state.nombreError == null &&
                     state.imagePathError ==null &&
-                    !state.nombre.isBlank() &&
-                    state.descripcion.isBlank() &&
+                    state.nombre.isNotBlank() &&
+                    state.descripcion.isNotBlank() &&
                     state.imagePath.isNotBlank()
 
         }
@@ -63,7 +63,6 @@ class CategoriaFormViewModel (private val item: CategoriaDTO?,
     fun onEnabledChange(v: Boolean) {
         _uiState.value = _uiState.value.copy(
             enabled =  v
-
         )
     }
 

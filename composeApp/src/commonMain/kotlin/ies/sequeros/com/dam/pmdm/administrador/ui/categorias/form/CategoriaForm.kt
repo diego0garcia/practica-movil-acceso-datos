@@ -112,9 +112,9 @@ fun CategoriaForm(
                 )
                 Text(
                     text = if (selected == null)
-                        "Crear nuevo usuario"
+                        "Crear nueva categoría"
                     else
-                        "Editar usuario",
+                        "Editar categoría",
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )

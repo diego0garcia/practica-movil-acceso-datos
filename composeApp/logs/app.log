@@ -2873,3 +2873,31 @@ nov 25, 2025 7:37:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestruct
 INFORMACIÓN: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
 nov 25, 2025 7:37:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
 INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+nov 26, 2025 7:53:45 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+nov 26, 2025 7:53:45 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+nov 26, 2025 7:56:54 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+nov 26, 2025 7:56:54 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+nov 26, 2025 8:01:31 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+nov 26, 2025 8:01:31 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+nov 26, 2025 8:03:05 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+nov 26, 2025 8:03:05 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+nov 26, 2025 8:03:25 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getById
+INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA where id=? | Parametros: [id=d58f8423-5138-410e-99d8-c42692e90ae9]
+nov 26, 2025 8:03:25 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao update
+INFORMACIÓN: Ejecutando SQL: UPDATE CATEGORIA SET name = ?, image_path = ?, descripcion = ?,enabled = ? WHERE id = ? | Params: [1]=897897, [2]=d58f8423-5138-410e-99d8-c42692e90ae9.png, [3]=98797889sefesfs, [4]=true, [5]=d58f8423-5138-410e-99d8-c42692e90ae9]
+nov 26, 2025 8:03:55 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+nov 26, 2025 8:03:55 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+nov 26, 2025 8:06:50 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+nov 26, 2025 8:06:50 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFORMACIÓN: Ejecutando SQL: select * from CATEGORIA | Parametros: 
