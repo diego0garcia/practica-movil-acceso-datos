@@ -1,40 +1,86 @@
-package ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form
+package ies.sequeros.com.dam.pmdm.administrador.ui.productos.form
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.*
-import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.material.icons.filled.Autorenew
+import androidx.compose.material.icons.filled.CheckCircleOutline
+import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.Description
+import androidx.compose.material.icons.filled.Email
+import androidx.compose.material.icons.filled.Fastfood
+import androidx.compose.material.icons.filled.Lock
+import androidx.compose.material.icons.filled.Money
+import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.PersonOutline
+import androidx.compose.material.icons.filled.Save
+import androidx.compose.material.icons.filled.Visibility
+import androidx.compose.material.icons.filled.VisibilityOff
+import androidx.compose.material3.Button
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.FilledTonalButton
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
+
+import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteFormState
+import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteFormViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.commons.ui.ImagenDesdePath
 import ies.sequeros.com.dam.pmdm.commons.ui.SelectorImagenComposable
+
 import vegaburguer.composeapp.generated.resources.Res
 import vegaburguer.composeapp.generated.resources.hombre
 
 
 @Composable
-fun CategoriaForm(
+fun ProductoForm(
     //appViewModel: AppViewModel,
-    categoriaViewModel: CategoriaViewModel,
+    productoViewModel: ProductoViewModel,
     onClose: () -> Unit,
-    onConfirm: (datos: CategoriaFormState) -> Unit = {},
-    categoriaFormularioViewModel: CategoriaFormViewModel = viewModel {
-        CategoriaFormViewModel(
-            categoriaViewModel.selected.value, onConfirm
+    onConfirm: (datos: ProductoFormState) -> Unit = {},
+    productoFormularioViewModel: ProductoFormViewModel = viewModel {
+        ProductoFormViewModel(
+            productoViewModel.selected.value, onConfirm
         )
     }
 ) {
-    val state by categoriaFormularioViewModel.uiState.collectAsState()
-    val formValid by categoriaFormularioViewModel.isFormValid.collectAsState()
-    val selected = categoriaViewModel.selected.collectAsState()
-    val imagePath = remember { mutableStateOf(if (state.imagePath != null && state.imagePath.isNotEmpty()) state.imagePath else "") }
+    val state by productoFormularioViewModel.uiState.collectAsState()
+    val formValid by productoFormularioViewModel.isFormValid.collectAsState()
+    val selected = productoViewModel.selected.collectAsState()
+    val imagePath =
+        remember { mutableStateOf(if (state.imagePath != null && state.imagePath.isNotEmpty()) state.imagePath else "") }
 
     //val names = CartoonString.getNames() - "default"
 
@@ -63,16 +109,16 @@ fun CategoriaForm(
                 horizontalArrangement = Arrangement.spacedBy(12.dp)
             ) {
                 Icon(
-                    imageVector = Icons.Default.Icecream,
+                    imageVector = Icons.Default.Fastfood,
                     contentDescription = null,
                     tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(40.dp)
                 )
                 Text(
                     text = if (selected == null)
-                        "Crear nueva categoría"
+                        "Crear nuevo producto"
                     else
-                        "Editar categoría",
+                        "Editar producto",
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -84,9 +130,9 @@ fun CategoriaForm(
             //  Campos
             OutlinedTextField(
                 value = state.nombre,
-                onValueChange = { categoriaFormularioViewModel.onNombreChange(it) },
-                label = { Text("Nombre completo") },
-                leadingIcon = { Icon(Icons.Default.PersonOutline, contentDescription = null) },
+                onValueChange = { productoFormularioViewModel.onNombreChange(it) },
+                label = { Text("Nombre Del Producto") },
+                leadingIcon = { Icon(Icons.Default.Fastfood, contentDescription = null) },
                 isError = state.nombreError != null,
                 modifier = Modifier.fillMaxWidth()
             )
@@ -97,11 +143,11 @@ fun CategoriaForm(
                     color = MaterialTheme.colorScheme.error
                 )
             }
-            //Descripción
+
             OutlinedTextField(
                 value = state.descripcion,
-                onValueChange = { categoriaFormularioViewModel.onDescripcionChange(it) },
-                label = { Text("Descripción de la categoría") },
+                onValueChange = { productoFormularioViewModel.onDescripcionChange(it) },
+                label = { Text("Descripción") },
                 leadingIcon = { Icon(Icons.Default.Description, contentDescription = null) },
                 isError = state.descripcionError != null,
                 modifier = Modifier.fillMaxWidth()
@@ -113,12 +159,29 @@ fun CategoriaForm(
                     color = MaterialTheme.colorScheme.error
                 )
             }
+
+            OutlinedTextField(
+                value = state.precio,
+                onValueChange = { productoFormularioViewModel.onPrecioChange(it) },
+                label = { Text("Precio Del Producto") },
+                leadingIcon = { Icon(Icons.Default.Money, contentDescription = null) },
+                isError = state.precioError != null,
+                modifier = Modifier.fillMaxWidth()
+            )
+            state.precioError?.let {
+                Text(
+                    it,
+                    style = MaterialTheme.typography.labelSmall,
+                    color = MaterialTheme.colorScheme.error
+                )
+            }
+
             // Checkboxes
             Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     Checkbox(
                         checked = state.enabled,
-                        onCheckedChange = { categoriaFormularioViewModel.onEnabledChange(it) }
+                        onCheckedChange = { productoFormularioViewModel.onEnabledChange(it) }
                     )
                     Text("Activo", style = MaterialTheme.typography.bodyMedium)
                 }
@@ -130,7 +193,7 @@ fun CategoriaForm(
             HorizontalDivider(thickness = 1.dp, color = MaterialTheme.colorScheme.outlineVariant)
             val scope = rememberCoroutineScope()
             SelectorImagenComposable({ it: String ->
-                categoriaFormularioViewModel.onImagePathChange(it)//  dependienteViewModel.almacenDatos.copy(it, "prueba","/dependientes_imgs/")
+                productoFormularioViewModel.onImagePathChange(it)//  dependienteViewModel.almacenDatos.copy(it, "prueba","/dependientes_imgs/")
                 imagePath.value = it
             })
 
@@ -152,7 +215,7 @@ fun CategoriaForm(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                FilledTonalButton(onClick = { categoriaFormularioViewModel.clear() }) {
+                FilledTonalButton(onClick = { productoFormularioViewModel.clear() }) {
                     Icon(Icons.Default.Autorenew, contentDescription = null)
                     //Spacer(Modifier.width(6.dp))
                     //Text("Limpiar")
@@ -160,9 +223,9 @@ fun CategoriaForm(
 
                 Button(
                     onClick = {
-                        categoriaFormularioViewModel.submit(
+                        productoFormularioViewModel.submit(
                             onSuccess = {
-                                onConfirm(categoriaFormularioViewModel.uiState.value)
+                                onConfirm(productoFormularioViewModel.uiState.value)
                             },
                             onFailure = {}
                         )

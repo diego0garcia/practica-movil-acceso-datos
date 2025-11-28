@@ -1,6 +1,6 @@
 package ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear
 
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.PedidoDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.toDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Pedido
@@ -20,6 +20,10 @@ class CrearPedidoUseCase(private val repositorio: IPedidoRepositorio, private va
             id = id,
             name = createUserCommand.name,
             imagePath = imageName,
+            descripcion = createUserCommand.descipcion,
+            enable = createUserCommand.enable,
+            date = createUserCommand.date,
+            id_dependiente = createUserCommand.id_dependiente
         )
         val element=repositorio.findByName(item.name)
         if(element!=null)

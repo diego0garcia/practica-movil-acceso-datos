@@ -32,7 +32,6 @@ fun Categorias (
         }
     }
 
-
     // Contenedor principal
     Column(
         modifier = Modifier

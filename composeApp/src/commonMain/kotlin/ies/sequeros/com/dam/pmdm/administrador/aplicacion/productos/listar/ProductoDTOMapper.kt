@@ -1,5 +1,6 @@
 package ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.listar
 
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Producto
 
 fun Producto.toDTO(path:String="") = ProductoDTO(
@@ -8,7 +9,7 @@ fun Producto.toDTO(path:String="") = ProductoDTO(
     name = name,
     imagePath = imagePath,
     description = description,
-    price = price,
+    price = price.toString(),
     enabled,
     categoriaName = categoriaName
 )
@@ -18,7 +19,7 @@ fun ProductoDTO.toProducto()= Producto(
     name = name,
     imagePath = imagePath,
     description = description,
-    price = price,
+    price = price.toFloat(),
     enabled,
     categoriaName = categoriaName
 )
