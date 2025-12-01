@@ -31,8 +31,11 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministrador
 import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
+import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
+import ies.sequeros.com.dam.pmdm.tpv.TpvViewModel
+import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
 
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -58,6 +61,9 @@ fun App( dependienteRepositorio : IDependienteRepositorio,categroiaRepositorio :
     appViewModel.setWindowsAdatativeInfo( currentWindowAdaptiveInfo())
     val navController= rememberNavController()
 
+    val tpvViewModel = viewModel { TpvViewModel() }
+    val maintpvViewModel = viewModel { MainTpvViewModel() }
+
     //LAUNCH UI
     AppTheme(appViewModel.darkMode.collectAsState()) { //Load the app theme
         NavHost(
@@ -68,7 +74,7 @@ fun App( dependienteRepositorio : IDependienteRepositorio,categroiaRepositorio :
             composable(AppRoutes.Main) {
                 Principal({
                     navController.navigate(AppRoutes.Administrador)
-                },{},{})
+                },{},{ navController.navigate(AppRoutes.TPV)})
             }
             //ADMINISTARTOR VIEW
             composable (AppRoutes.Administrador){
@@ -77,6 +83,13 @@ fun App( dependienteRepositorio : IDependienteRepositorio,categroiaRepositorio :
                     navController.popBackStack()
                 })
             }
+            composable (AppRoutes.TPV){
+                MainTpv(appViewModel,maintpvViewModel,tpvViewModel,
+                    {
+                        navController.popBackStack()
+                    })
+            }
+
 
         }
     }
