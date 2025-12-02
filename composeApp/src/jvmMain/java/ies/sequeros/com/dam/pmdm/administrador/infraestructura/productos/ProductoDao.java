@@ -23,8 +23,8 @@ public class ProductoDao implements IDao<Producto> {
     private final String findbyname = "select * from " + table_name + " where name=?";
 
     private final String deletebyid = "delete from " + table_name + " where id='?'";
-    private final String insert = "INSERT INTO " + table_name + " (id, name, iage_path, descripcion, enabled, date, id_dependiente) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+    private final String insert = "INSERT INTO " + table_name + " (id, id_categoria, name, image_path, descripcion, price, enabled, categoriasName) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String update =
             "UPDATE " + table_name + " SET name = ?, email = ?, password = ?, image_path = ?, enabled = ?, is_admin = ? " +
                     "WHERE id = ?";
@@ -170,8 +170,9 @@ public class ProductoDao implements IDao<Producto> {
             pst.setString(3, item.getName());
             pst.setString(4,item.getImagePath());
             pst.setString(5,item.getDescription());
-            pst.setBoolean(6, item.getEnabled());
-            pst.setString(7, item.getCategoriaName());
+            pst.setFloat(6, item.getPrice());
+            pst.setBoolean(7, item.getEnabled());
+            pst.setString(8, item.getCategoriaName());
 
             pst.executeUpdate();
             pst.close();

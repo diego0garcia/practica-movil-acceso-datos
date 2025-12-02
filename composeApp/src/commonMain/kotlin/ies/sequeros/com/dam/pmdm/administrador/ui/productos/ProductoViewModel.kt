@@ -2,6 +2,8 @@ package ies.sequeros.com.dam.pmdm.administrador.ui.productos
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.listar.ListarCategoriasUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.BorrarProductoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.activar.ActivarProductoCommand
@@ -11,6 +13,7 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.actualizar.A
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.crear.CrearProductoCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.crear.CrearProductoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.listar.ListarProductosUseCase
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.form.ProductoFormState
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
@@ -23,6 +26,7 @@ import kotlinx.coroutines.launch
 class ProductoViewModel(
     //private val administradorViewModel: MainAdministradorViewModel,
     private val productoRepositorio: IProductoRepositorio,
+    private val categoriaRepositorio: ICategoriaRepositorio,
     val almacenDatos: AlmacenDatos
 ) : ViewModel() {
     //los casos de uso se crean dentro para la recomposición
@@ -32,11 +36,18 @@ class ProductoViewModel(
     private val listarProductoUseCase: ListarProductosUseCase
     private val actualizarProductoUseCase: ActualizarProductoUseCase
     private val activarProductoUseCase: ActivarProductoUseCase
+    private val listarCategoriasUseCase: ListarCategoriasUseCase
 
     private val _items = MutableStateFlow<MutableList<ProductoDTO>>(mutableListOf())
     val items: StateFlow<List<ProductoDTO>> = _items.asStateFlow()
     private val _selected = MutableStateFlow<ProductoDTO?>(null)
     val selected = _selected.asStateFlow()
+
+    //ESTO ES PA CARGAR LAS CATEGORIAS PARA LUEGO SELECCIONARLAS EN LO DEL CREAR PRODUCTO
+    private val _categoria = MutableStateFlow<MutableList<CategoriaDTO>>(mutableListOf())
+    val categoria: StateFlow<List<CategoriaDTO>> = _categoria.asStateFlow()
+    private val _categoriaSelected = MutableStateFlow<CategoriaDTO?>(null)
+    val categoriaSelected = _categoriaSelected.asStateFlow()
 
     init {
         actualizarProductoUseCase = ActualizarProductoUseCase(productoRepositorio,almacenDatos)
@@ -44,12 +55,23 @@ class ProductoViewModel(
         crearProductoUseCase = CrearProductoUseCase(productoRepositorio,almacenDatos)
         listarProductoUseCase = ListarProductosUseCase(productoRepositorio,almacenDatos)
         activarProductoUseCase = ActivarProductoUseCase(productoRepositorio,almacenDatos)
+
+        listarCategoriasUseCase = ListarCategoriasUseCase(categoriaRepositorio,almacenDatos)
         viewModelScope.launch {
+            val categoria = listarCategoriasUseCase.invoke()
+            _categoria.value.clear()
+            _categoria.value.addAll(categoria)
+
             var items = listarProductoUseCase.invoke()
             _items.value.clear()
             _items.value.addAll(items)
 
         }
+
+    }
+
+    fun setCategoriaSeleccionada(cat: CategoriaDTO) {
+        _categoriaSelected.value = cat
     }
 
     fun setSelectedProducto(item: ProductoDTO?) {
@@ -93,7 +115,8 @@ class ProductoViewModel(
             formState.descripcion,
             formState.precio.toFloat(),
             formState.enabled,
-            formState.categoriaName
+            formState.categoriaName,
+            formState.categoriaId
         )
         viewModelScope.launch {
             try {
