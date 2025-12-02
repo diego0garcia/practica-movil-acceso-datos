@@ -44,6 +44,7 @@ import vegaburguer.composeapp.generated.resources.hombre
 
 @Composable
 fun Principal(onAdministrador:()->Unit, onDependiente:()->Unit,onTPV:()->Unit){
+
     Res.drawable.hombre
     Box(
         modifier = Modifier

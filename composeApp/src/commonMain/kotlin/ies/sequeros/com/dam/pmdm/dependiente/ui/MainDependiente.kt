@@ -1,4 +1,4 @@
-package ies.sequeros.com.dam.pmdm.tpv.ui
+package ies.sequeros.com.dam.pmdm.dependiente.ui
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -30,23 +30,30 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
-
+import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
 
 
 @Suppress("ViewModelConstructorInComposable")
 @Composable
-fun MainTpv(
+fun MainDependiente(
     appViewModel: AppViewModel,
-    mainViewModel: MainTpvViewModel,
+    mainViewModel: MainDependienteViewModel,
+    dependienteViewModel: DependienteViewModel,
     onExit: () -> Unit
 ) {
+
     val navController = rememberNavController()
     val options by mainViewModel.filteredItems.collectAsState() //
 
@@ -55,9 +62,9 @@ fun MainTpv(
         listOf(
             ItemOption(
                 Icons.Default.Home, {
-                    navController.navigate(TpvRoutes.Main) {
+                    navController.navigate(DependienteRoutes.Main) {
                         launchSingleTop = true
-                        popUpTo(TpvRoutes.Main)
+                        popUpTo(DependienteRoutes.Main)
                     }
                 },
                 "Home", false
@@ -84,15 +91,34 @@ fun MainTpv(
     val adaptiveInfo = currentWindowAdaptiveInfo()
 
 
+    val loginViewModel = viewModel { FormularioLoginViewModel() }
+
     val navegador: @Composable () -> Unit = {
         NavHost(
             navController,
-            startDestination = TpvRoutes.Main
+            startDestination = DependienteRoutes.Login
         ) {
-            composable(TpvRoutes.Main) {
-                PrincipalTpv()
+            //Para que se inicie el Login
+            composable(DependienteRoutes.Login) {
+                FormularioLogin(
+                    viewModel = loginViewModel,
+                    onNavigateToHome = {
+                        navController.navigate(DependienteRoutes.Main)
+                    }
+                )
+            }
+            composable(DependienteRoutes.Main) {
+                PrincipalDependiente()
             }
         }
+    }
+
+    val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
+
+    //Si estas en login no abre la pantalla principal
+    if (currentRoute == DependienteRoutes.Login) {
+        navegador()
+        return
     }
 
 
