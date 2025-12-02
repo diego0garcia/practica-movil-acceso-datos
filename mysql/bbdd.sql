@@ -25,20 +25,20 @@ CREATE TABLE IF NOT EXISTS pedido (
                             id_dependiente VARCHAR(36) NOT NULL,
                             CONSTRAINT fk_pedido_dependiente FOREIGN KEY (id_dependiente) REFERENCES dependiente(id) ON DELETE CASCADE);
 
+
+DROP TABLE IF EXISTS producto;
 CREATE TABLE IF NOT EXISTS producto (
                          id VARCHAR(36) PRIMARY KEY,
-                         categoriasId VARCHAR(36),
+                         id_categoria VARCHAR(36) NOT NULL,
                          name VARCHAR(100) NOT NULL,
                          image_path VARCHAR(255),
                          descripcion VARCHAR(255),
                          price FLOAT NOT NULL,
                          enabled BOOLEAN NOT NULL,
-                         categoriasName FLOAT NOT NULL,
-                         id_categoria VARCHAR(36) NOT NULL,
+                         categoriasName VARCHAR(255) NOT NULL,
                          CONSTRAINT fk_producto_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS lineapedido (
                            id VARCHAR(36) PRIMARY KEY,
-                           pedido_id VARCHAR(36) NOT NULL,
                            id_pedido VARCHAR(36) NOT NULL,
                            CONSTRAINT fk_lineapedido_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id) ON DELETE CASCADE);

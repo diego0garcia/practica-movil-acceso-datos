@@ -1,6 +1,6 @@
 package ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.crear
 
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.listar.ProductoDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.listar.toDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Producto
@@ -18,7 +18,8 @@ class CrearProductoUseCase(private val repositorio: IProductoRepositorio, privat
         val imageName=almacenDatos.copy(createUserCommand.imagePath,id,"/productos/")
         val item = Producto(
             id = id,
-            categoriaId = createUserCommand.categoriaId,
+            //ACUERDATE DE CAMBIAR ESTO PARA CREAR PRODUCTOS PORFAVOR QUE NO SE TE OLVIDE HDP
+            categoriaId =  createUserCommand.categoriaId,//createUserCommand.categoriaId,
             name = createUserCommand.name,
             imagePath = imageName,
             description = createUserCommand.description,

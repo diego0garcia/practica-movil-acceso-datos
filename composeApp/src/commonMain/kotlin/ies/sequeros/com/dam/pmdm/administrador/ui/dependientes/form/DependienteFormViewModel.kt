@@ -43,7 +43,6 @@ class DependienteFormViewModel (private val item: DependienteDTO?,
             state.nombreError == null &&
                     state.emailError == null &&
                     state.imagePathError ==null &&
-                    state.imagePathError==null &&
                     !state.nombre.isBlank() &&
                     !state.email.isBlank() &&
                     state.imagePath.isNotBlank()
