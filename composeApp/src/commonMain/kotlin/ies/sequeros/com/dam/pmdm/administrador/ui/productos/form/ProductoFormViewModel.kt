@@ -1,10 +1,22 @@
 package ies.sequeros.com.dam.pmdm.administrador.ui.productos.form
 
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.BorrarCategoriaUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.activar.ActivarCategoriaUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.actualizar.ActualizarCategoriaUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.crear.CrearCategoriaUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.listar.ListarCategoriasUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteFormState
+import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -14,8 +26,11 @@ import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
-class ProductoFormViewModel (private val item: ProductoDTO?,
-                             onSuccess: (ProductoFormState) -> Unit): ViewModel() {
+class ProductoFormViewModel (
+    val almacenDatos: AlmacenDatos,
+    private val item: ProductoDTO?,
+    onSuccess: (ProductoFormState) -> Unit): ViewModel()
+{
 
     private val _uiState = MutableStateFlow(
         ProductoFormState(
@@ -32,7 +47,21 @@ class ProductoFormViewModel (private val item: ProductoDTO?,
     //para saber si el formulario es válido
     val isFormValid: StateFlow<Boolean> = uiState.map { state ->
         if(item==null){
-        state.nombreError == null &&
+            println(
+                "nombreError=${state.nombreError}, " +
+                        "descripcionError=${state.descripcionError}, " +
+                        "imagePathError=${state.imagePathError}, " +
+                        "categoriaNameError=${state.categoriaNameError}, " +
+                        "precioError=${state.precioError}, " +
+                        "nombre.isNotBlank=${state.nombre}, " +
+                        "precio.isNotBlank=${state.precio}, " +
+                        "imagePath.isNotBlank=${state.imagePath}, " +
+                        "descripcion.isNotBlank=${state.descripcion}, " +
+                        "categoriaName.isNotBlank=${state.categoriaName}, " +
+                        "categoriaId=${state.categoriaId}"
+            )
+
+            state.nombreError == null &&
                 state.descripcionError == null &&
                 state.imagePathError ==null &&
                 state.categoriaNameError == null &&
@@ -54,6 +83,14 @@ class ProductoFormViewModel (private val item: ProductoDTO?,
 
     fun onNombreChange(v: String) {
         _uiState.value = _uiState.value.copy(nombre = v, nombreError = validateNombre(v))
+    }
+
+    fun onCategoriaNameChange(cat: String) {
+        _uiState.value = _uiState.value.copy(categoriaName = cat, categoriaNameError = validateCategoriaName(cat))
+    }
+
+    fun onCategoriaIdChange(cat: CategoriaDTO?){
+        _uiState.value = _uiState.value.copy(categoriaId = cat?.id ?: "")
     }
 
     fun onDescripcionChange(v: String) {
@@ -81,6 +118,10 @@ class ProductoFormViewModel (private val item: ProductoDTO?,
     private fun validateNombre(nombre: String): String? {
         if (nombre.isBlank()) return "El nombre es obligatorio"
         if (nombre.length < 2) return "El nombre es muy corto"
+        return null
+    }
+    private fun validateCategoriaName(categoriaName: String): String? {
+        if (categoriaName.isBlank()) return "La categoría es obligatoria"
         return null
     }
     private fun validateImagePath(path: String): String? {

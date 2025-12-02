@@ -39,7 +39,6 @@ class DependientesViewModel(
     private val borrarDependienteUseCase: BorrarDependienteUseCase
     private val crearDependienteUseCase: CrearDependienteUseCase
     private val listarDependientesUseCase: ListarDependientesUseCase
-
     private val actualizarDependienteUseCase: ActualizarDependienteUseCase
     private val activarDependienteUseCase: ActivarDependienteUseCase
     private val cambiarPermisosUseCase:  CambiarPermisosUseCase

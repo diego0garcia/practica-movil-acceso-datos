@@ -6,5 +6,6 @@ class CrearProductoCommand (
     val description: String,
     val price: Float,
     val enabled: Boolean,
-    val categoriaName:String
+    val categoriaName:String,
+    val categoriaId: String
 )

@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS producto (
                          descripcion VARCHAR(255),
                          price FLOAT NOT NULL,
                          enabled BOOLEAN NOT NULL,
-                         categoriasName FLOAT NOT NULL,
+                         categoriasName VARCHAR(255) NOT NULL,
                          CONSTRAINT fk_producto_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE);
 
 CREATE TABLE IF NOT EXISTS lineapedido (

@@ -19,7 +19,7 @@ class CrearProductoUseCase(private val repositorio: IProductoRepositorio, privat
         val item = Producto(
             id = id,
             //ACUERDATE DE CAMBIAR ESTO PARA CREAR PRODUCTOS PORFAVOR QUE NO SE TE OLVIDE HDP
-            categoriaId =  id,//createUserCommand.categoriaId,
+            categoriaId =  createUserCommand.categoriaId,//createUserCommand.categoriaId,
             name = createUserCommand.name,
             imagePath = imageName,
             description = createUserCommand.description,

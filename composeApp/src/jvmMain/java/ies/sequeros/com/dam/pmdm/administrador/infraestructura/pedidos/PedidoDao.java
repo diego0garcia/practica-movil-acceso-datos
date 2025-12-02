@@ -25,7 +25,7 @@ public class PedidoDao implements IDao<Pedido> {
     private final String insert = "INSERT INTO " + table_name + " (id, name, iage_path, descripcion, enabled, date, id_dependiente) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String update =
-            "UPDATE " + table_name + " SET name = ?, email = ?, password = ?, image_path = ?, enabled = ?, is_admin = ? " +
+            "UPDATE " + table_name + " SET name = ?, image_path = ?, descripcion = ?, enabled = ?, date = ?, id_dependiente = ? " +
                     "WHERE id = ?";
     public PedidoDao() {
     }
@@ -120,10 +120,12 @@ public class PedidoDao implements IDao<Pedido> {
             pst.setString(3,item.getDescripcion());
             pst.setBoolean(4, item.getEnable());
             pst.setDate(5, item.getDate());
-            pst.setString(6, item.getId());
+            pst.setDate(6, item.getDate());
+            pst.setString(7, item.getId());
             pst.executeUpdate();
             pst.close();
             Logger logger = Logger.getLogger(PedidoDao.class.getName());
+            /*
             logger.info(() ->
                     "Ejecutando SQL: " + update +
                             " | Params: [1]=" + item.getName() +
@@ -134,6 +136,7 @@ public class PedidoDao implements IDao<Pedido> {
                             ", [6]=" + item.getId() +
                             "]"
             );
+            */
         } catch (final SQLException ex) {
             Logger.getLogger(PedidoDao.class.getName()).log(Level.SEVERE,
                     null, ex);
@@ -203,7 +206,7 @@ public class PedidoDao implements IDao<Pedido> {
                     r.getString("IMAGE_PATH"),
                     r.getString("DESCRIPCION"),
                     r.getBoolean("ENABLED"),
-                    r.getDate("PASSWORD"),
+                    r.getDate("DATE"),
                     r.getString("ID_DEPENDIENTE"));
             return sc;
         } catch (final SQLException ex) {

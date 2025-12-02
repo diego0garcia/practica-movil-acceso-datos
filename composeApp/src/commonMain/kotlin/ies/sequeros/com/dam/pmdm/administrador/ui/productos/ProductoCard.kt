@@ -111,6 +111,11 @@ fun ProductoCard(
                     color = MaterialTheme.colorScheme.onSurface
                 )
                 Text(
+                    text = item.categoriaName + " | Id: " + item.categoriaId,
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                Text(
                     text = item.description,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
