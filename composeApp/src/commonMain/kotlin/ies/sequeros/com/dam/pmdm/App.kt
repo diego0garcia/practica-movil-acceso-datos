@@ -87,7 +87,11 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
             composable(AppRoutes.Main) {
                 Principal({
                     navController.navigate(AppRoutes.Administrador)
-                },{},{})
+                },{
+                    navController.navigate(AppRoutes.Dependiente)
+                },{
+                    navController.navigate(AppRoutes.TPV)
+                })
             }
             //ADMINISTARTOR VIEW
             composable (AppRoutes.Administrador){
