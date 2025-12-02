@@ -18,6 +18,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,10 +30,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun FormularioLogin(viewModel: FormularioLoginViewModel, onNavigateToHome: () -> Unit) {
+/**
+ * FormularioLogin ahora acepta opcionalmente un validador suspend que recibe nombre y contraseña
+ * y devuelve un String con el mensaje de error ("" si OK). Si no se provee, solo hace validaciones locales.
+ */
+fun FormularioLogin(
+    viewModel: FormularioLoginViewModel,
+    onNavigateToHome: () -> Unit,
+    validator: (suspend (String, String) -> String)? = null
+) {
 
     val state by viewModel.uiState.collectAsState()
     var errorMessage by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
 
     Column(
         modifier = Modifier.fillMaxSize().background(Color(0xFFAD46FF)),
@@ -71,8 +82,22 @@ fun FormularioLogin(viewModel: FormularioLoginViewModel, onNavigateToHome: () ->
                 modifier = Modifier
                     .clip(RoundedCornerShape(16.dp)),
                 onClick = {
-                    errorMessage = viewModel.accept_loggin(state.nombre, state.contraseña);
-                    if (viewModel.validateAll(state.nombre,state.contraseña)) onNavigateToHome()
+                    // primero validaciones locales
+                    errorMessage = viewModel.accept_loggin(state.nombre, state.contraseña)
+                    if (validator != null) {
+                        // invoke suspend validator in coroutine
+                        scope.launch {
+                            val v = validator(state.nombre, state.contraseña)
+                            if (v.isEmpty()) {
+                                // exitoso
+                                onNavigateToHome()
+                            } else {
+                                errorMessage = v
+                            }
+                        }
+                    } else {
+                        if (viewModel.validateAll(state.nombre, state.contraseña)) onNavigateToHome()
+                    }
                 },
                 enabled = if (state.nombre != "" && state.contraseña != "") true else false
             ){

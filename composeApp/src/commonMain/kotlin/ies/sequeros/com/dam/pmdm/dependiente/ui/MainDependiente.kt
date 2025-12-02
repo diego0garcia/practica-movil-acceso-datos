@@ -51,7 +51,9 @@ fun MainDependiente(
     appViewModel: AppViewModel,
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
-    onExit: () -> Unit
+    onExit: () -> Unit,
+    // validator opcional: recibe nombre y contraseña, devuelve "" si OK o mensaje de error
+    validator: (suspend (String, String) -> String)? = null
 ) {
 
     val navController = rememberNavController()
@@ -104,7 +106,8 @@ fun MainDependiente(
                     viewModel = loginViewModel,
                     onNavigateToHome = {
                         navController.navigate(DependienteRoutes.Main)
-                    }
+                    },
+                    validator = validator
                 )
             }
             composable(DependienteRoutes.Main) {
