@@ -19,7 +19,7 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 fun Categorias (
     mainAdministradorViewModel: MainAdministradorViewModel,
     categoriaViewModel: CategoriaViewModel,
-    onSelectItem:(CategoriaDTO?)->Unit
+    onSelectItem: (CategoriaDTO?) -> Unit
 ) {
     val items by categoriaViewModel.items.collectAsState()
     var searchText by remember { mutableStateOf("") }

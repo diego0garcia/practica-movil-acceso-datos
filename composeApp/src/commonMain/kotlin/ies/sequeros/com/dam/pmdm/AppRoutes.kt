@@ -6,4 +6,5 @@ object  AppRoutes {
     const val Dependiente="dependiente"
     const val TPV = "tpv"
 
+
 }

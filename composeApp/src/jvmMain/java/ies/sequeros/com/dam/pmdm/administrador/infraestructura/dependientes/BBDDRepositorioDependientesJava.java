@@ -40,10 +40,12 @@ public  class BBDDRepositorioDependientesJava {
     public List<Dependiente> getAll() {
         return this.dao.getAll();
     }
-    public Dependiente findByName(String name){
 
-        return null;
+    //Añadido
+    public Dependiente findByName(String name){
+        return this.dao.findByName(name);
     }
+
     public Dependiente  getById(String id){
         return this.dao.getById(id);
 
