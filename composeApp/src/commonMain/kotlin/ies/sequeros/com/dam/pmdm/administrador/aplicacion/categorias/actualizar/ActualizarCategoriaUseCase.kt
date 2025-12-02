@@ -2,10 +2,7 @@ package ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.actualizar
 
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.listar.toDTO
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.actualizar.ActualizarDependienteCommand
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.toDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Categoria
-import ies.sequeros.com.dam.pmdm.administrador.modelo.Dependiente
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 

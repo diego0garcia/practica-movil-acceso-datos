@@ -1,6 +1,6 @@
 package ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.actualizar
 
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.listar.ProductoDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.listar.toDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Producto

@@ -4,7 +4,7 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.listar.toDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 
-class BorrarProductoUseCaseUseCase(private val repositorio: IProductoRepositorio, private val almacenDatos: AlmacenDatos) {
+class BorrarProductoUseCase(private val repositorio: IProductoRepositorio, private val almacenDatos: AlmacenDatos) {
 
     suspend  fun invoke(id: String) {
         val tempo=repositorio.getById(id)

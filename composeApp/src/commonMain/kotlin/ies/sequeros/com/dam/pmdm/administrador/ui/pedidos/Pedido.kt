@@ -1,49 +1,36 @@
 package ies.sequeros.com.dam.pmdm.administrador.ui.pedidos
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
-import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.Icon
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.compose.material3.*
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
+import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 
 @Composable
 fun Pedidos (
-
+    mainAdministradorViewModel: MainAdministradorViewModel,
+    pedidoViewModel: PedidoViewModel,
+    onSelectItem:(PedidoDTO?)->Unit
 ){
-    //val items by dependientesViewModel.items.collectAsState()
+    val items by pedidoViewModel.items.collectAsState()
     var searchText by remember { mutableStateOf("") }
-    /*
+
     val filteredItems = items.filter {
         if (searchText.isNotBlank()) {
-            it.name.contains(searchText, ignoreCase = true) || it.email.contains(searchText, ignoreCase = true)
+            it.name.contains(searchText, ignoreCase = true) || it.name.contains(searchText, ignoreCase = true)
         } else {
             true
         }
     }
-    */
 
     // Contenedor principal
     Column(
@@ -74,59 +61,35 @@ fun Pedidos (
                     .padding(8.dp)
             )
             Spacer(Modifier.width(8.dp))
-            OutlinedButton(
-                onClick = {
-                    //dependientesViewModel.setSelectedDependiente(null)
-                    //onSelectItem(null);
-
-                },
-                colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary)
-            ) {
-                Icon(
-                    imageVector = Icons.Default.Add,
-                    contentDescription = "Add",
-                    modifier = Modifier
-                        .size(ButtonDefaults.IconSize)
-                )
-            }
-
         }
         LazyVerticalGrid(
             columns = GridCells.Adaptive(
                 minSize = 512.dp
             )
         ) {
-            /*
+
             items(filteredItems.size) { item ->
-                DependienteCard(
+                PedidoCard(
                     filteredItems.get(item),
                     {
 
                         val element = it.copy(
-                            enabled = !it.enabled
+                            enable = !it.enable
                         )
-                        dependientesViewModel.switchEnableDependiente(element)
+                        pedidoViewModel.switchEnablePedido(element)
                     }, {
 
                         val element = it.copy(
-                            enabled = !it.enabled
+                            enable = !it.enable
                         )
-                        dependientesViewModel.switchEnableDependiente(element)
+                        pedidoViewModel.switchEnablePedido(element)
                     }, {}, {
                         onSelectItem(it);
 
                     }, {
-                        dependientesViewModel.delete(it)
-                    },
-                    {
-                        val element = it.copy(
-                            isAdmin = !it.isAdmin
-                        )
-                        dependientesViewModel.switchAdmin(element)
-
-
+                        pedidoViewModel.delete(it)
                     })
-
-            */}
+            }
+        }
     }
 }

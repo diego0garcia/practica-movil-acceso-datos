@@ -21,6 +21,7 @@ import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -28,22 +29,27 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
+import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 
 @Composable
 fun Productos (
-
+    mainAdministradorViewModel: MainAdministradorViewModel,
+    productoViewModel: ProductoViewModel,
+    onSelectItem:(ProductoDTO?)->Unit
 ){
-    //val items by dependientesViewModel.items.collectAsState()
+    val items by productoViewModel.items.collectAsState()
     var searchText by remember { mutableStateOf("") }
-    /*
+
     val filteredItems = items.filter {
         if (searchText.isNotBlank()) {
-            it.name.contains(searchText, ignoreCase = true) || it.email.contains(searchText, ignoreCase = true)
+            it.name.contains(searchText, ignoreCase = true) || it.description.contains(searchText, ignoreCase = true)
         } else {
             true
         }
     }
-    */
 
     // Contenedor principal
     Column(
@@ -76,8 +82,8 @@ fun Productos (
             Spacer(Modifier.width(8.dp))
             OutlinedButton(
                 onClick = {
-                    //dependientesViewModel.setSelectedDependiente(null)
-                    //onSelectItem(null);
+                    productoViewModel.setSelectedProducto(null)
+                    onSelectItem(null);
 
                 },
                 colors = ButtonDefaults.outlinedButtonColors(contentColor = MaterialTheme.colorScheme.primary)
@@ -96,37 +102,29 @@ fun Productos (
                 minSize = 512.dp
             )
         ) {
-            /*
+
             items(filteredItems.size) { item ->
-                DependienteCard(
+                ProductoCard(
                     filteredItems.get(item),
                     {
 
                         val element = it.copy(
                             enabled = !it.enabled
                         )
-                        dependientesViewModel.switchEnableDependiente(element)
+                        productoViewModel.switchEnableProducto(element)
                     }, {
 
                         val element = it.copy(
                             enabled = !it.enabled
                         )
-                        dependientesViewModel.switchEnableDependiente(element)
+                        productoViewModel.switchEnableProducto(element)
                     }, {}, {
                         onSelectItem(it);
 
                     }, {
-                        dependientesViewModel.delete(it)
-                    },
-                    {
-                        val element = it.copy(
-                            isAdmin = !it.isAdmin
-                        )
-                        dependientesViewModel.switchAdmin(element)
-
-
+                        productoViewModel.delete(it)
                     })
-
-            */}
+            }
+        }
     }
 }

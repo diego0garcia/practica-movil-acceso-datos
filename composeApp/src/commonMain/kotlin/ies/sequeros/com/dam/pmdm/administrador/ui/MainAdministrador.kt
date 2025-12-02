@@ -49,8 +49,11 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaForm
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.Dependientes
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteForm
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.Pedidos
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.Productos
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.form.ProductoForm
 
 
 @Suppress("ViewModelConstructorInComposable")
@@ -61,6 +64,8 @@ fun MainAdministrador(
     administradorViewModel: AdministradorViewModel,
     dependientesViewModel: DependientesViewModel,
     categoriaViewModel: CategoriaViewModel,
+    productoViewModel: ProductoViewModel,
+    pedidoViewModel: PedidoViewModel,
     onExit: () -> Unit
 ) {
     val navController = rememberNavController()
@@ -197,10 +202,36 @@ fun MainAdministrador(
                 )
             }
             composable (AdminRoutes.Productos){
-                Productos()
+                Productos(
+                    mainViewModel, productoViewModel,{
+                        productoViewModel.setSelectedProducto(it)
+                        navController.navigate(AdminRoutes.Producto) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
             }
+
+            composable (AdminRoutes.Producto){
+                ProductoForm(
+                    productoViewModel,{
+                        navController.popBackStack()
+                    },{
+                        productoViewModel.save(it)
+                        navController.popBackStack()
+                    }
+                )
+            }
+
             composable (AdminRoutes.Pedidos){
-                Pedidos()
+                Pedidos(
+                    mainViewModel, pedidoViewModel,{
+                        pedidoViewModel.setSelectedPedido(it)
+                        navController.navigate(AdminRoutes.Pedidos) {
+                            launchSingleTop = true
+                        }
+                    }
+                )
             }
         }
     }
