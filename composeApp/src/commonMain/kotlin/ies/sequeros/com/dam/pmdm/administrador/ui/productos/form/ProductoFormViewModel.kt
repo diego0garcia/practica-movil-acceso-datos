@@ -1,29 +1,11 @@
 package ies.sequeros.com.dam.pmdm.administrador.ui.productos.form
 
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.BorrarCategoriaUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.activar.ActivarCategoriaUseCase
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.actualizar.ActualizarCategoriaUseCase
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.crear.CrearCategoriaUseCase
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.listar.ListarCategoriasUseCase
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
-import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
-import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteFormState
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
-
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
 class ProductoFormViewModel (
@@ -39,7 +21,8 @@ class ProductoFormViewModel (
             descripcion = item?.description ?: "",
             precio = item?.price ?: "",
             enabled = item?.enabled ?: false,
-            categoriaName = item?.categoriaName ?: ""
+            categoriaName = item?.categoriaName ?: "",
+            categoriaId = item?.categoriaId ?: ""
         )
     )
     val uiState: StateFlow<ProductoFormState> = _uiState.asStateFlow()
@@ -47,7 +30,7 @@ class ProductoFormViewModel (
     //para saber si el formulario es válido
     val isFormValid: StateFlow<Boolean> = uiState.map { state ->
         if(item==null){
-
+            /*
             println(
                 "nombreError=${state.nombreError}, " +
                         "descripcionError=${state.descripcionError}, " +
@@ -61,7 +44,7 @@ class ProductoFormViewModel (
                         "categoriaName.isNotBlank=${state.categoriaName}, " +
                         "categoriaId=${state.categoriaId}"
             )
-
+            */
 
             state.nombreError == null &&
                 state.descripcionError == null &&
@@ -73,7 +56,8 @@ class ProductoFormViewModel (
                 state.precio.isNotBlank() &&
                 state.imagePath.isNotBlank() &&
                 state.descripcion.isNotBlank() &&
-                state.categoriaName.isNotBlank()
+                state.categoriaName.isNotBlank() &&
+                    state.categoriaId.isNotBlank()
         }else{
             state.nombreError == null &&
                     state.descripcionError == null &&
@@ -100,8 +84,8 @@ class ProductoFormViewModel (
         _uiState.value = _uiState.value.copy(categoriaName = cat, categoriaNameError = validateCategoriaName(cat))
     }
 
-    fun onCategoriaIdChange(cat: CategoriaDTO?){
-        _uiState.value = _uiState.value.copy(categoriaId = cat?.id ?: "")
+    fun onCategoriaIdChange(id: String){
+        _uiState.value = _uiState.value.copy(categoriaId = id)
     }
 
     fun onDescripcionChange(v: String) {

@@ -132,15 +132,16 @@ fun ProductoForm(
                     ) {
                         categoria.forEach { cat ->
                             Text(
-                                text = cat.name ?: "",
+                                text = cat.name,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(8.dp)
                                     .clickable {
 
-                                        productoViewModel.setCategoriaSeleccionada(cat)
-                                        productoFormularioViewModel.onCategoriaNameChange(cat.name ?: "")
-                                        productoFormularioViewModel.onCategoriaIdChange(cat)
+                                        //productoViewModel.setCategoriaSeleccionada(cat)
+                                        productoFormularioViewModel.onCategoriaNameChange(cat.name)
+                                        println(cat.id)
+                                        productoFormularioViewModel.onCategoriaIdChange(cat.id)
                                         expanded = false
                                     }
                             )

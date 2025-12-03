@@ -113,6 +113,15 @@ fun ProductoCardTPV(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                HorizontalDivider(
+                    Modifier.fillMaxWidth(0.8f).padding(10.dp),
+                    DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
+                )
+                Text(
+                    text = item.price + "€",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
             }
         }
     }

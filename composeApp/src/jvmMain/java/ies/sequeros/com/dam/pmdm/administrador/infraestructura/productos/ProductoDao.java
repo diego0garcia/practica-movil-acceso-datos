@@ -1,7 +1,6 @@
 package ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos;
 
 
-import ies.sequeros.com.dam.pmdm.administrador.modelo.Pedido;
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Producto;
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.DataBaseConnection;
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.IDao;
