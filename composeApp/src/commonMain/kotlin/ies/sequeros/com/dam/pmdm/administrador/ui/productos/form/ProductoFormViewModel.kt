@@ -47,6 +47,7 @@ class ProductoFormViewModel (
     //para saber si el formulario es válido
     val isFormValid: StateFlow<Boolean> = uiState.map { state ->
         if(item==null){
+            /*
             println(
                 "nombreError=${state.nombreError}, " +
                         "descripcionError=${state.descripcionError}, " +
@@ -60,6 +61,7 @@ class ProductoFormViewModel (
                         "categoriaName.isNotBlank=${state.categoriaName}, " +
                         "categoriaId=${state.categoriaId}"
             )
+             */
 
             state.nombreError == null &&
                 state.descripcionError == null &&
