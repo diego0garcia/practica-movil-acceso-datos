@@ -26,12 +26,19 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 @Composable
-fun FormularioLogin(viewModel: FormularioLoginViewModel, onNavigateToHome: () -> Unit) {
+fun FormularioLogin(
+    viewModel: FormularioLoginViewModel,
+    onNavigateToHome: () -> Unit,
+    validator: (suspend (String, String) -> String)? = null
+) {
 
     val state by viewModel.uiState.collectAsState()
     var errorMessage by remember { mutableStateOf("") }
+    val scope = rememberCoroutineScope()
+
 
     Column(
         modifier = Modifier.fillMaxSize().background(Color(0xFFAD46FF)),
@@ -72,7 +79,18 @@ fun FormularioLogin(viewModel: FormularioLoginViewModel, onNavigateToHome: () ->
                     .clip(RoundedCornerShape(16.dp)),
                 onClick = {
                     errorMessage = viewModel.accept_loggin(state.nombre, state.contraseña);
-                    if (viewModel.validateAll(state.nombre,state.contraseña)) onNavigateToHome()
+                    if (validator != null) {
+                        scope.launch {
+                            val  v = validator(state.nombre,state.contraseña)
+                            if (v.isEmpty()) {
+                                onNavigateToHome()
+                            }else{
+                                errorMessage = v
+                            }
+                        }
+                    }else{
+                        if(viewModel.validateAll(state.nombre,state.contraseña))onNavigateToHome()
+                    }
                 },
                 enabled = if (state.nombre != "" && state.contraseña != "") true else false
             ){

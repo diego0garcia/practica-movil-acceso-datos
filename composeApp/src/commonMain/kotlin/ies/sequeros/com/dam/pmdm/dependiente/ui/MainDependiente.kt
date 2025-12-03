@@ -51,7 +51,8 @@ fun MainDependiente(
     appViewModel: AppViewModel,
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
-    onExit: () -> Unit
+    onExit: () -> Unit,
+    validator: (suspend (String, String) -> String)? = null
 ) {
 
     val navController = rememberNavController()
@@ -104,7 +105,8 @@ fun MainDependiente(
                     viewModel = loginViewModel,
                     onNavigateToHome = {
                         navController.navigate(DependienteRoutes.Main)
-                    }
+                    },
+                    validator = validator
                 )
             }
             composable(DependienteRoutes.Main) {

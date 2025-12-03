@@ -21,11 +21,6 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewM
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 
-import org.jetbrains.compose.resources.painterResource
-import org.jetbrains.compose.ui.tooling.preview.Preview
-
-import vegaburguer.composeapp.generated.resources.Res
-import vegaburguer.composeapp.generated.resources.compose_multiplatform
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
@@ -68,27 +63,76 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
             //MAIN VIEW
             composable(AppRoutes.Main) {
                 Principal({
-                    navController.navigate(AppRoutes.Administrador)
+                    // abrir login de administrador reutilizando el mismo formulario
+                    navController.navigate(AppRoutes.AdministradorLogin)
                 },{navController.navigate(AppRoutes.Dependiente)},{ navController.navigate(AppRoutes.TPV)})
             }
+            // ADMIN LOGIN: reutiliza el formulario de dependiente pero valida contra el repositorio de dependientes
+            composable(AppRoutes.AdministradorLogin) {
+                // creamos un viewModel local para el formulario
+                val loginViewModel = viewModel { ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLoginViewModel() }
+                ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLogin(
+                    viewModel = loginViewModel,
+                    onNavigateToHome = {
+                        // al validar correctamente, navegamos a la vista de administrador
+                        navController.navigate(AppRoutes.Administrador) {
+                            launchSingleTop = true
+                        }
+                    },
+                    validator = { nombre, contraseña ->
+                        // validator: busca en repositorio por name o email y comprueba contraseña
+                        val items = dependienteRepositorio.getAll()
+                        val user = items.firstOrNull { it.name.equals(nombre, true) || it.email.equals(nombre, true) }
+                        if (user == null) return@FormularioLogin "Usuario o contraseña incorrectos"
+                        if (!user.enabled) return@FormularioLogin "Usuario deshabilitado"
+                        if (user.password != contraseña) return@FormularioLogin "Usuario o contraseña incorrectos"
+                        if (!user.isAdmin) return@FormularioLogin "Este usuario no es administrador"
+                        "" // OK
+                    }
+                )
+            }
+
             //ADMINISTARTOR VIEW
             composable (AppRoutes.Administrador){
                 MainAdministrador(appViewModel,mainViewModel,administradorViewModel,
                     dependientesViewModel,categoriasViewModel,productosViewModel,pedidosViewModel,{
-                    navController.popBackStack()
-                })
+                        // regresar al inicio
+                        navController.navigate(AppRoutes.Main) {
+                            // limpia backstack para evitar volver al login accidentalmente
+                            popUpTo(AppRoutes.Main)
+                            launchSingleTop = true
+                        }
+                    })
             }
             composable (AppRoutes.TPV){
-                MainTpv(appViewModel,maintpvViewModel,
+                MainTpv(productosViewModel,categoriasViewModel, appViewModel,maintpvViewModel,)
                     {
-                        navController.popBackStack()
-                    })
+                        navController.navigate(AppRoutes.Main) {
+                            popUpTo(AppRoutes.Main)
+                            launchSingleTop = true
+                        }
+                    }
             }
             composable (AppRoutes.Dependiente){
-                MainDependiente(appViewModel,mainDependienteViewModel,dependienteViewModel,
+                MainDependiente(
+                    appViewModel,
+                    mainDependienteViewModel,
+                    dependienteViewModel,
                     {
-                        navController.popBackStack()
-                    })
+                        navController.navigate(AppRoutes.Main) {
+                            popUpTo(AppRoutes.Main)
+                            launchSingleTop = true
+                        }
+                    },
+                    validator = { nombre, contraseña ->
+                        val items = dependienteRepositorio.getAll()
+                        val user = items.firstOrNull { it.name.equals(nombre, true) || it.email.equals(nombre, true) }
+                        if (user == null) return@MainDependiente "Usuario o contraseña incorrectos"
+                        if (!user.enabled) return@MainDependiente "Usuario deshabilitado"
+                        if (user.password != contraseña) return@MainDependiente "Usuario o contraseña incorrectos"
+                        ""
+                    }
+                )
             }
 
 
