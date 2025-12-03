@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Article
@@ -63,19 +64,25 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ies.sequeros.com.dam.pmdm.AppTheme
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoCard
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
+import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
 import java.security.Principal
 
 
 @Composable
 fun PrincipalTpv(
     productoViewModel: ProductoViewModel,
-    categoriaViewModel: CategoriaViewModel
+    categoriaViewModel: CategoriaViewModel,
+    principalTpvViewModel: PrincipalTpvViewModel,
+    onSelectItem: () -> Unit
     ) {
     val categorias by categoriaViewModel.items.collectAsState()
     val productos by productoViewModel.items.collectAsState()
+    val pedido = principalTpvViewModel.pedido
 
     var searchText by remember { mutableStateOf("") }
 
@@ -103,13 +110,29 @@ fun PrincipalTpv(
                         containerColor = Color.Transparent,
                         contentColor = Color.Black
                     ),
-                    onClick = {}
+                    onClick = {
+                        onSelectItem()
+                    }
                 ){
                     Icon(
                         imageVector = Icons.Default.ShoppingCart,
                         contentDescription = "Carrito",
                         modifier = Modifier.size(40.dp)
                     )
+                    if (pedido.isNotEmpty()) {
+                        Box(
+                            modifier = Modifier
+                                .size(32.dp)
+                                .background(Color.Red, shape = CircleShape),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(
+                                text = pedido.size.toString(),
+                                color = Color.White,
+                                fontSize = 15.sp
+                            )
+                        }
+                    }
                 }
             }
         }
@@ -121,7 +144,6 @@ fun PrincipalTpv(
                 .padding(padding),
             //contentAlignment = Alignment.Center
         ) {
-
             Column(
                 //horizontalAlignment = Alignment.TopCenter,
                 verticalArrangement = Arrangement.Top
@@ -139,14 +161,13 @@ fun PrincipalTpv(
                                 .fillMaxWidth()
                                 .padding(8.dp))
                         {
-                            Row(
+                            Box(
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .height(42.dp)
                                     //.padding(16.dp)
-                                    .background(MaterialTheme.colorScheme.primary),
-                                verticalAlignment = Alignment.CenterVertically,
-                                horizontalArrangement = Arrangement.Start
+                                    .background(MaterialTheme.colorScheme.primary, shape = CircleShape),
+                                contentAlignment = Alignment.Center
                             ) {
                                 Text(
                                     filteredCategorias.get(item).name
@@ -172,7 +193,9 @@ fun PrincipalTpv(
                                         shape = RectangleShape,
                                         elevation = null,
                                         contentPadding = PaddingValues(0.dp),
-                                        onClick = {}
+                                        onClick = {
+                                            principalTpvViewModel.añadirProducto(productosFiltrados.get(item))
+                                        }
                                     ) {
                                         ProductoCardTPV(
                                             productosFiltrados.get(item)

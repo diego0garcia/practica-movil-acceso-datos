@@ -40,6 +40,7 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
+import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
 
@@ -68,6 +69,9 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
     )}
     val productosViewModel = viewModel{ ProductoViewModel(
         productoRepostorio, categroiaRepositorio,almacenImagenes
+    )}
+    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel(
+
     )}
 
     appViewModel.setWindowsAdatativeInfo( currentWindowAdaptiveInfo())
@@ -101,7 +105,7 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
                 })
             }
             composable (AppRoutes.TPV){
-                MainTpv(productosViewModel,categoriasViewModel,appViewModel,maintpvViewModel,
+                MainTpv(productosViewModel,categoriasViewModel,principalTpvViewModel,appViewModel,maintpvViewModel,
                     {
                         navController.popBackStack()
                     })
