@@ -37,6 +37,11 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
+import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
+import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
+import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
 
 import org.jetbrains.compose.resources.painterResource
 import org.jetbrains.compose.ui.tooling.preview.Preview
@@ -68,6 +73,10 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
     appViewModel.setWindowsAdatativeInfo( currentWindowAdaptiveInfo())
     val navController= rememberNavController()
 
+    val dependienteViewModel = viewModel { DependienteViewModel() }
+    val maintpvViewModel = viewModel { MainTpvViewModel() }
+    val mainDependienteViewModel = viewModel { MainDependienteViewModel() }
+
     //LAUNCH UI
     AppTheme(appViewModel.darkMode.collectAsState()) { //Load the app theme
         NavHost(
@@ -78,7 +87,11 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
             composable(AppRoutes.Main) {
                 Principal({
                     navController.navigate(AppRoutes.Administrador)
-                },{},{})
+                },{
+                    navController.navigate(AppRoutes.Dependiente)
+                },{
+                    navController.navigate(AppRoutes.TPV)
+                })
             }
             //ADMINISTARTOR VIEW
             composable (AppRoutes.Administrador){
@@ -86,6 +99,18 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
                     dependientesViewModel,categoriasViewModel,productosViewModel,pedidosViewModel,{
                     navController.popBackStack()
                 })
+            }
+            composable (AppRoutes.TPV){
+                MainTpv(appViewModel,maintpvViewModel,
+                    {
+                        navController.popBackStack()
+                    })
+            }
+            composable (AppRoutes.Dependiente){
+                MainDependiente(appViewModel,mainDependienteViewModel,dependienteViewModel,
+                    {
+                        navController.popBackStack()
+                    })
             }
 
         }

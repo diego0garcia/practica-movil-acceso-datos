@@ -218,4 +218,5 @@ public class DependienteDao implements IDao<Dependiente> {
         }
         return sc;
     }
+
 }
