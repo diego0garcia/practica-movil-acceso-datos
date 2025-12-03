@@ -47,7 +47,7 @@ class ProductoFormViewModel (
     //para saber si el formulario es válido
     val isFormValid: StateFlow<Boolean> = uiState.map { state ->
         if(item==null){
-            /*
+
             println(
                 "nombreError=${state.nombreError}, " +
                         "descripcionError=${state.descripcionError}, " +
@@ -61,7 +61,7 @@ class ProductoFormViewModel (
                         "categoriaName.isNotBlank=${state.categoriaName}, " +
                         "categoriaId=${state.categoriaId}"
             )
-             */
+
 
             state.nombreError == null &&
                 state.descripcionError == null &&
@@ -75,7 +75,16 @@ class ProductoFormViewModel (
                 state.descripcion.isNotBlank() &&
                 state.categoriaName.isNotBlank()
         }else{
-            false
+            state.nombreError == null &&
+                    state.descripcionError == null &&
+                    state.imagePathError ==null &&
+                    state.categoriaNameError == null &&
+                    state.precioError == null &&
+                    !state.nombre.isBlank() &&
+                    !state.precio.isBlank() &&
+                    state.imagePath.isNotBlank() &&
+                    state.descripcion.isNotBlank() &&
+                    state.categoriaName.isNotBlank()
         }
     }.stateIn(
         scope = viewModelScope,
@@ -141,12 +150,6 @@ class ProductoFormViewModel (
         return null
     }
 
-    private fun validateConfirmPassword(pw: String, confirm: String): String? {
-        if (confirm.isBlank()) return "Confirma la contraseña"
-        if (pw != confirm) return "Las contraseñas no coinciden"
-        return null
-    }
-
     private fun validateDescripcion(descripcion: String): String? {
         if (descripcion.isBlank()) return "la descripción es obligatoria"
         //if (descripcion.trim().isNotEmpty()) return "Descripción inválida"
@@ -157,17 +160,19 @@ class ProductoFormViewModel (
         val s = _uiState.value
         val nombreErr = validateNombre(s.nombre)
         val descripcionErr = validateDescripcion(s.descripcion)
-        val imageErr=validateImagePath(s.imagePath)
+        val categoriaErr = validateCategoriaName(s.categoriaName)
+        val imageErr = validateImagePath(s.imagePath)
+        val precioErr = validatePrecio(s.precio)
         val newState = s.copy(
             nombreError = nombreErr,
             descripcionError = descripcionErr,
             imagePathError = imageErr,
-            //categoriaNameError = categoriaErr,
-
+            categoriaNameError = categoriaErr,
+            precioError = precioErr,
             submitted = true
         )
         _uiState.value = newState
-        return listOf(nombreErr, descripcionErr, imageErr).all { it == null }
+        return listOf(nombreErr, descripcionErr, imageErr, categoriaErr, precioErr).all { it == null }
     }
 
     //se le pasan lambdas para ejecutar código en caso de éxito o error
