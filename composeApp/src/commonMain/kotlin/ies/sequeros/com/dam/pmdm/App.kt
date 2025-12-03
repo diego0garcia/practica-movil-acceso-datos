@@ -101,7 +101,7 @@ fun App( dependienteRepositorio : IDependienteRepositorio, categroiaRepositorio 
                 })
             }
             composable (AppRoutes.TPV){
-                MainTpv(appViewModel,maintpvViewModel,
+                MainTpv(productosViewModel,categoriasViewModel,appViewModel,maintpvViewModel,
                     {
                         navController.popBackStack()
                     })

@@ -24,7 +24,7 @@ public class ProductoDao implements IDao<Producto> {
 
     private final String deletebyid = "delete from " + table_name + " where id= ?";
     private final String insert = "INSERT INTO " + table_name + " (id, id_categoria, name, image_path, descripcion, price, enabled, categoriasName) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
     private final String update =
             "UPDATE " + table_name + " SET id_categoria = ?, name = ?, image_path = ?, descripcion = ?, price = ?, enabled = ?, categoriasName = ?" +
                     "WHERE id = ?";
@@ -164,7 +164,7 @@ public class ProductoDao implements IDao<Producto> {
     public void insert(final Producto item) {
         final PreparedStatement pst;
         try {
-           pst = conn.getConnection().prepareStatement(insert,
+            pst = conn.getConnection().prepareStatement(insert,
                     Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, item.getId());
             pst.setString(2, item.getCategoriaId());
