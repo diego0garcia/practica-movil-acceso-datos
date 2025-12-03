@@ -21,7 +21,7 @@ public class PedidoDao implements IDao<Pedido> {
     private final String selectbyid = "select * from " + table_name + " where id=?";
     private final String findbyname = "select * from " + table_name + " where name=?";
 
-    private final String deletebyid = "delete from " + table_name + " where id='?'";
+    private final String deletebyid = "delete from " + table_name + " where id= ?";
     private final String insert = "INSERT INTO " + table_name + " (id, name, iage_path, descripcion, enabled, date, id_dependiente) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String update =

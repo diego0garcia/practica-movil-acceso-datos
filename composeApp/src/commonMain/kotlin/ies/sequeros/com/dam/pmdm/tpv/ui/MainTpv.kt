@@ -37,12 +37,15 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
-
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 
 
 @Suppress("ViewModelConstructorInComposable")
 @Composable
 fun MainTpv(
+    productoViewModel: ProductoViewModel,
+    categoriaViewModel: CategoriaViewModel,
     appViewModel: AppViewModel,
     mainViewModel: MainTpvViewModel,
     onExit: () -> Unit
@@ -90,7 +93,7 @@ fun MainTpv(
             startDestination = TpvRoutes.Main
         ) {
             composable(TpvRoutes.Main) {
-                PrincipalTpv()
+                PrincipalTpv(productoViewModel, categoriaViewModel)
             }
         }
     }
