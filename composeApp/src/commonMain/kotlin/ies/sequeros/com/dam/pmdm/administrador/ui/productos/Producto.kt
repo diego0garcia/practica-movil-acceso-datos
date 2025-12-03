@@ -51,6 +51,7 @@ fun Productos (
         }
     }
 
+
     // Contenedor principal
     Column(
         modifier = Modifier
