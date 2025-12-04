@@ -48,7 +48,10 @@ CREATE TABLE IF NOT EXISTS producto (
                          categoriasName VARCHAR(255) NOT NULL,
                          CONSTRAINT fk_producto_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE);
 
+DROP TABLE IF EXISTS lineapedido;
 CREATE TABLE IF NOT EXISTS lineapedido (
                            id VARCHAR(36) PRIMARY KEY,
+                           product_name VARCHAR(100) NOT NULL,
+                           product_price FLOAT NOT NULL,
                            id_pedido VARCHAR(36) NOT NULL,
                            CONSTRAINT fk_lineapedido_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id) ON DELETE CASCADE);

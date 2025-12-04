@@ -95,7 +95,6 @@ fun ProductoCardTPV(
                 contentAlignment = Alignment.Center
             ) {
                 ImagenDesdePath(imagePath, Res.drawable.hombre, Modifier.fillMaxWidth())
-
             }
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
