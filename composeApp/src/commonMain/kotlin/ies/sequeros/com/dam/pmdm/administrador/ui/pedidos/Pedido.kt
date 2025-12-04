@@ -5,7 +5,6 @@ import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
@@ -19,7 +18,7 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 fun Pedidos (
     mainAdministradorViewModel: MainAdministradorViewModel,
     pedidoViewModel: PedidoViewModel,
-    onSelectItem:(PedidoDTO?)->Unit
+    onSelectItem: (PedidoDTO?) -> Unit
 ){
     val items by pedidoViewModel.items.collectAsState()
     var searchText by remember { mutableStateOf("") }

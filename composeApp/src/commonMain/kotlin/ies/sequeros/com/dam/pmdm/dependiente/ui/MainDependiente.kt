@@ -51,7 +51,8 @@ fun MainDependiente(
     appViewModel: AppViewModel,
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
-    onExit: () -> Unit
+    onExit: () -> Unit,
+    validator: (suspend (String, String) -> String)? = null
 ) {
 
     val navController = rememberNavController()
@@ -104,7 +105,8 @@ fun MainDependiente(
                     viewModel = loginViewModel,
                     onNavigateToHome = {
                         navController.navigate(DependienteRoutes.Main)
-                    }
+                    },
+                    validator = validator
                 )
             }
             composable(DependienteRoutes.Main) {
@@ -166,8 +168,6 @@ fun MainDependiente(
 
                         Spacer(Modifier.height(16.dp))
                         options.forEach { item ->
-                            //si se tienen permiso
-                            // if(!item.admin || (item.admin && appViewModel.hasPermission()))
                             NavigationDrawerItem(
                                 icon = {
                                     Box(
@@ -198,7 +198,6 @@ fun MainDependiente(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp)
-                        // Add a fixed height constraint to prevent "Size out of range" error
                         .height(600.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center
