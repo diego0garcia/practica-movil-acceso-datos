@@ -24,6 +24,11 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
+
+
+import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
+import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
+
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.LoginValidator
 
@@ -42,10 +47,21 @@ fun App(
     val appViewModel = viewModel { AppViewModel() }
     val mainViewModel = remember { MainAdministradorViewModel() }
     val administradorViewModel = viewModel { AdministradorViewModel() }
-    val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, almacenImagenes) }
-    val categoriasViewModel = viewModel{ CategoriaViewModel(categroiaRepositorio, almacenImagenes) }
-    val pedidosViewModel = viewModel{ PedidoViewModel(pedidoRepositorio, almacenImagenes) }
-    val productosViewModel = viewModel{ ProductoViewModel(productoRepostorio, categroiaRepositorio, almacenImagenes) }
+    val dependientesViewModel = viewModel{ DependientesViewModel(
+        dependienteRepositorio, almacenImagenes
+    )}
+    val categoriasViewModel = viewModel{ CategoriaViewModel(
+        categroiaRepositorio, almacenImagenes
+    )}
+    val pedidosViewModel = viewModel{ PedidoViewModel(
+        pedidoRepositorio, almacenImagenes
+    )}
+    val productosViewModel = viewModel{ ProductoViewModel(
+        productoRepostorio, categroiaRepositorio,almacenImagenes
+    )}
+    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel(
+
+    )}
 
     appViewModel.setWindowsAdatativeInfo(currentWindowAdaptiveInfo())
     val navController = rememberNavController()
@@ -89,6 +105,7 @@ fun App(
                 )
             }
 
+
             // ADMIN VIEW
             composable(AppRoutes.Administrador) {
                 MainAdministrador(appViewModel, mainViewModel, administradorViewModel,dependientesViewModel,
@@ -101,7 +118,17 @@ fun App(
                         launchSingleTop = true
                     }
                 }
+
+              /*
+            composable (AppRoutes.TPV){
+                MainTpv(productosViewModel,categoriasViewModel,principalTpvViewModel,appViewModel,maintpvViewModel,
+                    {
+                        navController.popBackStack()
+                    })
+                   
+
             }
+             */
 
             // TPV VIEW
             composable(AppRoutes.TPV) {

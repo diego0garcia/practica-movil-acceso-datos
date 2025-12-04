@@ -95,7 +95,6 @@ fun ProductoCardTPV(
                 contentAlignment = Alignment.Center
             ) {
                 ImagenDesdePath(imagePath, Res.drawable.hombre, Modifier.fillMaxWidth())
-
             }
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -111,6 +110,15 @@ fun ProductoCardTPV(
                 Text(
                     text = item.description,
                     style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+                HorizontalDivider(
+                    Modifier.fillMaxWidth(0.8f).padding(10.dp),
+                    DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
+                )
+                Text(
+                    text = item.price + "€",
+                    style = MaterialTheme.typography.titleSmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
             }

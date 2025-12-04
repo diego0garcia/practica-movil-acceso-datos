@@ -4,7 +4,15 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileDependienteRepository
+
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
+import androidx.compose.ui.tooling.preview.Preview
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.memoria.FileDependienteRepository
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
+
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 
@@ -15,6 +23,8 @@ class MainActivity : ComponentActivity() {
         val almacenDatos:AlmacenDatos=  AlmacenDatos(this)
         //se le pasa al repositorio
         val dependienteRepositorio: IDependienteRepositorio =
+            FileDependienteRepository(almacenDatos)
+        val categoriaRepositorio: ICategoriaRepositorio =
             FileDependienteRepository(almacenDatos)
 
         enableEdgeToEdge()

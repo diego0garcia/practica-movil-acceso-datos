@@ -16,11 +16,11 @@ class MainTpvViewModel(): ViewModel() {
     private val _options= MutableStateFlow<List<ItemOption>>(emptyList())
 
     fun setOptions(options:List<ItemOption>){
-
         _options.value = options.toList() // fuerza una nueva referencia
-
     }
-    val filteredItems = _options/*combine(_options, appUser) { items, user ->
+    val filteredItems = _options
+
+    /*combine(_options, appUser) { items, user ->
         val isAdmin = user?.isAdmin ?: false
        // if (isAdmin)
             items // muestra todo
