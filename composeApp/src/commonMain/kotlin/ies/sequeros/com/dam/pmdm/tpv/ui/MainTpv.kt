@@ -19,10 +19,10 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
-import ies.sequeros.com.dam.pmdm.administrador.ui.AdminRoutes
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
+import ies.sequeros.com.dam.pmdm.tpv.ui.pedido.VisualizarPedido
 
 
 @Suppress("ViewModelConstructorInComposable")
@@ -91,11 +91,12 @@ fun MainTpv(
                 )
             }
             composable(TpvRoutes.Pedido) {
-               VisualizarPedido(principalTpvViewModel,
-                   onClose = {
-                       navController.popBackStack()
-                   }
-               )
+                VisualizarPedido(
+                    principalTpvViewModel,
+                    onClose = {
+                        navController.popBackStack()
+                    }
+                )
             }
         }
     }
