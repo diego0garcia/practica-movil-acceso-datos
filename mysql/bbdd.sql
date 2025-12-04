@@ -24,17 +24,6 @@ CREATE TABLE IF NOT EXISTS pedido (
                             date DATE NOT NULL,
                             id_dependiente VARCHAR(36) NOT NULL,
                             CONSTRAINT fk_pedido_dependiente FOREIGN KEY (id_dependiente) REFERENCES dependiente(id) ON DELETE CASCADE);
-INSERT INTO pedido (id, name, image_path, descripcion, enabled, date, id_dependiente)
-VALUES (
-           '1',
-           'Nombre de prueba',
-           '84a33917-b42c-49a4-a99c-9d3f1e4a4da1.jpg',
-           'Texto de descripción',
-           True,
-           CURDATE(),
-           'bc64bb37-c6a9-4f04-b6c3-be3abba14f85'
-       );
-
 
 DROP TABLE IF EXISTS producto;
 CREATE TABLE IF NOT EXISTS producto (
@@ -55,3 +44,6 @@ CREATE TABLE IF NOT EXISTS lineapedido (
                            product_price FLOAT NOT NULL,
                            id_pedido VARCHAR(36) NOT NULL,
                            CONSTRAINT fk_lineapedido_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id) ON DELETE CASCADE);
+
+INSERT INTO dependiente (id, name, email, password, image_path, enabled, is_admin)
+VALUES ('admin', 'admin', 'admin@admin.es', 'admin', 'c1c51d6b-918c-4b26-98af-23a69e43127a.png', True, True);
