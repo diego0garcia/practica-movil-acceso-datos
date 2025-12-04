@@ -44,5 +44,6 @@ CREATE TABLE IF NOT EXISTS lineapedido (
                            id_pedido VARCHAR(36) NOT NULL,
                            CONSTRAINT fk_lineapedido_pedido FOREIGN KEY (id_pedido) REFERENCES pedido(id) ON DELETE CASCADE);
 
+
 INSERT INTO dependiente (id, name, email, password, image_path, enabled, is_admin)
 VALUES ('admin', 'admin', 'admin@admin.es', 'admin', 'c1c51d6b-918c-4b26-98af-23a69e43127a.png', True, True);
