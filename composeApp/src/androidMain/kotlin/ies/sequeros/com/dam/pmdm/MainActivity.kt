@@ -4,12 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
-import androidx.compose.ui.tooling.preview.Preview
-import ies.sequeros.com.dam.pmdm.administrador.infraestructura.memoria.FileDependienteRepository
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileDependienteRepository
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
+
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -27,7 +25,8 @@ class MainActivity : ComponentActivity() {
             //pasan a la aplicación,
             val almacenImagenes:AlmacenDatos=  AlmacenDatos(this)
 
-            App(dependienteRepositorio,almacenImagenes)
+            App(dependienteRepositorio, categroiaRepositorio, productoRepostorio, pedidoRepositorio, almacenImagenes)
+        )
         }
     }
 }

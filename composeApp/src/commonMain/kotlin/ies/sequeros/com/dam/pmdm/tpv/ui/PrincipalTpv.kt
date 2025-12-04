@@ -152,7 +152,7 @@ fun PrincipalTpv(
                                     filteredCategorias.get(item).name
                                 )
                             }
-
+                            // FILTRAR PRODUCTO POR CATEGORIAS USANDO ID
                             val productosFiltrados = productos.filter { it.categoriaId == filteredCategorias.get(item).id }
 
                             LazyVerticalGrid(

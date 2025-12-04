@@ -75,27 +75,23 @@ fun FormularioLogin(
             )
 
             Button(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(16.dp)),
                 onClick = {
-                    errorMessage = viewModel.accept_loggin(state.nombre, state.contraseña);
                     if (validator != null) {
                         scope.launch {
-                            val  v = validator(state.nombre,state.contraseña)
-                            if (v.isEmpty()) {
+                            val error = validator(state.nombre, state.contraseña)
+                            errorMessage = error
+
+                            if (error.isEmpty()) {
                                 onNavigateToHome()
-                            }else{
-                                errorMessage = v
                             }
                         }
-                    }else{
-                        if(viewModel.validateAll(state.nombre,state.contraseña))onNavigateToHome()
                     }
                 },
-                enabled = if (state.nombre != "" && state.contraseña != "") true else false
-            ){
+                enabled = state.nombre.isNotEmpty() && state.contraseña.isNotEmpty()
+            ) {
                 Text("Aceptar")
             }
+
         }
     }
 }
