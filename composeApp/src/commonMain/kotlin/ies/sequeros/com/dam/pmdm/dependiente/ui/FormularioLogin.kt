@@ -28,12 +28,9 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-
+import androidx.compose.runtime.rememberCoroutineScope
+import kotlinx.coroutines.launch
 @Composable
-/**
- * FormularioLogin ahora acepta opcionalmente un validador suspend que recibe nombre y contraseña
- * y devuelve un String con el mensaje de error ("" si OK). Si no se provee, solo hace validaciones locales.
- */
 fun FormularioLogin(
     viewModel: FormularioLoginViewModel,
     onNavigateToHome: () -> Unit,
@@ -79,30 +76,23 @@ fun FormularioLogin(
             )
 
             Button(
-                modifier = Modifier
-                    .clip(RoundedCornerShape(16.dp)),
                 onClick = {
-                    // primero validaciones locales
-                    errorMessage = viewModel.accept_loggin(state.nombre, state.contraseña)
                     if (validator != null) {
-                        // invoke suspend validator in coroutine
                         scope.launch {
-                            val v = validator(state.nombre, state.contraseña)
-                            if (v.isEmpty()) {
-                                // exitoso
+                            val error = validator(state.nombre, state.contraseña)
+                            errorMessage = error
+
+                            if (error.isEmpty()) {
                                 onNavigateToHome()
-                            } else {
-                                errorMessage = v
                             }
                         }
-                    } else {
-                        if (viewModel.validateAll(state.nombre, state.contraseña)) onNavigateToHome()
                     }
                 },
-                enabled = if (state.nombre != "" && state.contraseña != "") true else false
-            ){
+                enabled = state.nombre.isNotEmpty() && state.contraseña.isNotEmpty()
+            ) {
                 Text("Aceptar")
             }
+
         }
     }
 }

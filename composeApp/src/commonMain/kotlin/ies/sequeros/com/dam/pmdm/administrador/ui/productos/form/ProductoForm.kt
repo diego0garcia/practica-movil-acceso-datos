@@ -14,6 +14,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.commons.ui.ImagenDesdePath
 import ies.sequeros.com.dam.pmdm.commons.ui.SelectorImagenComposable
@@ -24,6 +25,7 @@ import vegaburguer.composeapp.generated.resources.hombre
 @Composable
 fun ProductoForm(
     productoViewModel: ProductoViewModel,
+    categoriaViewModel: CategoriaViewModel,
     onClose: () -> Unit,
     onConfirm: (datos: ProductoFormState) -> Unit = {},
     productoFormularioViewModel: ProductoFormViewModel = viewModel {
@@ -34,8 +36,8 @@ fun ProductoForm(
         )
     }
 ) {
-    val categoria by productoViewModel.categoria.collectAsState()
-    val categoriaSelected by productoViewModel.categoriaSelected.collectAsState()
+    val categoria by categoriaViewModel.items.collectAsState()
+    //val categoriaSelected by productoViewModel.categoriaSelected.collectAsState()
 
     var expanded by remember { mutableStateOf(false) }
     val state by productoFormularioViewModel.uiState.collectAsState()
@@ -132,15 +134,16 @@ fun ProductoForm(
                     ) {
                         categoria.forEach { cat ->
                             Text(
-                                text = cat.name ?: "",
+                                text = cat.name,
                                 modifier = Modifier
                                     .fillMaxWidth()
                                     .padding(8.dp)
                                     .clickable {
 
-                                        productoViewModel.setCategoriaSeleccionada(cat)
-                                        productoFormularioViewModel.onCategoriaNameChange(cat.name ?: "")
-                                        productoFormularioViewModel.onCategoriaIdChange(cat)
+                                        //productoViewModel.setCategoriaSeleccionada(cat)
+                                        productoFormularioViewModel.onCategoriaNameChange(cat.name)
+                                        println(cat.id)
+                                        productoFormularioViewModel.onCategoriaIdChange(cat.id)
                                         expanded = false
                                     }
                             )

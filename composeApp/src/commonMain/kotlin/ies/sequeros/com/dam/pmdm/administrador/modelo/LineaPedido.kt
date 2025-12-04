@@ -3,7 +3,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class LineaPedido (
     var id:String,
-    val name:String,
-    val imagePath:String,
-
+    val product_name:String,
+    val product_price:Float,
+    val id_pedido:String,
     )

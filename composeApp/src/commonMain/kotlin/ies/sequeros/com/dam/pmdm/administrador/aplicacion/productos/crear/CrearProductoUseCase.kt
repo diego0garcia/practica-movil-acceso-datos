@@ -9,23 +9,23 @@ import ies.sequeros.com.dam.pmdm.generateUUID
 
 class CrearProductoUseCase(private val repositorio: IProductoRepositorio, private val almacenDatos: AlmacenDatos)  {
 
-    suspend  fun invoke(createUserCommand: CrearProductoCommand): ProductoDTO {
+    suspend  fun invoke(createProductoCommand: CrearProductoCommand): ProductoDTO {
         //this.validateUser(user)
-        if (repositorio.findByName(createUserCommand.name)!=null) {
+        if (repositorio.findByName(createProductoCommand.name)!=null) {
             throw IllegalArgumentException("El producto ya está registrado.")
         }
         val id=generateUUID()
-        val imageName=almacenDatos.copy(createUserCommand.imagePath,id,"/productos/")
+        val imageName=almacenDatos.copy(createProductoCommand.imagePath,id,"/productos/")
         val item = Producto(
             id = id,
             //ACUERDATE DE CAMBIAR ESTO PARA CREAR PRODUCTOS PORFAVOR QUE NO SE TE OLVIDE HDP
-            categoriaId =  createUserCommand.categoriaId,//createUserCommand.categoriaId,
-            name = createUserCommand.name,
+            categoriaId =  createProductoCommand.categoriaId,//createUserCommand.categoriaId,
+            name = createProductoCommand.name,
             imagePath = imageName,
-            description = createUserCommand.description,
-            price = createUserCommand.price,
-            enabled = createUserCommand.enabled,
-            categoriaName = createUserCommand.categoriaName,
+            description = createProductoCommand.description,
+            price = createProductoCommand.price,
+            enabled = createProductoCommand.enabled,
+            categoriaName = createProductoCommand.categoriaName,
         )
         val element=repositorio.findByName(item.name)
         if(element!=null)

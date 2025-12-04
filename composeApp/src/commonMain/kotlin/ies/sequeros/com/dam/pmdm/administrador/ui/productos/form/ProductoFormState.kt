@@ -2,7 +2,7 @@ package ies.sequeros.com.dam.pmdm.administrador.ui.productos.form
 
 data class ProductoFormState(
     val nombre: String = "",
-    val imagePath:String="default",
+    val imagePath:String="",
     val descripcion: String = "",
     val precio: String = "",
     val enabled: Boolean = false,

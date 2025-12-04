@@ -52,7 +52,6 @@ fun MainDependiente(
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
     onExit: () -> Unit,
-    // validator opcional: recibe nombre y contraseña, devuelve "" si OK o mensaje de error
     validator: (suspend (String, String) -> String)? = null
 ) {
 
@@ -169,8 +168,6 @@ fun MainDependiente(
 
                         Spacer(Modifier.height(16.dp))
                         options.forEach { item ->
-                            //si se tienen permiso
-                            // if(!item.admin || (item.admin && appViewModel.hasPermission()))
                             NavigationDrawerItem(
                                 icon = {
                                     Box(
@@ -201,7 +198,6 @@ fun MainDependiente(
                     modifier = Modifier
                         .fillMaxSize()
                         .padding(16.dp)
-                        // Add a fixed height constraint to prevent "Size out of range" error
                         .height(600.dp),
                     horizontalAlignment = Alignment.CenterHorizontally,
                     verticalArrangement = Arrangement.Center

@@ -131,7 +131,7 @@ class ProductoViewModel(
     fun update(formState: ProductoFormState) {
         val command = ActualizarProductoCommand(
             selected.value!!.id!!,
-            selected.value!!.categoriaId!!,
+            formState.categoriaId,
             formState.nombre,
             formState.imagePath,
             formState.descripcion,
