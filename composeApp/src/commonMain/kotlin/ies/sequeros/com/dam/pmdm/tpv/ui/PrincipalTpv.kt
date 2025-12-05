@@ -59,7 +59,6 @@ import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.input.mouse.mouseScrollFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -86,13 +85,7 @@ fun PrincipalTpv(
 
     var searchText by remember { mutableStateOf("") }
 
-    val filteredCategorias = categorias.filter {
-        if (searchText.isNotBlank()) {
-            it.name.contains(searchText, ignoreCase = true) || it.name.contains(searchText, ignoreCase = true)
-        } else {
-            true
-        }
-    }
+    val filteredCategorias = categorias.filter { it.enabled == true}
 
     Scaffold(
         topBar = {
@@ -174,32 +167,44 @@ fun PrincipalTpv(
                                 )
                             }
                             // FILTRAR PRODUCTO POR CATEGORIAS USANDO ID
-                            val productosFiltrados = productos.filter { it.categoriaId == filteredCategorias.get(item).id }
-
-                            LazyVerticalGrid(
-                                columns = GridCells.Fixed(3),
-                                modifier = Modifier
-                                    .fillMaxWidth()
-                                    .heightIn(max = 500.dp),
-                                verticalArrangement = Arrangement.spacedBy(4.dp),
-                                horizontalArrangement = Arrangement.spacedBy(4.dp)
-                            ) {
-                                items(productosFiltrados.size) { item ->
-                                    Button(
-                                        colors = ButtonDefaults.buttonColors(
-                                            containerColor = Color.Transparent,
-                                            contentColor = Color.Unspecified
-                                        ),
-                                        shape = RectangleShape,
-                                        elevation = null,
-                                        contentPadding = PaddingValues(0.dp),
-                                        onClick = {
-                                            principalTpvViewModel.añadirProducto(productosFiltrados.get(item))
+                            val productosFiltrados = productos.filter { it.categoriaId == filteredCategorias.get(item).id && it.enabled == true}
+                            if(productosFiltrados.isEmpty()){
+                                Box(
+                                    Modifier.fillMaxWidth(),
+                                    contentAlignment = Alignment.Center
+                                ){
+                                    Text(
+                                        text = "Categoría vacía",
+                                        style = MaterialTheme.typography.titleSmall,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                            }else{
+                                LazyVerticalGrid(
+                                    columns = GridCells.Fixed(3),
+                                    modifier = Modifier
+                                        .fillMaxWidth()
+                                        .heightIn(max = 500.dp),
+                                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                                ) {
+                                    items(productosFiltrados.size) { item ->
+                                        Button(
+                                            colors = ButtonDefaults.buttonColors(
+                                                containerColor = Color.Transparent,
+                                                contentColor = Color.Unspecified
+                                            ),
+                                            shape = RectangleShape,
+                                            elevation = null,
+                                            contentPadding = PaddingValues(0.dp),
+                                            onClick = {
+                                                principalTpvViewModel.añadirProducto(productosFiltrados.get(item))
+                                            }
+                                        ) {
+                                            ProductoCardTPV(
+                                                productosFiltrados.get(item)
+                                            )
                                         }
-                                    ) {
-                                        ProductoCardTPV(
-                                            productosFiltrados.get(item)
-                                        )
                                     }
                                 }
                             }

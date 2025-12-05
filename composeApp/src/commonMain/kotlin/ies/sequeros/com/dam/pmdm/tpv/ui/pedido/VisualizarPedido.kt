@@ -15,22 +15,19 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewModelScope
-import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.crear.CrearLineaPedidoCommand
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
-import kotlinx.coroutines.launch
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun VisualizarPedido(
     principalTpvViewModel: PrincipalTpvViewModel,
+    pedidoViewModel: PedidoViewModel,
     onClose: () -> Unit,
-
 ) {
     val items = principalTpvViewModel.pedido
     val totalPrice = items.sumOf { it.price.toDouble() }.toFloat()
-
 
     fun terminarPedido(){
         items.forEach { item ->
@@ -39,24 +36,8 @@ fun VisualizarPedido(
                 item.price.toFloat(),
                 item.id
             )
-            /*
-            viewModelScope.launch {
-                try {
-                    val user = crearCategoriasUseCase.invoke(command)
-                    _items.value = (_items.value + user) as MutableList<CategoriaDTO>
-                }catch (e:Exception){
-                    throw  e
-                }
-
-            }
-
-             */
         }
-
     }
-
-    //val scrollState = rememberScrollState()
-
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -90,8 +71,7 @@ fun VisualizarPedido(
                 )
             }
 
-            Column(
-            ) {
+            Column() {
                 if (items.isEmpty()){
                     Text("El carrito está vacío, compra algo anda.")
                 }else{
@@ -127,8 +107,6 @@ fun VisualizarPedido(
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
                 }
-
-
             }
 
             // Botones

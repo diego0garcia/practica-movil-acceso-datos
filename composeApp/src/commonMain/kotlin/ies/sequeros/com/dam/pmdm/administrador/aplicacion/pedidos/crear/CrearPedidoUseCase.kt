@@ -11,21 +11,15 @@ class CrearPedidoUseCase(private val repositorio: IPedidoRepositorio, private va
 
     suspend  fun invoke(createUserCommand: CrearPedidoCommand): PedidoDTO {
         //this.validateUser(user)
-        if (repositorio.findByName(createUserCommand.name)!=null) {
-            throw IllegalArgumentException("El pedido ya está registrado.")
-        }
+
         val id=generateUUID()
-        val imageName=almacenDatos.copy(createUserCommand.imagePath,id,"/pedidos/")
         val item = Pedido(
             id = id,
-            name = createUserCommand.name,
-            imagePath = imageName,
-            descripcion = createUserCommand.descipcion,
             enable = createUserCommand.enable,
             date = createUserCommand.date,
             id_dependiente = createUserCommand.id_dependiente
         )
-        val element=repositorio.findByName(item.name)
+        val element=repositorio.findByName(item.id)
         if(element!=null)
             throw IllegalArgumentException("El pedido ya está registrado.")
         repositorio.add(item)

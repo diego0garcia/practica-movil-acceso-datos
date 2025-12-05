@@ -10,6 +10,7 @@ data class PedidoFormState(
     val imagePath:String="default",
     val date: Date = Date(Instant.now().toEpochMilli()),
     val id_dependiente:String = "",
+
     // errores (null = sin error)
     val nombreError: String? = null,
     val descripcionError: String? = null,

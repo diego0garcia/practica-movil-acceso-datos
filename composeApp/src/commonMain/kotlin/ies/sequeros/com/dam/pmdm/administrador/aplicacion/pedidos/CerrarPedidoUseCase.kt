@@ -18,6 +18,5 @@ class CerrarPedidoUseCase(private val repositorio: IPedidoRepositorio, private v
 
         repositorio.remove(id)
         //se borra la imagen una vez borrado del repositorio
-        almacenDatos.remove(tempoDto.imagePath)
     }
 }

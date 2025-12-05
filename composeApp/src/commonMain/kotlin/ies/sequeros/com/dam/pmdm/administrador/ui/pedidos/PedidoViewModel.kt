@@ -90,9 +90,6 @@ class PedidoViewModel(
 
     fun add(formState: PedidoFormState) {
         val command = CrearPedidoCommand(
-            formState.nombre,
-            formState.imagePath,
-            formState.descripcion,
             formState.enabled,
             formState.date,
             formState.id_dependiente

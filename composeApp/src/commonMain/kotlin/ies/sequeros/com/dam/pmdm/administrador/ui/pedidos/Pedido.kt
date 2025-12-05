@@ -25,7 +25,7 @@ fun Pedidos (
 
     val filteredItems = items.filter {
         if (searchText.isNotBlank()) {
-            it.name.contains(searchText, ignoreCase = true) || it.name.contains(searchText, ignoreCase = true)
+            it.id.contains(searchText, ignoreCase = true) || it.id.contains(searchText, ignoreCase = true)
         } else {
             true
         }

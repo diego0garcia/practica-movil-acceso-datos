@@ -106,7 +106,7 @@ fun App(
 
             // TPV VIEW
             composable(AppRoutes.TPV) {
-                MainTpv(productosViewModel, categoriasViewModel, principalTpvViewModel,appViewModel, maintpvViewModel) {
+                MainTpv(productosViewModel, categoriasViewModel, principalTpvViewModel,pedidosViewModel,appViewModel, maintpvViewModel) {
                     navController.navigate(AppRoutes.Main) {
                         popUpTo(AppRoutes.Main)
                         launchSingleTop = true
