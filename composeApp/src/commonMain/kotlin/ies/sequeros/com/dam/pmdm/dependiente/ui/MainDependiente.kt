@@ -43,6 +43,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 
 
 @Suppress("ViewModelConstructorInComposable")
@@ -51,6 +52,7 @@ fun MainDependiente(
     appViewModel: AppViewModel,
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
+    pedidoViewModel: PedidoViewModel? = null,
     onExit: () -> Unit,
     validator: (suspend (String, String) -> String)? = null
 ) {
@@ -110,7 +112,7 @@ fun MainDependiente(
                 )
             }
             composable(DependienteRoutes.Main) {
-                PrincipalDependiente()
+                PrincipalDependiente(pedidoViewModel = pedidoViewModel)
             }
         }
     }

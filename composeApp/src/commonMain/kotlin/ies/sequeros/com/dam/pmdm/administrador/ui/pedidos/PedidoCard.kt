@@ -18,7 +18,7 @@ import androidx.compose.material.icons.automirrored.filled.Article
 import androidx.compose.material.icons.filled.AdminPanelSettings
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.CheckCircle
-import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ManageAccounts
 import androidx.compose.material.icons.filled.Visibility
@@ -154,43 +154,19 @@ fun PedidoCard(
                 horizontalArrangement = Arrangement.SpaceEvenly,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                // Activar / Desactivar
-                OutlinedIconButton(
-                    onClick = { if (item.enable)
-                        onDeactivate(item)
-                    else
-                        onActivate(item) },
-                    colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = if (item.enable)
-                            MaterialTheme.colorScheme.errorContainer
-                        else
-                            MaterialTheme.colorScheme.secondaryContainer
-                    )
-                ) {
-                    Icon(
-                        if (item.enable) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                        contentDescription = if (item.enable) "Desactivar" else "Activar"
-                    )
-                }
-
-                // Ver detalles
+                // Ver detalles (abre panel)
                 OutlinedIconButton(onClick = onView) {
                     Icon(Icons.AutoMirrored.Filled.Article, contentDescription = "Ver")
                 }
 
-                // Editar
-                OutlinedIconButton(onClick = { onEdit(item) }) {
-                    Icon(Icons.Default.Edit, contentDescription = "Editar")
-                }
-
-                // Eliminar
+                // Entregar (usa la misma función que eliminar pero con icono de check)
                 OutlinedIconButton(
                     onClick = { onDelete(item) },
                     colors = IconButtonDefaults.iconButtonColors(
-                        contentColor = MaterialTheme.colorScheme.error
+                        contentColor = MaterialTheme.colorScheme.primary
                     )
                 ) {
-                    Icon(Icons.Default.Delete, contentDescription = "Eliminar")
+                    Icon(Icons.Default.CheckCircle, contentDescription = "Entregar")
                 }
             }
         }
