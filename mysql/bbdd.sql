@@ -14,12 +14,9 @@ CREATE TABLE IF NOT EXISTS categoria (
                              descripcion VARCHAR(255),
                              enabled BOOLEAN NOT NULL);
 
-
+DROP TABLE IF EXISTS pedido;
 CREATE TABLE IF NOT EXISTS pedido (
                             id VARCHAR(36) PRIMARY KEY,
-                            name VARCHAR(100) NOT NULL,
-                            image_path VARCHAR(255),
-                            descripcion VARCHAR(255),
                             enabled BOOLEAN NOT NULL,
                             date DATE NOT NULL,
                             id_dependiente VARCHAR(36) NOT NULL,
@@ -47,3 +44,6 @@ CREATE TABLE IF NOT EXISTS lineapedido (
 
 INSERT INTO dependiente (id, name, email, password, image_path, enabled, is_admin)
 VALUES ('admin', 'admin', 'admin@admin.es', 'admin', 'c1c51d6b-918c-4b26-98af-23a69e43127a.png', True, True);
+
+INSERT INTO pedido (id, enabled, date,id_dependiente )
+VALUES ('jose', true,  '2006-12-11', 'admin');

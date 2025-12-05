@@ -22,10 +22,10 @@ public class PedidoDao implements IDao<Pedido> {
     private final String findbyname = "select * from " + table_name + " where name=?";
 
     private final String deletebyid = "delete from " + table_name + " where id= ?";
-    private final String insert = "INSERT INTO " + table_name + " (id, name, iage_path, descripcion, enabled, date, id_dependiente) " +
+    private final String insert = "INSERT INTO " + table_name + " (id, enabled, date, id_dependiente) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String update =
-            "UPDATE " + table_name + " SET name = ?, image_path = ?, descripcion = ?, enabled = ?, date = ?, id_dependiente = ? " +
+            "UPDATE " + table_name + " SET   enabled = ?, date = ?, id_dependiente = ? " +
                     "WHERE id = ?";
     public PedidoDao() {
     }
@@ -115,13 +115,10 @@ public class PedidoDao implements IDao<Pedido> {
         try {
             final PreparedStatement pst =
                     conn.getConnection().prepareStatement(update);
-            pst.setString(1, item.getName());
-            pst.setString(2, item.getImagePath());
-            pst.setString(3,item.getDescripcion());
-            pst.setBoolean(4, item.getEnable());
-            pst.setDate(5, item.getDate());
-            pst.setDate(6, item.getDate());
-            pst.setString(7, item.getId());
+            pst.setBoolean(1, item.getEnable());
+            pst.setDate(2, item.getDate());
+            pst.setString(3,item.getId_dependiente());
+            pst.setString(4, item.getId());
             pst.executeUpdate();
             pst.close();
             Logger logger = Logger.getLogger(PedidoDao.class.getName());
@@ -169,24 +166,19 @@ public class PedidoDao implements IDao<Pedido> {
            pst = conn.getConnection().prepareStatement(insert,
                     Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, item.getId());
-            pst.setString(2, item.getName());
-            pst.setString(5,item.getImagePath());
-            pst.setString(6,item.getDescripcion());
-            pst.setBoolean(7, item.getEnable());
-            pst.setDate(8, item.getDate());
-            pst.setString(9, item.getId_dependiente());
+            pst.setBoolean(2, item.getEnable());
+            pst.setDate(3, item.getDate());
+            pst.setString(4, item.getId_dependiente());
 
             pst.executeUpdate();
             pst.close();
             Logger logger = Logger.getLogger(PedidoDao.class.getName());
             logger.info(() ->
                     "Ejecutando SQL: " + update +
-                            " | Params: [1]=" + item.getName() +
-                            ", [2]=" + item.getImagePath() +
-                            ", [3]=" + item.getDescripcion() +
-                            ", [4]=" + item.getEnable() +
-                            ", [5]=" + item.getDate() +
-                            ", [6]=" + item.getId() +
+                            " | Params: [1]=" + item.getEnable() +
+                            ", [2]=" + item.getDate() +
+                            ", [3]=" + item.getId() +
+                            ", [4]=" + item.getId_dependiente() +
                             "]"
             );
 
@@ -202,9 +194,6 @@ public class PedidoDao implements IDao<Pedido> {
         try {
             sc=new Pedido(
                     r.getString("ID"),
-                    r.getString("NAME"),
-                    r.getString("IMAGE_PATH"),
-                    r.getString("DESCRIPCION"),
                     r.getBoolean("ENABLED"),
                     r.getDate("DATE"),
                     r.getString("ID_DEPENDIENTE"));

@@ -11,8 +11,7 @@ import kotlinx.coroutines.launch
 class ProductoFormViewModel (
     val almacenDatos: AlmacenDatos,
     private val item: ProductoDTO?,
-    onSuccess: (ProductoFormState) -> Unit): ViewModel()
-{
+    onSuccess: (ProductoFormState) -> Unit): ViewModel() {
 
     private val _uiState = MutableStateFlow(
         ProductoFormState(
@@ -174,5 +173,4 @@ class ProductoFormViewModel (
             }
         }
     }
-
 }

@@ -17,6 +17,9 @@ import kotlinx.coroutines.launch
 class VisualizarPedidoViewModel (private val item: LineaPedidoDTO?)/*,
                                  onSuccess: (CategoriaFormState) -> Unit): ViewModel()*/{
 
+    fun terminarPedido(){
+        
+    }
     /*
     private val _uiState = MutableStateFlow(
         CategoriaFormState(
