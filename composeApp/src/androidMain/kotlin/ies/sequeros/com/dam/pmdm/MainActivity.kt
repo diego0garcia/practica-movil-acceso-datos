@@ -10,10 +10,14 @@ import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileDepe
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
-import ies.sequeros.com.dam.pmdm.administrador.infraestructura.memoria.FileDependienteRepository
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileCategoriaRepository
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FilePedidoRepository
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileProductoRepository
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 
 
@@ -25,7 +29,11 @@ class MainActivity : ComponentActivity() {
         val dependienteRepositorio: IDependienteRepositorio =
             FileDependienteRepository(almacenDatos)
         val categoriaRepositorio: ICategoriaRepositorio =
-            FileDependienteRepository(almacenDatos)
+            FileCategoriaRepository(almacenDatos)
+        val productoRepostorio: IProductoRepositorio =
+            FileProductoRepository(almacenDatos)
+        val pedidoRepositorio: IPedidoRepositorio =
+            FilePedidoRepository(almacenDatos)
 
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -35,8 +43,8 @@ class MainActivity : ComponentActivity() {
             //pasan a la aplicación,
             val almacenImagenes:AlmacenDatos=  AlmacenDatos(this)
 
-            App(dependienteRepositorio, categroiaRepositorio, productoRepostorio, pedidoRepositorio, almacenImagenes)
-        )
+            App(dependienteRepositorio, categoriaRepositorio, productoRepostorio, pedidoRepositorio, almacenImagenes)
+
         }
     }
 }
