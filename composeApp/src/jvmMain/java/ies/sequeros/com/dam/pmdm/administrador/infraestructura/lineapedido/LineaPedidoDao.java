@@ -1,6 +1,7 @@
-package ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos;
+package ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido;
 
 
+import ies.sequeros.com.dam.pmdm.administrador.modelo.LineaPedido;
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Producto;
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.DataBaseConnection;
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.IDao;
@@ -14,20 +15,20 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ProductoDao implements IDao<Producto> {
+public class LineaPedidoDao implements IDao<LineaPedido> {
     private DataBaseConnection conn;
-    private final String table_name = "PRODUCTO";
+    private final String table_name = "LINEAPEDIDO";
     private final String selectall = "select * from " + table_name;
     private final String selectbyid = "select * from " + table_name + " where id=?";
     private final String findbyname = "select * from " + table_name + " where name=?";
 
     private final String deletebyid = "delete from " + table_name + " where id= ?";
-    private final String insert = "INSERT INTO " + table_name + " (id, id_categoria, name, image_path, descripcion, price, enabled, categoriasName) " +
-            "VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
+    private final String insert = "INSERT INTO " + table_name + " (id, product_name, product_price, id_pedido) " +
+            "VALUES (?, ?, ?, ?)";
     private final String update =
-            "UPDATE " + table_name + " SET id_categoria = ?, name = ?, image_path = ?, descripcion = ?, price = ?, enabled = ?, categoriasName = ?" +
+            "UPDATE " + table_name + " SET product_name = ?, product_price = ?, id_pedido = ?" +
                     "WHERE id = ?";
-    public ProductoDao() {
+    public LineaPedidoDao() {
     }
 
     public DataBaseConnection getConn() {
@@ -39,8 +40,8 @@ public class ProductoDao implements IDao<Producto> {
     }
 
     @Override
-    public Producto getById(final String id) {
-        Producto sp = null;// = new Dependiente();
+    public LineaPedido getById(final String id) {
+        LineaPedido sp = null;// = new Dependiente();
         try {
             final PreparedStatement pst = conn.getConnection().prepareStatement(selectbyid);
             pst.setString(1, id);
@@ -49,18 +50,18 @@ public class ProductoDao implements IDao<Producto> {
                 sp = registerToObject(rs);
             }
             pst.close();
-            Logger logger = Logger.getLogger(ProductoDao.class.getName());
+            Logger logger = Logger.getLogger(LineaPedidoDao.class.getName());
             logger.info("Ejecutando SQL: " + selectbyid + " | Parametros: [id=" + id + "]");
             return sp;
         } catch (final SQLException ex) {
-            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
         return sp;
     }
 
-    public Producto findByName(final String name) {
-        Producto sp = null;// = new Dependiente();
+    public LineaPedido findByName(final String name) {
+        LineaPedido sp = null;// = new Dependiente();
         try {
             final PreparedStatement pst = conn.getConnection().prepareStatement(findbyname);
             pst.setString(1, name);
@@ -69,26 +70,26 @@ public class ProductoDao implements IDao<Producto> {
                 sp = registerToObject(rs);
             }
             pst.close();
-            Logger logger = Logger.getLogger(ProductoDao.class.getName());
+            Logger logger = Logger.getLogger(LineaPedidoDao.class.getName());
             logger.info("Ejecutando SQL: " + findbyname + " | Parametros: [name=" + name + "]");
 
             return sp;
         } catch (final SQLException ex) {
-            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
         return sp;
     }
     @Override
-    public List<Producto> getAll() {
-        final ArrayList<Producto> scl = new ArrayList<>();
-        Producto tempo;
+    public List<LineaPedido> getAll() {
+        final ArrayList<LineaPedido> scl = new ArrayList<>();
+        LineaPedido tempo;
         PreparedStatement pst = null;
         try {
             try {
                 pst = conn.getConnection().prepareStatement(selectall);
             } catch (final SQLException ex) {
-                Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
             }
             final ResultSet rs = pst.executeQuery();
             while (rs.next()) {
@@ -97,11 +98,11 @@ public class ProductoDao implements IDao<Producto> {
             }
 
             pst.close();
-            Logger logger = Logger.getLogger(ProductoDao.class.getName());
+            Logger logger = Logger.getLogger(LineaPedidoDao.class.getName());
             logger.info("Ejecutando SQL: " + selectall+ " | Parametros: ");
 
         } catch (final SQLException ex) {
-            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
 
@@ -110,21 +111,18 @@ public class ProductoDao implements IDao<Producto> {
     //Pedido
 
     @Override
-    public void update(final Producto item) {
+    public void update(final LineaPedido item) {
+
         try {
             final PreparedStatement pst =
                     conn.getConnection().prepareStatement(update);
-            pst.setString(8, item.getId());
-            pst.setString(1, item.getCategoriaId());
-            pst.setString(2, item.getName());
-            pst.setString(3,item.getImagePath());
-            pst.setString(4,item.getDescription());
-            pst.setFloat(5,item.getPrice());
-            pst.setBoolean(6, item.getEnabled());
-            pst.setString(7, item.getCategoriaName());
+            pst.setString(4, item.getId());
+            pst.setString(1, item.getProduct_name());
+            pst.setFloat(2, item.getProduct_price());
+            pst.setString(3,item.getId_pedido());
             pst.executeUpdate();
             pst.close();
-            Logger logger = Logger.getLogger(ProductoDao.class.getName());
+            Logger logger = Logger.getLogger(LineaPedidoDao.class.getName());
             /*
             logger.info(() ->
                     "Ejecutando SQL: " + update +
@@ -138,45 +136,41 @@ public class ProductoDao implements IDao<Producto> {
             );
             */
         } catch (final SQLException ex) {
-            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     @Override
-    public void delete(final Producto item) {
+    public void delete(final LineaPedido item) {
         try {
             final PreparedStatement pst =
                     conn.getConnection().prepareStatement(deletebyid);
             pst.setString(1, item.getId());
             pst.executeUpdate();
             pst.close();
-            Logger logger = Logger.getLogger(ProductoDao.class.getName());
+            Logger logger = Logger.getLogger(LineaPedidoDao.class.getName());
             logger.info("Ejecutando SQL: " + deletebyid + " | Parametros: [id=" + item.getId() + "]");
 
         } catch (final SQLException ex) {
-            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
     }
 
     @Override
-    public void insert(final Producto item) {
+    public void insert(final LineaPedido item) {
         final PreparedStatement pst;
         try {
             pst = conn.getConnection().prepareStatement(insert,
                     Statement.RETURN_GENERATED_KEYS);
             pst.setString(1, item.getId());
-            pst.setString(2, item.getCategoriaId());
-            pst.setString(3, item.getName());
-            pst.setString(4,item.getImagePath());
-            pst.setString(5,item.getDescription());
-            pst.setFloat(6, item.getPrice());
-            pst.setBoolean(7, item.getEnabled());
-            pst.setString(8, item.getCategoriaName());
+            pst.setString(2, item.getProduct_name());
+            pst.setFloat(3, item.getProduct_price());
+            pst.setString(4,item.getId_pedido());
 
             pst.executeUpdate();
             pst.close();
-            Logger logger = Logger.getLogger(ProductoDao.class.getName());
+            Logger logger = Logger.getLogger(LineaPedidoDao.class.getName());
             /*
             logger.info(() ->
                     "Ejecutando SQL: " + update +
@@ -190,28 +184,24 @@ public class ProductoDao implements IDao<Producto> {
             );
              */
         } catch (final SQLException ex) {
-            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
     }
 
     //pasar de registro a objeto
-    private Producto registerToObject(final ResultSet r) {
+    private LineaPedido registerToObject(final ResultSet r) {
 
-        Producto sc =null;
+        LineaPedido sc =null;
         try {
-            sc=new Producto(
+            sc=new LineaPedido(
                     r.getString("ID"),
-                    r.getString("ID_CATEGORIA"),
-                    r.getString("NAME"),
-                    r.getString("IMAGE_PATH"),
-                    r.getString("DESCRIPCION"),
-                    r.getFloat("PRICE"),
-                    r.getBoolean("ENABLED"),
-                    r.getString("CATEGORIASNAME"));
+                    r.getString("PRODUCT_NAME"),
+                    r.getFloat("PRODUCT_PRICE"),
+                    r.getString("ID_PEDIDO"));
             return sc;
         } catch (final SQLException ex) {
-            Logger.getLogger(ProductoDao.class.getName()).log(Level.SEVERE,
+            Logger.getLogger(LineaPedidoDao.class.getName()).log(Level.SEVERE,
                     null, ex);
         }
         return sc;

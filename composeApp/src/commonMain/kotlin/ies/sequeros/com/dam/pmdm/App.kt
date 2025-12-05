@@ -26,6 +26,7 @@ import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.LoginValidator
+import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
 
 @Suppress("ViewModelConstructorInComposable")
 @Composable
@@ -46,7 +47,7 @@ fun App(
     val categoriasViewModel = viewModel{ CategoriaViewModel(categroiaRepositorio, almacenImagenes) }
     val pedidosViewModel = viewModel{ PedidoViewModel(pedidoRepositorio, almacenImagenes) }
     val productosViewModel = viewModel{ ProductoViewModel(productoRepostorio, categroiaRepositorio, almacenImagenes) }
-
+    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel()}
     appViewModel.setWindowsAdatativeInfo(currentWindowAdaptiveInfo())
     val navController = rememberNavController()
 
@@ -105,7 +106,7 @@ fun App(
 
             // TPV VIEW
             composable(AppRoutes.TPV) {
-                MainTpv(productosViewModel, categoriasViewModel, appViewModel, maintpvViewModel) {
+                MainTpv(productosViewModel, categoriasViewModel, principalTpvViewModel,appViewModel, maintpvViewModel) {
                     navController.navigate(AppRoutes.Main) {
                         popUpTo(AppRoutes.Main)
                         launchSingleTop = true

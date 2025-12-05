@@ -16,16 +16,20 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.Article
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.AdminPanelSettings
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ManageAccounts
+import androidx.compose.material.icons.filled.Remove
+import androidx.compose.material.icons.filled.ShoppingCart
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DividerDefaults
@@ -60,7 +64,7 @@ fun ProductoCardTPV(
     item: ProductoDTO,
 ) {
     val cardAlpha by animateFloatAsState(if (item.enabled) 1f else 0.5f)
-    val imagePath =mutableStateOf(if(item.imagePath!=null && item.imagePath.isNotEmpty()) item.imagePath else "")
+    val imagePath = mutableStateOf(if (item.imagePath != null && item.imagePath.isNotEmpty()) item.imagePath else "")
     val borderColor = when {
         item.enabled -> MaterialTheme.colorScheme.primary
         !item.enabled -> MaterialTheme.colorScheme.outline
@@ -95,7 +99,6 @@ fun ProductoCardTPV(
                 contentAlignment = Alignment.Center
             ) {
                 ImagenDesdePath(imagePath, Res.drawable.hombre, Modifier.fillMaxWidth())
-
             }
 
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
@@ -113,6 +116,41 @@ fun ProductoCardTPV(
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )
+                HorizontalDivider(
+                    Modifier.fillMaxWidth(0.8f).padding(10.dp),
+                    DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
+                )
+                Row(
+                    Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Center,
+                    //verticalAlignment = Alignment.CenterHorizontally,
+                ) {
+                    Button(
+                        modifier = Modifier.size(30.dp),
+                        onClick = {}
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Remove,
+                            contentDescription = "Remove",
+                            //modifier = Modifier.size(20.dp)
+                        )
+                    }
+                    Text(
+                        text = item.price + "€",
+                        style = MaterialTheme.typography.titleSmall,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Button(
+                        modifier = Modifier.size(30.dp),
+                        onClick = {}
+                    ) {
+                        Icon(
+                            imageVector = Icons.Default.Add,
+                            contentDescription = "Add",
+                            //modifier = Modifier.size(20.dp)
+                        )
+                    }
+                }
             }
         }
     }
