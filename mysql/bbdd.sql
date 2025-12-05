@@ -14,12 +14,9 @@ CREATE TABLE IF NOT EXISTS categoria (
                              descripcion VARCHAR(255),
                              enabled BOOLEAN NOT NULL);
 
-
+DROP TABLE IF EXISTS pedido;
 CREATE TABLE IF NOT EXISTS pedido (
                             id VARCHAR(36) PRIMARY KEY,
-                            name VARCHAR(100) NOT NULL,
-                            image_path VARCHAR(255),
-                            descripcion VARCHAR(255),
                             enabled BOOLEAN NOT NULL,
                             date DATE NOT NULL,
                             id_dependiente VARCHAR(36) NOT NULL,
