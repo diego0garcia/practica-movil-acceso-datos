@@ -44,3 +44,6 @@ CREATE TABLE IF NOT EXISTS lineapedido (
 
 INSERT INTO dependiente (id, name, email, password, image_path, enabled, is_admin)
 VALUES ('admin', 'admin', 'admin@admin.es', 'admin', 'c1c51d6b-918c-4b26-98af-23a69e43127a.png', True, True);
+
+INSERT INTO pedido (id, enabled, date,id_dependiente )
+VALUES ('jose', true,  '2006-12-11', 'admin');

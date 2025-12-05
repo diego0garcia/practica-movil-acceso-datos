@@ -22,10 +22,10 @@ public class PedidoDao implements IDao<Pedido> {
     private final String findbyname = "select * from " + table_name + " where name=?";
 
     private final String deletebyid = "delete from " + table_name + " where id= ?";
-    private final String insert = "INSERT INTO " + table_name + " (id, name, iage_path, descripcion, enabled, date, id_dependiente) " +
+    private final String insert = "INSERT INTO " + table_name + " (id, enabled, date, id_dependiente) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)";
     private final String update =
-            "UPDATE " + table_name + " SET name = ?, image_path = ?, descripcion = ?, enabled = ?, date = ?, id_dependiente = ? " +
+            "UPDATE " + table_name + " SET   enabled = ?, date = ?, id_dependiente = ? " +
                     "WHERE id = ?";
     public PedidoDao() {
     }
@@ -115,10 +115,10 @@ public class PedidoDao implements IDao<Pedido> {
         try {
             final PreparedStatement pst =
                     conn.getConnection().prepareStatement(update);
-            pst.setBoolean(4, item.getEnable());
-            pst.setDate(5, item.getDate());
-            pst.setDate(6, item.getDate());
-            pst.setString(7, item.getId());
+            pst.setBoolean(1, item.getEnable());
+            pst.setDate(2, item.getDate());
+            pst.setString(3,item.getId_dependiente());
+            pst.setString(4, item.getId());
             pst.executeUpdate();
             pst.close();
             Logger logger = Logger.getLogger(PedidoDao.class.getName());
