@@ -30,7 +30,7 @@ class PrincipalTpvViewModel : ViewModel() {
             formState.product_name,
             formState.product_price.toFloat(),
             formState.id_pedido,
-        )
+        )/*
         viewModelScope.launch {
             try {
                 val user = crearProductoUseCase.invoke(command)
@@ -39,5 +39,7 @@ class PrincipalTpvViewModel : ViewModel() {
                 throw  e
             }
         }
+        */
+
     }
 }

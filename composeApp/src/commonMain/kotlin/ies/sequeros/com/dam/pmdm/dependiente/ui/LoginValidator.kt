@@ -18,6 +18,6 @@ class LoginValidator(
 
         if (soloAdmins && !user.isAdmin) return "Este usuario no es administrador"
 
-        return ""   // OK
+        return ""
     }
 }

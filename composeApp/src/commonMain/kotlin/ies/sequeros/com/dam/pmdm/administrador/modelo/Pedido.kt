@@ -6,9 +6,6 @@ import java.sql.Date
 @Serializable
 data class Pedido (
     var id:String,
-    val name:String,
-    val imagePath:String,
-    val descripcion: String,
     val enable: Boolean,
     @Serializable(with = DateAdaptador::class)
     val date: Date,

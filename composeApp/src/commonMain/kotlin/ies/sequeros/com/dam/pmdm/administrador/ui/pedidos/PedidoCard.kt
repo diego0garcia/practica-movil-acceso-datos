@@ -64,7 +64,6 @@ fun PedidoCard(
     onDelete: (item: PedidoDTO) -> Unit,
 ) {
     val cardAlpha by animateFloatAsState(if (item.enable) 1f else 0.5f)
-    val imagePath =mutableStateOf(if(item.imagePath!=null && item.imagePath.isNotEmpty()) item.imagePath else "./pedidos/71f952b4-cc23-4b06-b131-b4a98306043c.jpeg")
     val borderColor = when {
         item.enable -> MaterialTheme.colorScheme.primary
         !item.enable -> MaterialTheme.colorScheme.outline
@@ -99,22 +98,7 @@ fun PedidoCard(
                     .background(MaterialTheme.colorScheme.surfaceVariant),
                 contentAlignment = Alignment.Center
             ) {
-                ImagenDesdePath(imagePath, Res.drawable.hombre, Modifier.fillMaxWidth())
 
-            }
-
-            //  Nombre y correo
-            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                Text(
-                    text = item.name,
-                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
-                    color = MaterialTheme.colorScheme.onSurface
-                )
-                Text(
-                    text = item.descripcion,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
             }
 
             // 🧩 Estado y rol
