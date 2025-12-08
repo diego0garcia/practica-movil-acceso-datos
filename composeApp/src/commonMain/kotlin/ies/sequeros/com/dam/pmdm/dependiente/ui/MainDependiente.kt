@@ -52,7 +52,7 @@ fun MainDependiente(
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
     pedidoRepositorio: ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio,
-    lineaPedidoViewModel: ies.sequeros.com.dam.pmdm.dependiente.ui.LineaPedidoViewModel,
+    lineaPedidoViewModel: LineaPedidoViewModel,
     onExit: () -> Unit,
     validator: (suspend (String, String) -> String)? = null
 ) {

@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -32,6 +33,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.produceState
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -63,16 +67,14 @@ fun PrincipalDependiente(pedidoRepositorio: IPedidoRepositorio, lineaPedidoViewM
                 modifier = Modifier.fillMaxWidth()
             ) {
 
-                // Mostramos únicamente nombre del producto, precio y fecha
-
-                // Cargamos pedidos
-                val pedidosState = produceState<List<Pedido>>(initialValue = emptyList()) {
-                    value = pedidoRepositorio.getAll()
+                // Mostramos únicamente nombre del producto, precio
+                val pedidos = remember { mutableStateListOf<Pedido>() }
+                LaunchedEffect(Unit) {
+                    pedidos.addAll(pedidoRepositorio.getAll())
                 }
-                val pedidos = pedidosState.value
 
                 if (pedidos.isNotEmpty()) {
-                    // Mostramos los pedidos en filas de 2 tarjetas por fila
+                    // Mostramos los pedidos en filas 
                     Column(
                         modifier = Modifier.fillMaxWidth(),
                         verticalArrangement = Arrangement.spacedBy(16.dp)
@@ -85,39 +87,70 @@ fun PrincipalDependiente(pedidoRepositorio: IPedidoRepositorio, lineaPedidoViewM
                             ) {
                                 rowPedidos.forEach { p ->
                                     Surface(
-                                        shape = RoundedCornerShape(12.dp),
-                                        tonalElevation = 2.dp,
-                                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
                                         modifier = Modifier
                                             .weight(1f)
                                             .padding(8.dp)
+                                            .fillMaxWidth()
+                                            .defaultMinSize(minHeight = 160.dp),
+                                        tonalElevation = 4.dp,
+                                        shape = RoundedCornerShape(16.dp),
+                                        color = MaterialTheme.colorScheme.surface
                                     ) {
                                         Column(
-                                            horizontalAlignment = Alignment.CenterHorizontally,
-                                            modifier = Modifier.padding(24.dp)
+                                            modifier = Modifier
+                                                .padding(24.dp),
+                                            verticalArrangement = Arrangement.spacedBy(12.dp),
+                                            horizontalAlignment = Alignment.CenterHorizontally
                                         ) {
                                             // título del pedido (id)
-                                            Text(text = "Pedido: ${p.id}", fontSize = 14.sp, fontWeight = FontWeight.Medium)
-                                            Spacer(modifier = Modifier.height(8.dp))
-
-                                            val lineasState = produceState<List<LineaPedido>>(initialValue = emptyList(), key1 = p.id) {
-                                                value = lineaPedidoViewModel.findByPedido(p.id)
+                                            Row(
+                                                modifier = Modifier.fillMaxWidth(),
+                                                verticalAlignment = Alignment.CenterVertically,
+                                                horizontalArrangement = Arrangement.Center
+                                            ) {
+                                                Text(
+                                                    text = p.id,
+                                                    style = MaterialTheme.typography.titleMedium,
+                                                    color = MaterialTheme.colorScheme.onSurface
+                                                )
                                             }
-                                            val lineas = lineasState.value
 
+                                            val lineas = remember(p.id) { mutableStateListOf<LineaPedido>() }
+                                            LaunchedEffect(p.id) {
+                                                // Cargamos las líneas del pedido
+                                                lineas.clear()
+                                                lineas.addAll(lineaPedidoViewModel.findByPedido(p.id))
+                                            }
+
+                                            // Mostramos las líneas del pedido
                                             if (lineas.isNotEmpty()) {
                                                 lineas.forEachIndexed { index, linea ->
-                                                    Text(text = linea.product_name, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
-                                                    Text(text = "Precio: ${linea.product_price}", fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f))
-                                                    if (index < lineas.lastIndex) {
-                                                        Spacer(modifier = Modifier.height(8.dp))
-                                                        Divider(modifier = Modifier.fillMaxWidth(0.6f))
-                                                        Spacer(modifier = Modifier.height(8.dp))
+                                                    // Mostramos el nombre y precio del producto
+                                                    Column(
+                                                        horizontalAlignment = Alignment.CenterHorizontally,
+                                                        modifier = Modifier.fillMaxWidth()
+                                                    ) {
+                                                        Text(
+                                                            text = linea.product_name,
+                                                            style = MaterialTheme.typography.titleSmall,
+                                                            color = MaterialTheme.colorScheme.onSurface
+                                                        )
+                                                        Spacer(modifier = Modifier.height(4.dp))
+                                                        Text(
+                                                            text = "€ ${linea.product_price}",
+                                                            style = MaterialTheme.typography.bodyMedium,
+                                                            color = MaterialTheme.colorScheme.primary
+                                                        )
                                                     }
+                                                    Spacer(modifier = Modifier.height(12.dp))
                                                 }
                                             } else {
-                                                Text(text = "--", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
-                                                Text(text = "Precio: --", fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f))
+                                                // Si no hay líneas, mostramos un mensaje
+                                                Text(
+                                                    text = "Sin productos",
+                                                    style = MaterialTheme.typography.bodyMedium,
+                                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                                                )
                                             }
                                         }
                                     }
