@@ -30,10 +30,10 @@ class PedidoViewModel(
 ) : ViewModel() {
     //los casos de uso se crean dentro para la recomposición
     //se pueden injectar también, se tratará en próximos temas
-    private val cerrarPedidoUseCase: CerrarPedidoUseCase = CerrarPedidoUseCase(pedidoRepositorio,almacenDatos)
-    private val crearPedidoUseCase: CrearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio,almacenDatos)
-    private val listarPedidoUseUseCase: ListarPedidosUseCase = ListarPedidosUseCase(pedidoRepositorio,almacenDatos)
-    private val activarPedidoUseUseCase: ActivarPedidoUseCase = ActivarPedidoUseCase(pedidoRepositorio,almacenDatos)
+    private val cerrarPedidoUseCase: CerrarPedidoUseCase
+    private val crearPedidoUseCase: CrearPedidoUseCase
+    private val listarPedidoUseUseCase: ListarPedidosUseCase
+    private val activarPedidoUseUseCase: ActivarPedidoUseCase
 
     private val _items = MutableStateFlow<MutableList<PedidoDTO>>(mutableListOf())
     val items: StateFlow<List<PedidoDTO>> = _items.asStateFlow()
@@ -41,6 +41,10 @@ class PedidoViewModel(
     val selected = _selected.asStateFlow()
 
     init {
+        cerrarPedidoUseCase = CerrarPedidoUseCase(pedidoRepositorio,almacenDatos)
+        crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio,almacenDatos)
+        listarPedidoUseUseCase = ListarPedidosUseCase(pedidoRepositorio,almacenDatos)
+        activarPedidoUseUseCase = ActivarPedidoUseCase(pedidoRepositorio,almacenDatos)
 
         viewModelScope.launch {
             var items = listarPedidoUseUseCase.invoke()

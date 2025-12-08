@@ -56,6 +56,7 @@ fun App(
     val dependienteViewModel = viewModel { DependienteViewModel() }
     val maintpvViewModel = viewModel { MainTpvViewModel() }
     val mainDependienteViewModel = viewModel { MainDependienteViewModel() }
+    val lineaPedidoViewModel = viewModel { ies.sequeros.com.dam.pmdm.dependiente.ui.LineaPedidoViewModel(lineaPedidoRepositorio) }
     //Validacion del login
     val loginValidator = remember { LoginValidator(dependienteRepositorio) }
 
@@ -122,7 +123,7 @@ fun App(
                     mainViewModel = mainDependienteViewModel,
                     dependienteViewModel = dependienteViewModel,
                     pedidoRepositorio = pedidoRepositorio,
-                    lineaPedidoRepositorio = lineaPedidoRepositorio,
+                    lineaPedidoViewModel = lineaPedidoViewModel,
                     onExit = { navController.popBackStack() },
                     validator = { nombre: String, contraseña: String -> loginValidator.validar(nombre, contraseña) }
                 )

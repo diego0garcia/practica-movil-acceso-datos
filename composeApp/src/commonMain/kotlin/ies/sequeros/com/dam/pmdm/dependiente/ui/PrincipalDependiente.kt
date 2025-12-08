@@ -39,13 +39,13 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Pedido
-import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
+import ies.sequeros.com.dam.pmdm.dependiente.ui.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.modelo.LineaPedido
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 
 
 @Composable
-fun PrincipalDependiente(pedidoRepositorio: IPedidoRepositorio, lineaPedidoRepositorio: ILineaPedidoRepositorio) {
+fun PrincipalDependiente(pedidoRepositorio: IPedidoRepositorio, lineaPedidoViewModel: LineaPedidoViewModel) {
     Scaffold(
         topBar = {},
     ) { padding ->
@@ -72,48 +72,60 @@ fun PrincipalDependiente(pedidoRepositorio: IPedidoRepositorio, lineaPedidoRepos
                 val pedidos = pedidosState.value
 
                 if (pedidos.isNotEmpty()) {
-                    // Mostramos cada pedido en su propia tarjeta, dispuestas horizontalmente
-                    Row(
+                    // Mostramos los pedidos en filas de 2 tarjetas por fila
+                    Column(
                         modifier = Modifier.fillMaxWidth(),
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically
+                        verticalArrangement = Arrangement.spacedBy(16.dp)
                     ) {
-                        pedidos.forEach { p ->
-                            Surface(
-                                shape = RoundedCornerShape(12.dp),
-                                tonalElevation = 2.dp,
-                                border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(8.dp)
+                        pedidos.chunked(2).forEach { rowPedidos ->
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                                verticalAlignment = Alignment.Top
                             ) {
-                                Column(
-                                    horizontalAlignment = Alignment.CenterHorizontally,
-                                    modifier = Modifier.padding(24.dp)
-                                ) {
-                                    // título del pedido (id)
-                                    Text(text = "Pedido: ${p.id}", fontSize = 14.sp, fontWeight = FontWeight.Medium)
-                                    Spacer(modifier = Modifier.height(8.dp))
+                                rowPedidos.forEach { p ->
+                                    Surface(
+                                        shape = RoundedCornerShape(12.dp),
+                                        tonalElevation = 2.dp,
+                                        border = BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
+                                        modifier = Modifier
+                                            .weight(1f)
+                                            .padding(8.dp)
+                                    ) {
+                                        Column(
+                                            horizontalAlignment = Alignment.CenterHorizontally,
+                                            modifier = Modifier.padding(24.dp)
+                                        ) {
+                                            // título del pedido (id)
+                                            Text(text = "Pedido: ${p.id}", fontSize = 14.sp, fontWeight = FontWeight.Medium)
+                                            Spacer(modifier = Modifier.height(8.dp))
 
-                                    val lineasState = produceState<List<LineaPedido>>(initialValue = emptyList(), key1 = p.id) {
-                                        value = lineaPedidoRepositorio.getAll().filter { it.id_pedido == p.id }
-                                    }
-                                    val lineas = lineasState.value
+                                            val lineasState = produceState<List<LineaPedido>>(initialValue = emptyList(), key1 = p.id) {
+                                                value = lineaPedidoViewModel.findByPedido(p.id)
+                                            }
+                                            val lineas = lineasState.value
 
-                                    if (lineas.isNotEmpty()) {
-                                        lineas.forEachIndexed { index, linea ->
-                                            Text(text = linea.product_name, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
-                                            Text(text = "Precio: ${linea.product_price}", fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f))
-                                            if (index < lineas.lastIndex) {
-                                                Spacer(modifier = Modifier.height(8.dp))
-                                                Divider(modifier = Modifier.fillMaxWidth(0.6f))
-                                                Spacer(modifier = Modifier.height(8.dp))
+                                            if (lineas.isNotEmpty()) {
+                                                lineas.forEachIndexed { index, linea ->
+                                                    Text(text = linea.product_name, fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+                                                    Text(text = "Precio: ${linea.product_price}", fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f))
+                                                    if (index < lineas.lastIndex) {
+                                                        Spacer(modifier = Modifier.height(8.dp))
+                                                        Divider(modifier = Modifier.fillMaxWidth(0.6f))
+                                                        Spacer(modifier = Modifier.height(8.dp))
+                                                    }
+                                                }
+                                            } else {
+                                                Text(text = "--", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
+                                                Text(text = "Precio: --", fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f))
                                             }
                                         }
-                                    } else {
-                                        Text(text = "--", fontSize = 18.sp, fontWeight = FontWeight.SemiBold)
-                                        Text(text = "Precio: --", fontSize = 16.sp, color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f))
                                     }
+                                }
+
+                                // Si la fila tiene un elemento, añadimos un spacer para equilibrar
+                                if (rowPedidos.size < 2) {
+                                    Spacer(modifier = Modifier.weight(1f))
                                 }
                             }
                         }

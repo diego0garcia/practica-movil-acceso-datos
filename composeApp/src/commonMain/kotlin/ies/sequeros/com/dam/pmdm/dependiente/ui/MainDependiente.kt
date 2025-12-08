@@ -52,7 +52,7 @@ fun MainDependiente(
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
     pedidoRepositorio: ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio,
-    lineaPedidoRepositorio: ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio,
+    lineaPedidoViewModel: ies.sequeros.com.dam.pmdm.dependiente.ui.LineaPedidoViewModel,
     onExit: () -> Unit,
     validator: (suspend (String, String) -> String)? = null
 ) {
@@ -112,7 +112,7 @@ fun MainDependiente(
                 )
             }
             composable(DependienteRoutes.Main) {
-                PrincipalDependiente(pedidoRepositorio, lineaPedidoRepositorio)
+                PrincipalDependiente(pedidoRepositorio, lineaPedidoViewModel)
             }
         }
     }
