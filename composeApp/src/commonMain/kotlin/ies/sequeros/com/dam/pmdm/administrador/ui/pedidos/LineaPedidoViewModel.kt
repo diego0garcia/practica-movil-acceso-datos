@@ -24,17 +24,17 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class PedidoViewModel(
+class LineaPedidoViewModel(
     //private val administradorViewModel: MainAdministradorViewModel,
     private val pedidoRepositorio: IPedidoRepositorio,
     val almacenDatos: AlmacenDatos
 ) : ViewModel() {
     //los casos de uso se crean dentro para la recomposición
     //se pueden injectar también, se tratará en próximos temas
-    private val cerrarPedidoUseCase: CerrarPedidoUseCase
-    private val crearPedidoUseCase: CrearPedidoUseCase
-    private val listarPedidoUseUseCase: ListarPedidosUseCase
-    private val activarPedidoUseUseCase: ActivarPedidoUseCase
+    private lateinit var cerrarPedidoUseCase: CerrarPedidoUseCase
+    private lateinit var crearPedidoUseCase: CrearPedidoUseCase
+    private lateinit var listarPedidoUseUseCase: ListarPedidosUseCase
+    private lateinit var activarPedidoUseUseCase: ActivarPedidoUseCase
 
     private val _items = MutableStateFlow<MutableList<PedidoDTO>>(mutableListOf())
     val items: StateFlow<List<PedidoDTO>> = _items.asStateFlow()
@@ -91,7 +91,6 @@ class PedidoViewModel(
 
     fun add(formState: PedidoFormState, id: String = generateUUID()) {
         val command = CrearPedidoCommand(
-            id,
             formState.enabled,
             formState.date,
             formState.id_dependiente

@@ -9,11 +9,14 @@ import ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDProductoRepos
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.BBDDRepositorioCategoriaJava
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.BBDDRepositorioDependientesJava
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.BBDDRepositorioPedidoJava
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.BBDDRepositorioLineaPedidoJava
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.BBDDRepositorioProductoJava
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.BBDDLineaPedidoRepository
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import java.io.FileInputStream
 import java.util.logging.LogManager
@@ -22,11 +25,13 @@ fun main() = application {
     val categoriaRepositorioJava= BBDDRepositorioCategoriaJava("/app.properties")
     val productoRepositorioJava= BBDDRepositorioProductoJava("/app.properties")
     val pedidoRepositorioJava= BBDDRepositorioPedidoJava("/app.properties")
+    val lineaPedidoRepositorioJava= BBDDRepositorioLineaPedidoJava("/app.properties")
 
     val dependienteRepositorio: IDependienteRepositorio = BBDDDependienteRepository(dependienteRepositorioJava )
     val categoriaRepositorio: ICategoriaRepositorio = BBDDCategoriaRepository(categoriaRepositorioJava)
     val productoRepositorio: IProductoRepositorio = BBDDProductoRepository(productoRepositorioJava)
     val pedidoRepositorio: IPedidoRepositorio = BBDDPedidoRepository(pedidoRepositorioJava)
+    val lineaPedidoRepositorio: ILineaPedidoRepositorio = BBDDLineaPedidoRepository(lineaPedidoRepositorioJava)
 
     configureExternalLogging("./logging.properties")
     Window(
@@ -37,7 +42,7 @@ fun main() = application {
         title = "VegaBurguer",
     ) {
         //se envuelve el repositorio en java en uno que exista en Kotlin
-        App(dependienteRepositorio,categoriaRepositorio, productoRepositorio,pedidoRepositorio,AlmacenDatos())
+        App(dependienteRepositorio,categoriaRepositorio, productoRepositorio,pedidoRepositorio,lineaPedidoRepositorio,AlmacenDatos())
     }
 }
 fun configureExternalLogging(path: String) {

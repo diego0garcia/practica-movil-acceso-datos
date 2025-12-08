@@ -11,6 +11,7 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministrador
@@ -35,6 +36,7 @@ fun App(
     categroiaRepositorio : ICategoriaRepositorio,
     productoRepostorio : IProductoRepositorio,
     pedidoRepositorio : IPedidoRepositorio,
+    lineaPedidoRepositorio: ILineaPedidoRepositorio,
     almacenImagenes:AlmacenDatos
 ) {
 
@@ -83,8 +85,7 @@ fun App(
                             launchSingleTop = true
                         }
                     },
-                    validator = { nombre, contraseña ->
-                        // Login de admins
+                    validator = { nombre: String, contraseña: String ->
                         loginValidator.validar(nombre, contraseña, soloAdmins = true)
                     }
                 )
@@ -117,19 +118,13 @@ fun App(
             // LOGIN DEPENDIENTE
             composable(AppRoutes.Dependiente) {
                 MainDependiente(
-                    appViewModel,
-                    mainDependienteViewModel,
-                    dependienteViewModel,
-                    {
-                        navController.navigate(AppRoutes.Main) {
-                            popUpTo(AppRoutes.Main)
-                            launchSingleTop = true
-                        }
-                    },
-                    validator = { nombre, contraseña ->
-                        //Login de dependiente
-                        loginValidator.validar(nombre, contraseña)
-                    }
+                    appViewModel = appViewModel,
+                    mainViewModel = mainDependienteViewModel,
+                    dependienteViewModel = dependienteViewModel,
+                    pedidoRepositorio = pedidoRepositorio,
+                    lineaPedidoRepositorio = lineaPedidoRepositorio,
+                    onExit = { navController.popBackStack() },
+                    validator = { nombre: String, contraseña: String -> loginValidator.validar(nombre, contraseña) }
                 )
             }
         }

@@ -47,3 +47,13 @@ VALUES ('admin', 'admin', 'admin@admin.es', 'admin', 'c1c51d6b-918c-4b26-98af-23
 
 INSERT INTO pedido (id, enabled, date,id_dependiente )
 VALUES ('jose', true,  '2006-12-11', 'admin');
+
+INSERT INTO lineapedido (id, product_name, product_price, id_pedido)
+VALUES ('admin','HAMBURGUESA',16,'jose');
+
+
+INSERT INTO pedido (id, enabled, date,id_dependiente )
+VALUES ('diego', true,  '2007-12-11', 'admin');
+
+INSERT INTO lineapedido (id, product_name, product_price, id_pedido)
+VALUES ('pepi','Patatas',18,'diego');

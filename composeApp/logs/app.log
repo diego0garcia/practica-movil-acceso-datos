@@ -418,3 +418,463 @@ dic 05, 2025 7:26:26 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestruct
 INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
 dic 05, 2025 7:26:26 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao delete
 INFO: Ejecutando SQL: delete from PEDIDO where id= ? | Parametros: [id=jose]
+dic 05, 2025 7:37:51 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 05, 2025 7:37:51 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 05, 2025 7:37:51 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 05, 2025 7:37:51 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 05, 2025 7:37:51 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 05, 2025 7:38:03 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:14:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:14:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:14:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:14:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:14:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:15:02 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:15:13 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:15:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:15:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:15:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:15:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:15:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:15:43 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:15:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 4:15:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 4:15:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 4:15:49 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 4:17:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:17:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:17:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:17:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:17:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:17:07 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:22:06 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:22:06 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:22:06 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:22:06 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:22:06 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:22:12 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:22:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 4:22:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:22:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 4:22:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao delete
+INFO: Ejecutando SQL: delete from PEDIDO where id= ? | Parametros: [id=jose]
+dic 08, 2025 4:25:57 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:25:57 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:25:57 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:25:57 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:25:57 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:26:09 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:26:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:26:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:26:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:26:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:26:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:27:04 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:38:12 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:38:12 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:38:12 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:38:12 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:38:12 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:38:26 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:38:29 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:38:29 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:38:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:39:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:39:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:39:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:39:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:39:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:39:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:39:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:42:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:42:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:42:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:42:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:42:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:42:34 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:42:34 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:53:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:53:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:53:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:53:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:53:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:53:37 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:53:43 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:53:44 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:54:40 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:54:40 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:54:40 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 4:54:40 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 4:54:40 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 4:54:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:55:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 4:55:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:17:23 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:17:23 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:17:23 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:17:23 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:17:23 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:18:25 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:18:25 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:18:25 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:18:25 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:18:25 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:18:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:18:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:18:52 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:19:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:19:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:19:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:19:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:19:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:19:31 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:19:31 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:23:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:23:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:23:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:23:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:23:00 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:23:18 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:23:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:23:24 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:24:01 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:24:01 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:24:01 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:24:01 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:24:01 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:24:07 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:24:07 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:24:23 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:24:26 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 5:24:26 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:24:26 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 5:24:26 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao delete
+INFO: Ejecutando SQL: delete from PEDIDO where id= ? | Parametros: [id=jose]
+dic 08, 2025 5:24:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:24:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:24:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:24:58 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:25:02 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:25:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:25:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:25:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:25:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:25:42 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:25:46 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:25:46 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:25:52 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:26:07 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:26:07 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:29:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:29:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:29:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:29:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:29:36 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:29:52 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:29:52 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:29:52 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:30:03 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:30:03 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:30:03 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:30:03 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:30:03 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:30:11 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:30:11 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:30:11 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:31:27 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:31:27 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:31:27 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:31:27 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:31:27 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:31:33 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:31:33 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:31:33 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:33:35 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:33:35 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:33:35 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:33:35 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:33:35 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:33:45 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:33:46 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:33:46 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:33:53 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:34:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:34:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:34:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:34:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:34:17 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:34:28 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:34:28 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:34:28 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:36:09 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:36:09 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:36:09 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:36:09 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:36:09 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:36:19 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:36:19 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:36:19 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:36:19 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:37:29 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:37:30 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:37:34 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 5:37:34 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:37:34 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getById
+INFO: Ejecutando SQL: select * from PEDIDO where id=? | Parametros: [id=jose]
+dic 08, 2025 5:37:34 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao delete
+INFO: Ejecutando SQL: delete from PEDIDO where id= ? | Parametros: [id=jose]
+dic 08, 2025 5:37:39 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:37:39 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:37:39 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:38:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:38:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:38:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:38:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:38:15 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:38:21 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:38:21 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:38:21 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:38:29 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:40:05 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:40:05 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:40:05 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:40:05 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:40:05 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:40:13 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:40:14 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:40:14 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:40:44 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:40:44 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:40:44 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:40:44 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.categorias.CategoriasDao getAll
+INFO: Ejecutando SQL: select * from CATEGORIA | Parametros: 
+dic 08, 2025 5:40:44 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.productos.ProductoDao getAll
+INFO: Ejecutando SQL: select * from PRODUCTO | Parametros: 
+dic 08, 2025 5:40:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.dependientes.DependienteDao getAll
+INFO: Ejecutando SQL: select * from DEPENDIENTE | Parametros: 
+dic 08, 2025 5:40:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.pedidos.PedidoDao getAll
+INFO: Ejecutando SQL: select * from PEDIDO | Parametros: 
+dic 08, 2025 5:40:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
+dic 08, 2025 5:40:48 P. M. ies.sequeros.com.dam.pmdm.administrador.infraestructura.lineapedido.LineaPedidoDao getAll
+INFO: Ejecutando SQL: select * from LINEAPEDIDO | Parametros: 
