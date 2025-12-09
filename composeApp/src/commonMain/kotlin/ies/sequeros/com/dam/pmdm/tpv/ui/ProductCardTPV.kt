@@ -128,6 +128,7 @@ fun ProductoCardTPV(
                     horizontalArrangement = Arrangement.Center,
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
+                    /*
                     IconButton(
                         modifier = Modifier.size(30.dp),
                         onClick = {}
@@ -138,11 +139,13 @@ fun ProductoCardTPV(
                             //modifier = Modifier.size(20.dp)
                         )
                     }
+                     */
                     Text(
                         text = item.price + "€",
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
+                    /*
                     IconButton(
                         modifier = Modifier.size(30.dp),
                         onClick = {},
@@ -154,6 +157,7 @@ fun ProductoCardTPV(
                             //modifier = Modifier.size(20.dp)
                         )
                     }
+                     */
                 }
             }
         }

@@ -17,6 +17,7 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaFormState
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.form.PedidoFormState
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
+import ies.sequeros.com.dam.pmdm.generateUUID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -88,8 +89,9 @@ class PedidoViewModel(
 
     }
 
-    fun add(formState: PedidoFormState) {
+    fun add(formState: PedidoFormState, id: String = generateUUID()) {
         val command = CrearPedidoCommand(
+            id,
             formState.enabled,
             formState.date,
             formState.id_dependiente

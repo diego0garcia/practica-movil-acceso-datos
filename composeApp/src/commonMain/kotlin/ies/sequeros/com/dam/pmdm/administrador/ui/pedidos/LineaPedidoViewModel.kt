@@ -6,6 +6,11 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDT
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.activar.ActivarCategoriaCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.actualizar.ActualizarCategoriaCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.crear.CrearCategoriaCommand
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.BorrarLineaPedidoUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.LineaPedidoDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.crear.CrearLineaPedidoCommand
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.crear.CrearLineaPedidoUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.listar.ListarLineaPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.CerrarPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.activar.ActivarPedidoCommand
@@ -13,75 +18,57 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.activar.Activa
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.ListarPedidosUseCase
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaFormState
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.form.PedidoFormState
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.generateUUID
+import ies.sequeros.com.dam.pmdm.tpv.ui.pedido.LineaPedidoFormState
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-class PedidoViewModel(
+class LineaPedidoViewModel(
     //private val administradorViewModel: MainAdministradorViewModel,
-    private val pedidoRepositorio: IPedidoRepositorio,
+    private val lineaPedidoRepositorio: ILineaPedidoRepositorio,
     val almacenDatos: AlmacenDatos
 ) : ViewModel() {
     //los casos de uso se crean dentro para la recomposición
     //se pueden injectar también, se tratará en próximos temas
-    private val cerrarPedidoUseCase: CerrarPedidoUseCase
-    private val crearPedidoUseCase: CrearPedidoUseCase
-    private val listarPedidoUseUseCase: ListarPedidosUseCase
-    private val activarPedidoUseUseCase: ActivarPedidoUseCase
+    private val borrarLineaPedidoUseCase: BorrarLineaPedidoUseCase
+    private val crearLineaPedidoUseCase: CrearLineaPedidoUseCase
+    private val listarLineaPedidoUseCase: ListarLineaPedidoUseCase
 
-    private val _items = MutableStateFlow<MutableList<PedidoDTO>>(mutableListOf())
-    val items: StateFlow<List<PedidoDTO>> = _items.asStateFlow()
-    private val _selected = MutableStateFlow<PedidoDTO?>(null)
+    private val _items = MutableStateFlow<MutableList<LineaPedidoDTO>>(mutableListOf())
+    val items: StateFlow<List<LineaPedidoDTO>> = _items.asStateFlow()
+    private val _selected = MutableStateFlow<LineaPedidoDTO?>(null)
     val selected = _selected.asStateFlow()
 
     init {
-        cerrarPedidoUseCase = CerrarPedidoUseCase(pedidoRepositorio,almacenDatos)
-        crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio,almacenDatos)
-        listarPedidoUseUseCase = ListarPedidosUseCase(pedidoRepositorio,almacenDatos)
-        activarPedidoUseUseCase = ActivarPedidoUseCase(pedidoRepositorio,almacenDatos)
+        borrarLineaPedidoUseCase = BorrarLineaPedidoUseCase(lineaPedidoRepositorio,almacenDatos)
+        crearLineaPedidoUseCase = CrearLineaPedidoUseCase(lineaPedidoRepositorio,almacenDatos)
+        listarLineaPedidoUseCase = ListarLineaPedidoUseCase(lineaPedidoRepositorio,almacenDatos)
+
 
         viewModelScope.launch {
-            var items = listarPedidoUseUseCase.invoke()
+            var items = listarLineaPedidoUseCase.invoke()
             _items.value.clear()
             _items.value.addAll(items)
 
         }
     }
 
-    fun setSelectedPedido(item: PedidoDTO?) {
+    fun setSelectedPedido(item: LineaPedidoDTO?) {
         _selected.value = item
     }
 
 
-    fun switchEnablePedido(item: PedidoDTO) {
-        val command= ActivarPedidoCommand(
-            item.id,
-            item.enable,
-        )
-
-        viewModelScope.launch {
-            val item=activarPedidoUseUseCase.invoke(command)
-
-            _items.value = _items.value.map {
-                if (item.id == it.id)
-                    item
-                else
-                    it
-            } as MutableList<PedidoDTO>
-        }
-
-    }
-
     fun delete(item: PedidoDTO) {
         viewModelScope.launch {
-            cerrarPedidoUseCase.invoke(item.id)
+            borrarLineaPedidoUseCase.invoke(item.id)
             _items.update { current ->
                 current.filterNot { it.id == item.id }.toMutableList()
             }
@@ -89,17 +76,16 @@ class PedidoViewModel(
 
     }
 
-    fun add(formState: PedidoFormState, id: String = generateUUID()) {
-        val command = CrearPedidoCommand(
-            id,
-            formState.enabled,
-            formState.date,
-            formState.id_dependiente
+    fun add(formState: LineaPedidoFormState) {
+        val command = CrearLineaPedidoCommand(
+            formState.product_name,
+            formState.product_price.toFloat(),
+            formState.id_pedido
         )
         viewModelScope.launch {
             try {
-                val user = crearPedidoUseCase.invoke(command)
-                _items.value = (_items.value + user) as MutableList<PedidoDTO>
+                val user = crearLineaPedidoUseCase.invoke(command)
+                _items.value = (_items.value + user) as MutableList<LineaPedidoDTO>
             }catch (e:Exception){
                 throw  e
             }
@@ -109,7 +95,7 @@ class PedidoViewModel(
 
 
 
-    fun save(item: PedidoFormState) {
+    fun save(item: LineaPedidoFormState) {
         if (_selected.value == null)
             this.add(item)
     }
