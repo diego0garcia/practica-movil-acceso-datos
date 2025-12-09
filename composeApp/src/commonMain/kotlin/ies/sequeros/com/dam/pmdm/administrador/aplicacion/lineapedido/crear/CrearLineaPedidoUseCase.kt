@@ -9,14 +9,14 @@ import ies.sequeros.com.dam.pmdm.generateUUID
 
 class CrearLineaPedidoUseCase(private val repositorio: ILineaPedidoRepositorio, private val almacenDatos: AlmacenDatos)  {
 
-    suspend  fun invoke(createProductoCommand: CrearLineaPedidoCommand): LineaPedidoDTO {
+    suspend  fun invoke(createLineaProductoCommand: CrearLineaPedidoCommand): LineaPedidoDTO {
         //this.validateUser(user)
         val id=generateUUID()
         val item = LineaPedido(
             id = id,
-            product_name =  createProductoCommand.product_name,//createUserCommand.categoriaId,
-            product_price = createProductoCommand.product_price,
-            id_pedido = createProductoCommand.id_pedido
+            product_name =  createLineaProductoCommand.product_name,//createUserCommand.categoriaId,
+            product_price = createLineaProductoCommand.product_price,
+            id_pedido = createLineaProductoCommand.id_pedido
         )
         repositorio.add(item)
         return item.toDTO( almacenDatos.getAppDataDir()+"/lineapedido/");

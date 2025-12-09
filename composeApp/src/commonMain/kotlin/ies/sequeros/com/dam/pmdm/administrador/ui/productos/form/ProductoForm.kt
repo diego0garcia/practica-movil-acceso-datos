@@ -115,7 +115,7 @@ fun ProductoForm(
             Column {
                 OutlinedTextField(
                     value = state.categoriaName,
-                    onValueChange = {}, // se deja vacío
+                    onValueChange = {},
                     readOnly = true,
                     label = { Text("Categoría") },
                     trailingIcon = {

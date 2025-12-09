@@ -10,6 +10,7 @@ import ies.sequeros.com.dam.pmdm.administrador.AdministradorViewModel
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 
@@ -18,6 +19,7 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 
@@ -31,6 +33,7 @@ import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
 @Suppress("ViewModelConstructorInComposable")
 @Composable
 fun App(
+    lineaPedidoRepositorio: ILineaPedidoRepositorio,
     dependienteRepositorio : IDependienteRepositorio,
     categroiaRepositorio : ICategoriaRepositorio,
     productoRepostorio : IProductoRepositorio,
@@ -43,11 +46,12 @@ fun App(
     val appViewModel = viewModel { AppViewModel() }
     val mainViewModel = remember { MainAdministradorViewModel() }
     val administradorViewModel = viewModel { AdministradorViewModel() }
+    val lineaPedidosViewModel = viewModel{ LineaPedidoViewModel(lineaPedidoRepositorio, almacenImagenes) }
     val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, almacenImagenes) }
     val categoriasViewModel = viewModel{ CategoriaViewModel(categroiaRepositorio, almacenImagenes) }
     val pedidosViewModel = viewModel{ PedidoViewModel(pedidoRepositorio, almacenImagenes) }
     val productosViewModel = viewModel{ ProductoViewModel(productoRepostorio, categroiaRepositorio, almacenImagenes) }
-    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel()}
+    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel(pedidosViewModel,lineaPedidosViewModel,lineaPedidoRepositorio,pedidoRepositorio,almacenImagenes)}
     appViewModel.setWindowsAdatativeInfo(currentWindowAdaptiveInfo())
     val navController = rememberNavController()
 
@@ -106,7 +110,7 @@ fun App(
 
             // TPV VIEW
             composable(AppRoutes.TPV) {
-                MainTpv(productosViewModel, categoriasViewModel, principalTpvViewModel,pedidosViewModel,appViewModel, maintpvViewModel) {
+                MainTpv(productosViewModel, categoriasViewModel, dependientesViewModel, principalTpvViewModel,pedidosViewModel,appViewModel, maintpvViewModel) {
                     navController.navigate(AppRoutes.Main) {
                         popUpTo(AppRoutes.Main)
                         launchSingleTop = true

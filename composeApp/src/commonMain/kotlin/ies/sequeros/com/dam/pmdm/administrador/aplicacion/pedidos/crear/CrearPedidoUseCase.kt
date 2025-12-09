@@ -12,10 +12,10 @@ class CrearPedidoUseCase(private val repositorio: IPedidoRepositorio, private va
     suspend  fun invoke(createUserCommand: CrearPedidoCommand): PedidoDTO {
         //this.validateUser(user)
 
-        val id=generateUUID()
+        //val id=generateUUID()
         val item = Pedido(
-            id = id,
-            enable = createUserCommand.enable,
+            id = createUserCommand.id,
+            enable = true,
             date = createUserCommand.date,
             id_dependiente = createUserCommand.id_dependiente
         )
