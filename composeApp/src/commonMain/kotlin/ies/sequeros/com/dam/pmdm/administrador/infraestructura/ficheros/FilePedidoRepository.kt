@@ -32,7 +32,7 @@ class FilePedidoRepository(
     override suspend fun add(item: Pedido) {
         val items = this.getAll().toMutableList()
 
-        if (items.firstOrNull { it.name == item.name } == null) {
+        if (items.firstOrNull { it.id == item.id } == null) {
             items.add(item)
         } else {
             throw IllegalArgumentException("ALTA:El usuario con id:" + item.id + " ya existe")
@@ -83,7 +83,7 @@ class FilePedidoRepository(
     override suspend fun findByName(name: String): Pedido? {
         val elements=this.getAll()
         for(element in elements){
-            if(element.name==name)
+            if(element.id==name)
                 return element
         }
         return null; //this.items.values.firstOrNull { it.name.equals(name) };

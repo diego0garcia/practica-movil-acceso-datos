@@ -15,6 +15,7 @@ CREATE TABLE IF NOT EXISTS categoria (
                              enabled BOOLEAN NOT NULL);
 
 DROP TABLE IF EXISTS pedido;
+TRUNCATE TABLE pedido;
 CREATE TABLE IF NOT EXISTS pedido (
                             id VARCHAR(36) PRIMARY KEY,
                             enabled BOOLEAN NOT NULL,
@@ -35,6 +36,7 @@ CREATE TABLE IF NOT EXISTS producto (
                          CONSTRAINT fk_producto_categoria FOREIGN KEY (id_categoria) REFERENCES categoria(id) ON DELETE CASCADE);
 
 DROP TABLE IF EXISTS lineapedido;
+TRUNCATE TABLE lineapedido;
 CREATE TABLE IF NOT EXISTS lineapedido (
                            id VARCHAR(36) PRIMARY KEY,
                            product_name VARCHAR(100) NOT NULL,
