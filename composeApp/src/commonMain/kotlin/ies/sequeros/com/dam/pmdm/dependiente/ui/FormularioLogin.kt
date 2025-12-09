@@ -1,6 +1,5 @@
 package ies.sequeros.com.dam.pmdm.dependiente.ui
 
-
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -28,12 +27,13 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.runtime.rememberCoroutineScope
-import kotlinx.coroutines.launch
+import androidx.compose.foundation.layout.Row
+
 @Composable
 fun FormularioLogin(
     viewModel: FormularioLoginViewModel,
     onNavigateToHome: () -> Unit,
+    onExit: () -> Unit = {},
     validator: (suspend (String, String) -> String)? = null
 ) {
 
@@ -42,7 +42,7 @@ fun FormularioLogin(
     val scope = rememberCoroutineScope()
 
     Column(
-        modifier = Modifier.fillMaxSize().background(Color(0xFFAD46FF)),
+        modifier = Modifier.fillMaxSize().background(Color(0xFFE6E0E9)),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -55,7 +55,12 @@ fun FormularioLogin(
             verticalArrangement = Arrangement.spacedBy(16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            Text(text="INICIAR SESIÓN", fontWeight = FontWeight.Bold, fontSize = 32.sp, fontFamily = FontFamily.Monospace)
+            Text(
+                text = "Inicia sesión",
+                fontWeight = FontWeight.Bold,
+                fontSize = 32.sp,
+                fontFamily = FontFamily.SansSerif
+            )
 
             TextField(
                 value = state.nombre,
@@ -71,28 +76,41 @@ fun FormularioLogin(
                 modifier = Modifier.fillMaxWidth()
             )
 
-            Text(
-                errorMessage
-            )
+            Text("Usuario y contraseña de prueba: admin", fontSize = 12.sp, color = Color.Gray)
 
-            Button(
-                onClick = {
-                    if (validator != null) {
-                        scope.launch {
-                            val error = validator(state.nombre, state.contraseña)
-                            errorMessage = error
+            Text(errorMessage)
 
-                            if (error.isEmpty()) {
-                                onNavigateToHome()
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(25.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Button(
+                    onClick = {
+                        if (validator != null) {
+                            scope.launch {
+                                val error = validator(state.nombre, state.contraseña)
+                                errorMessage = error
+
+                                if (error.isEmpty()) {
+                                    onNavigateToHome()
+                                }
                             }
                         }
-                    }
-                },
-                enabled = state.nombre.isNotEmpty() && state.contraseña.isNotEmpty()
-            ) {
-                Text("Aceptar")
-            }
+                    },
+                    enabled = state.nombre.isNotEmpty() && state.contraseña.isNotEmpty()
+                ) {
+                    Text("Aceptar")
+                }
 
+                Button(
+                    onClick = {
+                        onExit()
+                    },
+                    enabled = true
+                ) {
+                    Text("Cancelar")
+                }
+            }
         }
     }
 }

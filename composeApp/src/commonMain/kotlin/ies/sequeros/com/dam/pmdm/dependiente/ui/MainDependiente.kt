@@ -108,6 +108,7 @@ fun MainDependiente(
                     onNavigateToHome = {
                         navController.navigate(DependienteRoutes.Main)
                     },
+                    onExit = { onExit() },
                     validator = validator
                 )
             }
