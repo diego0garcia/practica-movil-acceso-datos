@@ -89,6 +89,12 @@ fun App(
                             launchSingleTop = true
                         }
                     },
+                    onExit = {
+                        navController.navigate(AppRoutes.Main) {
+                            popUpTo(AppRoutes.Main)
+                            launchSingleTop = true
+                        }
+                    },
                     validator = { nombre, contraseña ->
                         // Login de admins
                         loginValidator.validar(nombre, contraseña, soloAdmins = true)
@@ -126,15 +132,16 @@ fun App(
                     appViewModel,
                     mainDependienteViewModel,
                     dependienteViewModel,
+                    pedidosViewModel,
                     {
                         navController.navigate(AppRoutes.Main) {
                             popUpTo(AppRoutes.Main)
                             launchSingleTop = true
                         }
                     },
-                    validator = { nombre, contraseña ->
-                        //Login de dependiente
-                        loginValidator.validar(nombre, contraseña)
+                    validator = { nombre: String, contrasena: String ->
+                        // Login de dependiente
+                        loginValidator.validar(nombre, contrasena)
                     }
                 )
             }

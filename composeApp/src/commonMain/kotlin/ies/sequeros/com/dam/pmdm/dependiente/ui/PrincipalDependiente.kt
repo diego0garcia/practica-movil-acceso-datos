@@ -17,6 +17,10 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
+import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.Pedidos
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
@@ -25,18 +29,8 @@ import androidx.compose.ui.unit.sp
 
 
 @Composable
-fun PrincipalDependiente() {
+fun PrincipalDependiente(pedidoViewModel: ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel? = null) {
     Scaffold(
-        topBar = {
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(16.dp),
-                contentAlignment = Alignment.TopEnd
-            ) {
-
-            }
-        }
     ) { padding ->
 
         Box(
@@ -53,12 +47,11 @@ fun PrincipalDependiente() {
 
                 Spacer(modifier = Modifier.height(10.dp))
 
-                Text(
-                    text = "VegaBurguer Dependiente",
-                    fontSize = 26.sp,
-                    fontWeight = FontWeight.Bold,
-                    color = MaterialTheme.colorScheme.primary
-                )
+                    pedidoViewModel?.let { pvm ->
+                        val mainAdminVM = remember { MainAdministradorViewModel() }
+                        Pedidos(mainAdminVM, pvm) { selected ->
+                        }
+                    }
             }
         }
     }

@@ -178,7 +178,9 @@ fun MainAdministrador(
                     },{
                         dependientesViewModel.save(it)
                         navController.popBackStack()
-                    }
+                    },
+                    // pasamos pedidoViewModel para que el dependiente vea los pedidos en modo lectura
+                    pedidoViewModel
                 )
             }
             composable (AdminRoutes.Categorias){
