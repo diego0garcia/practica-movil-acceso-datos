@@ -51,6 +51,15 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoCard
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
+import androidx.compose.ui.unit.dp
 import ies.sequeros.com.dam.pmdm.commons.ui.ImagenDesdePath
 import ies.sequeros.com.dam.pmdm.commons.ui.SelectorImagenComposable
 
@@ -64,6 +73,7 @@ fun DependienteForm(
     dependienteViewModel: DependientesViewModel,
     onClose: () -> Unit,
     onConfirm: (datos: DependienteFormState) -> Unit = {},
+    pedidoViewModel: PedidoViewModel? = null,
     dependienteFormularioViewModel: DependienteFormViewModel = viewModel {
         DependienteFormViewModel(
             dependienteViewModel.selected.value, onConfirm
@@ -288,6 +298,35 @@ fun DependienteForm(
                     //Text("Cancelar")
                 }
             }
+
+                // Si se nos pasa un PedidoViewModel mostramos la lista de pedidos en modo lectura
+                pedidoViewModel?.let { pvm ->
+                    Spacer(modifier = Modifier.height(8.dp))
+                    Text(
+                        text = "PEDIDOS",
+                        style = MaterialTheme.typography.titleMedium,
+                        color = MaterialTheme.colorScheme.primary
+                    )
+
+                    val pedidos by pvm.items.collectAsState()
+                    // mostramos una grid similar a la vista de administrador pero con acciones vacías (solo ver)
+                    LazyVerticalGrid(
+                        columns = GridCells.Adaptive(minSize = 512.dp),
+                        modifier = Modifier.fillMaxSize()
+                    ) {
+                        items(pedidos.size) { index ->
+                            val item: PedidoDTO = pedidos[index]
+                            PedidoCard(
+                                item,
+                                onActivate = {},
+                                onDeactivate = {},
+                                onView = {},
+                                onEdit = {},
+                                onDelete = {}
+                            )
+                        }
+                    }
+                }
         }
     }
 }

@@ -1,0 +1,27 @@
+package ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.entregar
+
+
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.toDTO
+import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.Pedido
+import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
+
+
+class EntregarPedidoUseCase(private val repositorio: IPedidoRepositorio, private val almacenDatos: AlmacenDatos){
+
+    //Es una corrutina, invoke es como se llaman todos los casos de uso
+    suspend fun invoke(command: EntregarPedidoCommand ): PedidoDTO {
+        val item: Pedido?=repositorio.getById(command.id)
+        if (item==null) {
+            throw IllegalArgumentException("El pedido no esta registrado.")
+        }
+        var newUser= item.copy(
+            enable = command.enabled,
+            id_dependiente = command.id_dependiente
+        )
+        repositorio.update(newUser)
+        //se devuelve con el path correcto
+        return newUser.toDTO(almacenDatos.getAppDataDir()+"/categorias/")
+    }
+}

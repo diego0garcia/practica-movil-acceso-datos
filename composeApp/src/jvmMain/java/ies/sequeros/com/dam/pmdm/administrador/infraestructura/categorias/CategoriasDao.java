@@ -16,7 +16,7 @@ import java.util.logging.Logger;
 
 public class CategoriasDao implements IDao<Categoria> {
     private DataBaseConnection conn;
-    private final String table_name = "CATEGORIA";
+    private final String table_name = "categoria";
     private final String selectall = "select * from " + table_name;
     private final String selectbyid = "select * from " + table_name + " where id=?";
     private final String findbyname = "select * from " + table_name + " where name=?";

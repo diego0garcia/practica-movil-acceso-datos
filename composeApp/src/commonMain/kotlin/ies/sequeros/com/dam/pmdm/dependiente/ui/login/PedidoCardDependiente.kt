@@ -1,4 +1,4 @@
-package ies.sequeros.com.dam.pmdm.administrador.ui.pedidos
+package ies.sequeros.com.dam.pmdm.dependiente.ui.login
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.BorderStroke
@@ -7,10 +7,14 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -19,12 +23,15 @@ import androidx.compose.material.icons.filled.AdminPanelSettings
 import androidx.compose.material.icons.filled.Block
 import androidx.compose.material.icons.filled.CheckCircle
 import androidx.compose.material.icons.filled.Delete
+import androidx.compose.material.icons.filled.DeliveryDining
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.ManageAccounts
 import androidx.compose.material.icons.filled.Visibility
 import androidx.compose.material.icons.filled.VisibilityOff
 import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.DividerDefaults
@@ -35,18 +42,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedIconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.commons.ui.ImagenDesdePath
+import ies.sequeros.com.dam.pmdm.tpv.ui.ProductoCardTPV
 
 
 import vegaburguer.composeapp.generated.resources.Res
@@ -55,20 +69,22 @@ import vegaburguer.composeapp.generated.resources.hombre
 
 @Suppress("UnrememberedMutableState")
 @Composable
-fun PedidoCard(
+fun PedidoCardDependiente(
     item: PedidoDTO,
-    onActivate: (item:PedidoDTO) -> Unit,
-    onDeactivate: (item:PedidoDTO) -> Unit,
-    onView: () -> Unit,
-    onEdit: (PedidoDTO) -> Unit,
-    onDelete: (item: PedidoDTO) -> Unit,
+    onDeactivate: (item: PedidoDTO) -> Unit,
+    lineaPedidoViewModel: LineaPedidoViewModel,
+    pedidoViewModel: PedidoViewModel
 ) {
+    val itemsLineasPedidos by lineaPedidoViewModel.items.collectAsState()
     val cardAlpha by animateFloatAsState(if (item.enable) 1f else 0.5f)
     val borderColor = when {
         item.enable -> MaterialTheme.colorScheme.primary
         !item.enable -> MaterialTheme.colorScheme.outline
         else -> MaterialTheme.colorScheme.secondary
     }
+
+    val filteredLineasPedido = itemsLineasPedidos.filter { it.id_pedido == item.id }
+    val totalPrice = filteredLineasPedido.sumOf { it.product_price.toDouble() }.toFloat()
 
     Card(
         modifier = Modifier
@@ -106,29 +122,42 @@ fun PedidoCard(
                 DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
             )
 
-            Row(
-                horizontalArrangement = Arrangement.spacedBy(8.dp),
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Center
             ) {
-                AssistChip(
-                    onClick = {},
-                    label = {
-                        Text(if (item.enable) "Activo" else "Inactivo")
-                    },
-                    leadingIcon = {
-                        Icon(
-                            if (item.enable) Icons.Default.CheckCircle else Icons.Default.Block,
-                            contentDescription = null,
-                            tint = if (item.enable)
-                                MaterialTheme.colorScheme.primary
-                            else
-                                MaterialTheme.colorScheme.error
-                        )
-                    },
-                    colors = AssistChipDefaults.assistChipColors(
-                        containerColor = MaterialTheme.colorScheme.surfaceVariant
-                    )
-                )
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(3),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .heightIn(max = 500.dp),
+                    verticalArrangement = Arrangement.spacedBy(4.dp),
+                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    items(filteredLineasPedido.size) { item ->
+                        Box(
+                            Modifier.fillMaxWidth(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text(filteredLineasPedido.get(item).product_name)
+                        }
+                    }
+                }
+            }
+
+            HorizontalDivider(
+                Modifier.fillMaxWidth(0.8f),
+                DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
+            )
+
+            Row (
+                Modifier.fillMaxWidth(0.8f),
+                horizontalArrangement = Arrangement.Start
+            ){
+                Text(text = "Total: ${totalPrice}€",
+                    style = MaterialTheme.typography.titleMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant)
+
             }
 
             HorizontalDivider(
@@ -144,36 +173,15 @@ fun PedidoCard(
             ) {
                 // Activar / Desactivar
                 OutlinedIconButton(
-                    onClick = { if (item.enable)
-                        onDeactivate(item)
-                    else
-                        onActivate(item) },
+                    onClick = { onDeactivate(item) },
                     colors = IconButtonDefaults.filledTonalIconButtonColors(
-                        containerColor = if (item.enable)
-                            MaterialTheme.colorScheme.errorContainer
-                        else
-                            MaterialTheme.colorScheme.secondaryContainer
+                        containerColor = MaterialTheme.colorScheme.secondaryContainer
                     )
                 ) {
                     Icon(
-                        if (item.enable) Icons.Default.VisibilityOff else Icons.Default.Visibility,
-                        contentDescription = if (item.enable) "Desactivar" else "Activar"
+                        Icons.Default.DeliveryDining,
+                        contentDescription = "Entregar"
                     )
-                }
-
-                // Ver detalles
-                OutlinedIconButton(onClick = onView) {
-                    Icon(Icons.AutoMirrored.Filled.Article, contentDescription = "Ver")
-                }
-
-                // Eliminar
-                OutlinedIconButton(
-                    onClick = { onDelete(item) },
-                    colors = IconButtonDefaults.iconButtonColors(
-                        contentColor = MaterialTheme.colorScheme.error
-                    )
-                ) {
-                    Icon(Icons.Default.Delete, contentDescription = "Eliminar")
                 }
             }
         }
