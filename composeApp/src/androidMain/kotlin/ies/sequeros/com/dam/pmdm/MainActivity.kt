@@ -49,7 +49,7 @@ class MainActivity : ComponentActivity() {
             //pasan a la aplicación,
             val almacenImagenes:AlmacenDatos=  AlmacenDatos(this)
 
-            App(lineaPedidoRepositorio,dependienteRepositorio, categoriaRepositorio, productoRepostorio, pedidoRepositorio,almacenImagenes)
+            App(lineaPedidoRepositorio, dependienteRepositorio, categoriaRepositorio, productoRepostorio, pedidoRepositorio, almacenImagenes)
 
         }
     }

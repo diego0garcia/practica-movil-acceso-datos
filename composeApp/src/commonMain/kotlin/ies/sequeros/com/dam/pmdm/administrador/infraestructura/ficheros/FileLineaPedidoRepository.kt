@@ -1,12 +1,10 @@
 package ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros
 
-import ies.sequeros.com.dam.pmdm.administrador.modelo.Categoria
-import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
-import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.LineaPedido
-import java.io.File
+import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import kotlinx.serialization.json.Json
+import java.io.File
 
 class FileLineaPedidoRepository(
     private val almacenDatos: AlmacenDatos,

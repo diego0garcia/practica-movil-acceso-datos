@@ -72,6 +72,7 @@ fun MainAdministrador(
     val options by mainViewModel.filteredItems.collectAsState() //
 
     val wai by appViewModel.windowsAdaptativeInfo.collectAsState();
+    //SE INICIAN LAS OPCIONES DEL MENU
     mainViewModel.setOptions(
         listOf(
             ItemOption(
@@ -153,7 +154,7 @@ fun MainAdministrador(
 
     val adaptiveInfo = currentWindowAdaptiveInfo()
 
-
+    //NAVEGACION ENTRE PANTALLAS DEL ADMINISTRADOR
     val navegador: @Composable () -> Unit = {
         NavHost(
             navController,
@@ -179,7 +180,7 @@ fun MainAdministrador(
                         dependientesViewModel.save(it)
                         navController.popBackStack()
                     },
-                    // pasamos pedidoViewModel para que el dependiente vea los pedidos en modo lectura
+                    // PASAMOS PEDIDOVIEWMODEL PARA QUE EL DEPENDIENTE VEA LOS PEDIDOS EN MODO LECTURA
                     pedidoViewModel
                 )
             }
