@@ -14,6 +14,7 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.crear.Cre
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.crear.CrearDependienteUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.listar.ListarDependientesUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.form.DependienteFormState
@@ -27,6 +28,7 @@ import kotlinx.coroutines.launch
 class DependientesViewModel(
     //private val administradorViewModel: MainAdministradorViewModel,
     private val dependienteRepositorio: IDependienteRepositorio,
+    private val encryptador: IEncryptador,
      val almacenDatos: AlmacenDatos
 ) : ViewModel() {
     //los casos de uso se crean dentro para la recomposición
@@ -46,7 +48,7 @@ class DependientesViewModel(
     init {
         actualizarDependienteUseCase = ActualizarDependienteUseCase(dependienteRepositorio,almacenDatos)
         borrarDependienteUseCase = BorrarDependienteUseCase(dependienteRepositorio,almacenDatos)
-        crearDependienteUseCase = CrearDependienteUseCase(dependienteRepositorio,almacenDatos)
+        crearDependienteUseCase = CrearDependienteUseCase(dependienteRepositorio,almacenDatos, encryptador)
         listarDependientesUseCase = ListarDependientesUseCase(dependienteRepositorio,almacenDatos)
         activarDependienteUseCase = ActivarDependienteUseCase(dependienteRepositorio,almacenDatos)
         cambiarPermisosUseCase= CambiarPermisosUseCase(dependienteRepositorio,almacenDatos)

@@ -49,6 +49,7 @@ kotlin {
             //carga de imagenes
             implementation("io.coil-kt.coil3:coil-compose:3.3.0")
 
+
             implementation(compose.runtime)
             implementation(compose.foundation)
             implementation(compose.material3)
@@ -65,6 +66,7 @@ kotlin {
             implementation(compose.desktop.currentOs)
             implementation(libs.kotlinx.coroutinesSwing)
             implementation("com.mysql:mysql-connector-j:9.5.0")
+            implementation("org.jasypt:jasypt:1.9.3")
         }
     }
 }
@@ -97,6 +99,7 @@ android {
 }
 
 dependencies {
+    //implementation("org.jasypt:jasypt:1.9.3")
     debugImplementation(compose.uiTooling)
 }
 

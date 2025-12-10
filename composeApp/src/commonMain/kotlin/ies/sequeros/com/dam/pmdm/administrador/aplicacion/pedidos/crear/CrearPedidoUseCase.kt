@@ -5,17 +5,16 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.toDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.Pedido
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
-import ies.sequeros.com.dam.pmdm.generateUUID
 
 class CrearPedidoUseCase(private val repositorio: IPedidoRepositorio, private val almacenDatos: AlmacenDatos)  {
 
     suspend  fun invoke(createUserCommand: CrearPedidoCommand): PedidoDTO {
         //this.validateUser(user)
 
-        val id=generateUUID()
+        //val id=generateUUID()
         val item = Pedido(
-            id = id,
-            enable = createUserCommand.enable,
+            id = createUserCommand.id,
+            enable = true,
             date = createUserCommand.date,
             id_dependiente = createUserCommand.id_dependiente
         )

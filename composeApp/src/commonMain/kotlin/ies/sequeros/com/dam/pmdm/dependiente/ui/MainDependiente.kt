@@ -30,9 +30,6 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
@@ -42,7 +39,12 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.lineapedido.VisualizarLineaPedido
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLogin
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLoginViewModel
 
 
 @Suppress("ViewModelConstructorInComposable")
@@ -51,6 +53,9 @@ fun MainDependiente(
     appViewModel: AppViewModel,
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
+    pedidoViewModel: PedidoViewModel,
+    lineaPedidoViewModel: LineaPedidoViewModel,
+    formularioLoginViewModel: FormularioLoginViewModel,
     onExit: () -> Unit,
     validator: (suspend (String, String) -> String)? = null
 ) {
@@ -106,11 +111,13 @@ fun MainDependiente(
                     onNavigateToHome = {
                         navController.navigate(DependienteRoutes.Main)
                     },
+                    onExit = { onExit() },
                     validator = validator
                 )
             }
+
             composable(DependienteRoutes.Main) {
-                PrincipalDependiente()
+                VisualizarLineaPedido(lineaPedidoViewModel = lineaPedidoViewModel ,pedidoViewModel = pedidoViewModel, formularioLoginViewModel = formularioLoginViewModel )
             }
         }
     }

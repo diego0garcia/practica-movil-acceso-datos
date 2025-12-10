@@ -1,4 +1,4 @@
-package ies.sequeros.com.dam.pmdm.dependiente.ui
+package ies.sequeros.com.dam.pmdm.dependiente.ui.login
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -6,6 +6,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 data class FormularioLoginFormState (
+    val id: String = "",
     val nombre: String = "",
     val contraseña: String = "",
     val nombreError: String? = null,
@@ -19,6 +20,10 @@ class FormularioLoginViewModel: ViewModel(){
 
     fun onNombreChange(v: String){
         _uiState.value = _uiState.value.copy(nombre = v, nombreError = validateNombre(v))
+    }
+
+    fun setId(id: String){
+        _uiState.value = _uiState.value.copy(id = id)
     }
 
     fun onContraseñaChange(v: String){

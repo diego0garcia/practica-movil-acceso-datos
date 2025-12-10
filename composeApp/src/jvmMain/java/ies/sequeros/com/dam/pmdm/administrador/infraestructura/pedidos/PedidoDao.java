@@ -16,14 +16,14 @@ import java.util.logging.Logger;
 
 public class PedidoDao implements IDao<Pedido> {
     private DataBaseConnection conn;
-    private final String table_name = "PEDIDO";
+    private final String table_name = "pedido";
     private final String selectall = "select * from " + table_name;
     private final String selectbyid = "select * from " + table_name + " where id=?";
     private final String findbyname = "select * from " + table_name + " where name=?";
 
     private final String deletebyid = "delete from " + table_name + " where id= ?";
     private final String insert = "INSERT INTO " + table_name + " (id, enabled, date, id_dependiente) " +
-                    "VALUES (?, ?, ?, ?, ?, ?, ?)";
+                    "VALUES (?, ?, ?, ?)";
     private final String update =
             "UPDATE " + table_name + " SET   enabled = ?, date = ?, id_dependiente = ? " +
                     "WHERE id = ?";
@@ -172,6 +172,7 @@ public class PedidoDao implements IDao<Pedido> {
 
             pst.executeUpdate();
             pst.close();
+            /*
             Logger logger = Logger.getLogger(PedidoDao.class.getName());
             logger.info(() ->
                     "Ejecutando SQL: " + update +
@@ -180,7 +181,9 @@ public class PedidoDao implements IDao<Pedido> {
                             ", [3]=" + item.getId() +
                             ", [4]=" + item.getId_dependiente() +
                             "]"
+
             );
+             */
 
         } catch (final SQLException ex) {
             Logger.getLogger(PedidoDao.class.getName()).log(Level.SEVERE,

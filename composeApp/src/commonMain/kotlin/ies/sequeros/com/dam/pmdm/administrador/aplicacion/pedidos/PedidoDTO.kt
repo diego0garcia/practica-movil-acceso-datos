@@ -6,5 +6,5 @@ data class PedidoDTO (
     var id:String,
     val enable: Boolean,
     val date: Date,
-    val id_dependiente: String
+    val id_dependiente: String?
 )

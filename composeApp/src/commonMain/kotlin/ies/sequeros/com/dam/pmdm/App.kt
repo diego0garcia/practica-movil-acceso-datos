@@ -7,9 +7,11 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ies.sequeros.com.dam.pmdm.administrador.AdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 
@@ -18,23 +20,28 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLogin
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLoginViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
-import ies.sequeros.com.dam.pmdm.dependiente.ui.LoginValidator
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.LoginValidator
 import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
 
 @Suppress("ViewModelConstructorInComposable")
 @Composable
 fun App(
+    lineaPedidoRepositorio: ILineaPedidoRepositorio,
     dependienteRepositorio : IDependienteRepositorio,
     categroiaRepositorio : ICategoriaRepositorio,
     productoRepostorio : IProductoRepositorio,
     pedidoRepositorio : IPedidoRepositorio,
+    encryptador: IEncryptador,
     almacenImagenes:AlmacenDatos
 ) {
 
@@ -43,19 +50,22 @@ fun App(
     val appViewModel = viewModel { AppViewModel() }
     val mainViewModel = remember { MainAdministradorViewModel() }
     val administradorViewModel = viewModel { AdministradorViewModel() }
-    val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, almacenImagenes) }
+    val lineaPedidosViewModel = viewModel{ LineaPedidoViewModel(lineaPedidoRepositorio, almacenImagenes) }
+    val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, encryptador,almacenImagenes) }
     val categoriasViewModel = viewModel{ CategoriaViewModel(categroiaRepositorio, almacenImagenes) }
     val pedidosViewModel = viewModel{ PedidoViewModel(pedidoRepositorio, almacenImagenes) }
     val productosViewModel = viewModel{ ProductoViewModel(productoRepostorio, categroiaRepositorio, almacenImagenes) }
-    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel()}
+    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel(pedidosViewModel,lineaPedidosViewModel,lineaPedidoRepositorio,pedidoRepositorio, almacenImagenes)}
     appViewModel.setWindowsAdatativeInfo(currentWindowAdaptiveInfo())
     val navController = rememberNavController()
 
     val dependienteViewModel = viewModel { DependienteViewModel() }
     val maintpvViewModel = viewModel { MainTpvViewModel() }
     val mainDependienteViewModel = viewModel { MainDependienteViewModel() }
+    val formularioLoginViewModel = viewModel { FormularioLoginViewModel() }
+
     //Validacion del login
-    val loginValidator = remember { LoginValidator(dependienteRepositorio) }
+    val loginValidator = remember { LoginValidator(dependienteRepositorio, formularioLoginViewModel,encryptador) }
 
     // UI
     AppTheme(appViewModel.darkMode.collectAsState()) {
@@ -74,12 +84,18 @@ fun App(
 
             // LOGIN ADMIN
             composable(AppRoutes.AdministradorLogin) {
-                val loginViewModel = viewModel { ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLoginViewModel() }
+                val loginViewModel = viewModel { FormularioLoginViewModel() }
 
-                ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLogin(
+                FormularioLogin(
                     viewModel = loginViewModel,
                     onNavigateToHome = {
                         navController.navigate(AppRoutes.Administrador) {
+                            launchSingleTop = true
+                        }
+                    },
+                    onExit = {
+                        navController.navigate(AppRoutes.Main) {
+                            popUpTo(AppRoutes.Main)
                             launchSingleTop = true
                         }
                     },
@@ -106,7 +122,7 @@ fun App(
 
             // TPV VIEW
             composable(AppRoutes.TPV) {
-                MainTpv(productosViewModel, categoriasViewModel, principalTpvViewModel,pedidosViewModel,appViewModel, maintpvViewModel) {
+                MainTpv(productosViewModel, categoriasViewModel, dependientesViewModel, principalTpvViewModel,pedidosViewModel,appViewModel, maintpvViewModel) {
                     navController.navigate(AppRoutes.Main) {
                         popUpTo(AppRoutes.Main)
                         launchSingleTop = true
@@ -120,15 +136,16 @@ fun App(
                     appViewModel,
                     mainDependienteViewModel,
                     dependienteViewModel,
-                    {
+                    pedidosViewModel, lineaPedidosViewModel,
+                    formularioLoginViewModel,{
                         navController.navigate(AppRoutes.Main) {
                             popUpTo(AppRoutes.Main)
                             launchSingleTop = true
                         }
                     },
-                    validator = { nombre, contraseña ->
-                        //Login de dependiente
-                        loginValidator.validar(nombre, contraseña)
+                    validator = { nombre: String, contrasena: String ->
+                        // Login de dependiente
+                        loginValidator.validar(nombre, contrasena)
                     }
                 )
             }

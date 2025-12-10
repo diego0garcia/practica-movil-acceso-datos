@@ -4,12 +4,9 @@ import java.time.Instant
 import java.sql.Date
 
 data class PedidoFormState(
-    val nombre: String = "",
-    val descripcion: String = "",
     val enabled: Boolean = false,
-    val imagePath:String="default",
     val date: Date = Date(Instant.now().toEpochMilli()),
-    val id_dependiente:String = "",
+    val id_dependiente:String? = null,
 
     // errores (null = sin error)
     val nombreError: String? = null,

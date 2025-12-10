@@ -9,5 +9,5 @@ data class Pedido (
     val enable: Boolean,
     @Serializable(with = DateAdaptador::class)
     val date: Date,
-    val id_dependiente: String
+    val id_dependiente: String?
 )

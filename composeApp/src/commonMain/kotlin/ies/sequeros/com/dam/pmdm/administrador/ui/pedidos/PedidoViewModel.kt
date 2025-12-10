@@ -12,11 +12,15 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.activar.Activa
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.activar.ActivarPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.entregar.EntregarPedidoCommand
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.entregar.EntregarPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.ListarPedidosUseCase
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaFormState
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.form.PedidoFormState
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
+import ies.sequeros.com.dam.pmdm.generateUUID
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -34,6 +38,7 @@ class PedidoViewModel(
     private val crearPedidoUseCase: CrearPedidoUseCase
     private val listarPedidoUseUseCase: ListarPedidosUseCase
     private val activarPedidoUseUseCase: ActivarPedidoUseCase
+    private val entregarPedidoUseUseCase: EntregarPedidoUseCase
 
     private val _items = MutableStateFlow<MutableList<PedidoDTO>>(mutableListOf())
     val items: StateFlow<List<PedidoDTO>> = _items.asStateFlow()
@@ -42,9 +47,10 @@ class PedidoViewModel(
 
     init {
         cerrarPedidoUseCase = CerrarPedidoUseCase(pedidoRepositorio,almacenDatos)
-        crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio,almacenDatos)
+        crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio, almacenDatos)
         listarPedidoUseUseCase = ListarPedidosUseCase(pedidoRepositorio,almacenDatos)
         activarPedidoUseUseCase = ActivarPedidoUseCase(pedidoRepositorio,almacenDatos)
+        entregarPedidoUseUseCase = EntregarPedidoUseCase(pedidoRepositorio,almacenDatos)
 
         viewModelScope.launch {
             var items = listarPedidoUseUseCase.invoke()
@@ -78,6 +84,26 @@ class PedidoViewModel(
 
     }
 
+    fun deliverPedido(item: PedidoDTO, id_dependiente: String) {
+        val command= EntregarPedidoCommand(
+            item.id,
+            item.enable,
+            id_dependiente = id_dependiente
+        )
+
+        viewModelScope.launch {
+            val item=entregarPedidoUseUseCase.invoke(command)
+
+            _items.value = _items.value.map {
+                if (item.id == it.id)
+                    item
+                else
+                    it
+            } as MutableList<PedidoDTO>
+        }
+
+    }
+
     fun delete(item: PedidoDTO) {
         viewModelScope.launch {
             cerrarPedidoUseCase.invoke(item.id)
@@ -88,8 +114,9 @@ class PedidoViewModel(
 
     }
 
-    fun add(formState: PedidoFormState) {
+    fun add(formState: PedidoFormState, id: String = generateUUID()) {
         val command = CrearPedidoCommand(
+            id,
             formState.enabled,
             formState.date,
             formState.id_dependiente
