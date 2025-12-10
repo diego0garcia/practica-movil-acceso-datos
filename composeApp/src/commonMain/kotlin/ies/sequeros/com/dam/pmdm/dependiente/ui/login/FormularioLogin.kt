@@ -38,6 +38,7 @@ fun FormularioLogin(
     viewModel: FormularioLoginViewModel,
     onNavigateToHome: () -> Unit,
     onExit: () -> Unit = {},
+    // FUNCIÓN OPCIONAL QUE RECIBE 2 STRINGS
     validator: (suspend (String, String) -> String)? = null
 ) {
 

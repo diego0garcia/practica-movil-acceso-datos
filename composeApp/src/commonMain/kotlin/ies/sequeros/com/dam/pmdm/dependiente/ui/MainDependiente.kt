@@ -39,7 +39,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
-import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.lineapedido.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.lineapedido.VisualizarLineaPedido
@@ -64,6 +64,7 @@ fun MainDependiente(
     val options by mainViewModel.filteredItems.collectAsState() //
 
     val wai by appViewModel.windowsAdaptativeInfo.collectAsState();
+    //SE INICIAN LAS OPCIONES DEL MENU
     mainViewModel.setOptions(
         listOf(
             ItemOption(
@@ -96,15 +97,15 @@ fun MainDependiente(
 
     val adaptiveInfo = currentWindowAdaptiveInfo()
 
-
+    //LOGIN
     val loginViewModel = viewModel { FormularioLoginViewModel() }
-
+    //NAVEGACION ENTRE PANTALLAS DE DEPENDIENTE
     val navegador: @Composable () -> Unit = {
         NavHost(
             navController,
             startDestination = DependienteRoutes.Login
         ) {
-            //Para que se inicie el Login
+            //PARA QUE SE INICIE EL LOGIN
             composable(DependienteRoutes.Login) {
                 FormularioLogin(
                     viewModel = loginViewModel,
@@ -115,7 +116,7 @@ fun MainDependiente(
                     validator = validator
                 )
             }
-
+            //PARA VER LAS LINEAS DE PEDIDOS CREADAS
             composable(DependienteRoutes.Main) {
                 VisualizarLineaPedido(lineaPedidoViewModel = lineaPedidoViewModel ,pedidoViewModel = pedidoViewModel, formularioLoginViewModel = formularioLoginViewModel )
             }
@@ -124,7 +125,7 @@ fun MainDependiente(
 
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
-    //Si estas en login no abre la pantalla principal
+    //SI ESTAS EN LOGIN NO ABRE LA PANTALLA PRINCIPAL
     if (currentRoute == DependienteRoutes.Login) {
         navegador()
         return

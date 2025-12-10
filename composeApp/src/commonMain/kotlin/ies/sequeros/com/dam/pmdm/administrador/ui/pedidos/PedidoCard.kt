@@ -82,6 +82,7 @@ fun PedidoCard(
         ),
         border = BorderStroke(1.dp, borderColor)
     ) {
+        // MOSTRAR INFO DE PEDIDO
         Column(
             modifier = Modifier
                 .padding(16.dp)

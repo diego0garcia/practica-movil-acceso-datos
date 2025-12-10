@@ -52,7 +52,7 @@ fun Productos (
     }
 
 
-    // Contenedor principal
+    // CONTENEDOR PRINCIPAL
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -103,7 +103,7 @@ fun Productos (
                 minSize = 512.dp
             )
         ) {
-
+            //MUESTRA LA CARD DE PRODUCTO
             items(filteredItems.size) { item ->
                 ProductoCard(
                     filteredItems.get(item),

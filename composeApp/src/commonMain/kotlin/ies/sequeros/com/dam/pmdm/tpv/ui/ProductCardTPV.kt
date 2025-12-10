@@ -103,9 +103,10 @@ fun ProductoCardTPV(
             ) {
                 ImagenDesdePath(imagePath, Res.drawable.hombre, Modifier.fillMaxWidth())
             }
-
+            // MOSTRAR INFO DE PEDIDO
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
+                    //APARECE EL NOMBRE DEL PRODUCTO
                     text = item.name,
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                     color = MaterialTheme.colorScheme.onSurface
@@ -115,6 +116,7 @@ fun ProductoCardTPV(
                     DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
                 )
                 Text(
+                    //APARECE LA DESCRIPCION DEL PRODUCTO
                     text = item.description,
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
@@ -141,6 +143,7 @@ fun ProductoCardTPV(
                     }
                      */
                     Text(
+                        //APARECE EL PRECIO DEL PRODUCTO
                         text = item.price + "€",
                         style = MaterialTheme.typography.titleSmall,
                         color = MaterialTheme.colorScheme.onSurfaceVariant

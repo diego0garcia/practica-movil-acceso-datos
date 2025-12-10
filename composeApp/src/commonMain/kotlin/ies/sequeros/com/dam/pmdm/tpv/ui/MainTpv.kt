@@ -39,10 +39,14 @@ fun MainTpv(
     mainViewModel: MainTpvViewModel,
     onExit: () -> Unit
 ) {
+    //NAVEGACION
     val navController = rememberNavController()
+
+    //OPCIONES FILTRADAS
     val options by mainViewModel.filteredItems.collectAsState() //
 
     val wai by appViewModel.windowsAdaptativeInfo.collectAsState();
+    //SE INICIAN LAS OPCIONES DEL MENU
     mainViewModel.setOptions(
         listOf(
             ItemOption(
@@ -76,7 +80,7 @@ fun MainTpv(
 
     val adaptiveInfo = currentWindowAdaptiveInfo()
 
-
+    //NAVEGACION ENTRE PANTALLAS DEL TPV
     val navegador: @Composable () -> Unit = {
         NavHost(
             navController,

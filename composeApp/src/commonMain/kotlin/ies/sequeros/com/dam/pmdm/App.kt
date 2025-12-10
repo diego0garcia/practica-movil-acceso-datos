@@ -20,7 +20,7 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
-import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.lineapedido.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 
@@ -100,7 +100,7 @@ fun App(
                         }
                     },
                     validator = { nombre, contraseña ->
-                        // Login de admins
+                        // LOGIN DE ADMIN
                         loginValidator.validar(nombre, contraseña, soloAdmins = true)
                     }
                 )

@@ -88,7 +88,7 @@ fun PrincipalTpv(
     val filteredCategorias = categorias.filter { it.enabled == true}
 
     Scaffold(
-        topBar = {
+        topBar = {//BARRA SUPERIOR
             Box(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -112,6 +112,7 @@ fun PrincipalTpv(
                         contentDescription = "Carrito",
                         modifier = Modifier.size(40.dp)
                     )
+                    // CONTADOR DE PRODUCTOS EN EL CARRITO
                     if (pedido.isNotEmpty()) {
                         Box(
                             modifier = Modifier
@@ -141,6 +142,7 @@ fun PrincipalTpv(
                 //horizontalAlignment = Alignment.TopCenter,
                 verticalArrangement = Arrangement.Top
             ) {
+                // GRID PRINCIPAL DE CATEGORÍAS
                 LazyVerticalGrid(
                     columns = GridCells.Adaptive(
                         minSize = 512.dp
@@ -163,7 +165,7 @@ fun PrincipalTpv(
                                 contentAlignment = Alignment.Center
                             ) {
                                 Text(
-                                    filteredCategorias.get(item).name
+                                    filteredCategorias.get(item).name//NOMBRE DE LA CATEGORIA
                                 )
                             }
                             // FILTRAR PRODUCTO POR CATEGORIAS USANDO ID
@@ -180,6 +182,7 @@ fun PrincipalTpv(
                                     )
                                 }
                             }else{
+                                //GRID DE PRODUCTOS
                                 LazyVerticalGrid(
                                     columns = GridCells.Fixed(3),
                                     modifier = Modifier
@@ -198,9 +201,10 @@ fun PrincipalTpv(
                                             elevation = null,
                                             contentPadding = PaddingValues(0.dp),
                                             onClick = {
+                                                //AÑADIR PRODUCTO AL PEDIDO
                                                 principalTpvViewModel.añadirProducto(productosFiltrados.get(item))
                                             }
-                                        ) {
+                                        ) {//TARJETA VISUAL DE TPV
                                             ProductoCardTPV(
                                                 productosFiltrados.get(item)
                                             )

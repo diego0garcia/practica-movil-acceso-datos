@@ -56,7 +56,7 @@ import androidx.compose.ui.unit.dp
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.categorias.CategoriaDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.dependientes.DependienteDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
-import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.lineapedido.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 import ies.sequeros.com.dam.pmdm.commons.ui.ImagenDesdePath
@@ -98,6 +98,7 @@ fun PedidoCardDependiente(
         ),
         border = BorderStroke(1.dp, borderColor)
     ) {
+        // MOSTRAR INFO DE PEDIDO
         Column(
             modifier = Modifier
                 .padding(16.dp)
