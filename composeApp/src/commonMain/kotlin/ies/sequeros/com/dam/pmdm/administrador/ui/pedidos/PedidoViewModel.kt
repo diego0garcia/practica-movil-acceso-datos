@@ -12,6 +12,7 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.activar.Activa
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.activar.ActivarPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.ListarPedidosUseCase
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaFormState
@@ -43,7 +44,7 @@ class PedidoViewModel(
 
     init {
         cerrarPedidoUseCase = CerrarPedidoUseCase(pedidoRepositorio,almacenDatos)
-        crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio,almacenDatos)
+        crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio, almacenDatos)
         listarPedidoUseUseCase = ListarPedidosUseCase(pedidoRepositorio,almacenDatos)
         activarPedidoUseUseCase = ActivarPedidoUseCase(pedidoRepositorio,almacenDatos)
 

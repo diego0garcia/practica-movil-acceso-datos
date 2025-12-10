@@ -5,8 +5,10 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.Check
@@ -22,6 +24,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.crear.CrearLineaPedidoCommand
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
@@ -51,7 +54,10 @@ fun VisualizarPedido(
             onClose()
             principalTpvViewModel.borrarPedido()
         } else print("PEDIDO VACIO")
+
+
     }
+    /*
     Surface(
         modifier = Modifier
             .fillMaxWidth()
@@ -61,8 +67,13 @@ fun VisualizarPedido(
         shape = RoundedCornerShape(16.dp),
         color = MaterialTheme.colorScheme.surface
     ) {
+
+     */
+        val scrollState = rememberScrollState()
         Column(
             modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(scrollState)
                 .padding(24.dp),
             verticalArrangement = Arrangement.spacedBy(16.dp)
         ) {
@@ -83,7 +94,8 @@ fun VisualizarPedido(
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
-                //Seleccionar dependientes
+                //Seleccionar dependientes, comentado pq aqui no va, jose copialo de aquí
+                /*
                 Column {
                     OutlinedTextField(
                         value = principalTpvViewModel.dependienteSelected,
@@ -120,6 +132,7 @@ fun VisualizarPedido(
                         }
                     }
                 }
+                 */
             }
 
             Column() {
@@ -139,13 +152,16 @@ fun VisualizarPedido(
                                     .fillMaxWidth()
                                     .height(42.dp)
                                     //.padding(16.dp)
-                                    .background(MaterialTheme.colorScheme.primary, shape = CircleShape),
+                                    .background(MaterialTheme.colorScheme.primary, shape = RoundedCornerShape(16.dp)),
                                 verticalAlignment = Alignment.CenterVertically,
                                 horizontalArrangement = Arrangement.Center
                             ) {
                                 Text(
-                                    items.get(item).name + "   " + items.get(item).price + "€"
+                                    "   " + items.get(item).name + "   " + items.get(item).price + "€"
                                 )
+
+                                Spacer(modifier = Modifier.weight(1f))
+
                                 IconButton(
                                     onClick = {
                                         principalTpvViewModel.borrarLinea(item)
@@ -158,7 +174,7 @@ fun VisualizarPedido(
                         }
                     }
                     HorizontalDivider(
-                        Modifier.fillMaxWidth(0.8f).padding(10.dp),
+                        Modifier.fillMaxWidth(1f).padding(10.dp),
                         DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
                     )
                     Text(
@@ -188,7 +204,7 @@ fun VisualizarPedido(
                     onClick = {
                         terminarPedido()
                     },
-                    enabled = items.isNotEmpty() && principalTpvViewModel.dependienteSelected.isNotBlank()
+                    enabled = items.isNotEmpty() /*&& principalTpvViewModel.dependienteSelected.isNotBlank()*/
                 ) {
                     Icon(Icons.Default.Check, contentDescription = null)
                 }
@@ -198,5 +214,7 @@ fun VisualizarPedido(
                 }
             }
         }
+    /*
     }
+     */
 }

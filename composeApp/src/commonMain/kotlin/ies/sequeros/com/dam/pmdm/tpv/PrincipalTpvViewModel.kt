@@ -11,6 +11,7 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.lineapedido.crear.Crea
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.PedidoDTO
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoUseCase
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
@@ -39,15 +40,13 @@ class PrincipalTpvViewModel(
     val pedido: List<ProductoDTO> = _pedido
     var pedidoFormState by mutableStateOf(
         PedidoFormState(
-            id_dependiente = ""
+            id_dependiente = null
         )
     )
 
 
     init {
         crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio,almacenDatos)
-
-
     }
 
     fun exit() {

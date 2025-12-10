@@ -89,19 +89,23 @@ fun PedidoCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Imagen circular con borde
-            Box(
-                modifier = Modifier
-                    .size(90.dp)
-                    .clip(CircleShape)
-                    .border(3.dp, borderColor, CircleShape)
-                    .background(MaterialTheme.colorScheme.surfaceVariant),
-                contentAlignment = Alignment.Center
-            ) {
+            Text(
+                text = "ID Pedido: " + item.id,
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
 
-            }
+            Text(
+                text = "Fecha: " + item.date,
+                style = MaterialTheme.typography.titleSmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
 
-            // 🧩 Estado y rol
+            HorizontalDivider(
+                Modifier.fillMaxWidth(0.8f),
+                DividerDefaults.Thickness, MaterialTheme.colorScheme.outlineVariant
+            )
+
             Row(
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.CenterVertically
@@ -160,11 +164,6 @@ fun PedidoCard(
                 // Ver detalles
                 OutlinedIconButton(onClick = onView) {
                     Icon(Icons.AutoMirrored.Filled.Article, contentDescription = "Ver")
-                }
-
-                // Editar
-                OutlinedIconButton(onClick = { onEdit(item) }) {
-                    Icon(Icons.Default.Edit, contentDescription = "Editar")
                 }
 
                 // Eliminar

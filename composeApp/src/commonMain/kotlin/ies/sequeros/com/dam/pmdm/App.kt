@@ -7,6 +7,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import ies.sequeros.com.dam.pmdm.administrador.AdministradorViewModel
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
@@ -38,6 +39,7 @@ fun App(
     categroiaRepositorio : ICategoriaRepositorio,
     productoRepostorio : IProductoRepositorio,
     pedidoRepositorio : IPedidoRepositorio,
+    encryptador: IEncryptador,
     almacenImagenes:AlmacenDatos
 ) {
 
@@ -47,11 +49,11 @@ fun App(
     val mainViewModel = remember { MainAdministradorViewModel() }
     val administradorViewModel = viewModel { AdministradorViewModel() }
     val lineaPedidosViewModel = viewModel{ LineaPedidoViewModel(lineaPedidoRepositorio, almacenImagenes) }
-    val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, almacenImagenes) }
+    val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, encryptador,almacenImagenes) }
     val categoriasViewModel = viewModel{ CategoriaViewModel(categroiaRepositorio, almacenImagenes) }
     val pedidosViewModel = viewModel{ PedidoViewModel(pedidoRepositorio, almacenImagenes) }
     val productosViewModel = viewModel{ ProductoViewModel(productoRepostorio, categroiaRepositorio, almacenImagenes) }
-    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel(pedidosViewModel,lineaPedidosViewModel,lineaPedidoRepositorio,pedidoRepositorio,almacenImagenes)}
+    val principalTpvViewModel = viewModel{ PrincipalTpvViewModel(pedidosViewModel,lineaPedidosViewModel,lineaPedidoRepositorio,pedidoRepositorio, almacenImagenes)}
     appViewModel.setWindowsAdatativeInfo(currentWindowAdaptiveInfo())
     val navController = rememberNavController()
 
@@ -59,7 +61,7 @@ fun App(
     val maintpvViewModel = viewModel { MainTpvViewModel() }
     val mainDependienteViewModel = viewModel { MainDependienteViewModel() }
     //Validacion del login
-    val loginValidator = remember { LoginValidator(dependienteRepositorio) }
+    val loginValidator = remember { LoginValidator(dependienteRepositorio, encryptador) }
 
     // UI
     AppTheme(appViewModel.darkMode.collectAsState()) {
