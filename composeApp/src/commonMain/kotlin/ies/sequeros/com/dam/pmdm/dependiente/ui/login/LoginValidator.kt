@@ -1,10 +1,11 @@
-package ies.sequeros.com.dam.pmdm.dependiente.ui
+package ies.sequeros.com.dam.pmdm.dependiente.ui.login
 
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 
 class LoginValidator(
     private val dependienteRepositorio: IDependienteRepositorio,
+    private val formularioLoginViewModel: FormularioLoginViewModel,
     private val encrytador: IEncryptador
 ) {
 
@@ -22,6 +23,9 @@ class LoginValidator(
 
         if (soloAdmins && !user.isAdmin) return "Este usuario no es administrador"
 
+        //AQUÍ COGEMOS EL ID DEL USUARIO Y LO AÑADIMOS AL VIEWMODEL PARA
+        // PODER USARLO LUEGO AL ENTREGAR EL PRODUCTO SABER QUE USARIO LO ENTREGÓ
+        formularioLoginViewModel.setId(user.id)
         return ""
     }
 }

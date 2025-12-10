@@ -25,10 +25,12 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLogin
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLoginViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
-import ies.sequeros.com.dam.pmdm.dependiente.ui.LoginValidator
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.LoginValidator
 import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
 
 @Suppress("ViewModelConstructorInComposable")
@@ -60,8 +62,10 @@ fun App(
     val dependienteViewModel = viewModel { DependienteViewModel() }
     val maintpvViewModel = viewModel { MainTpvViewModel() }
     val mainDependienteViewModel = viewModel { MainDependienteViewModel() }
+    val formularioLoginViewModel = viewModel { FormularioLoginViewModel() }
+
     //Validacion del login
-    val loginValidator = remember { LoginValidator(dependienteRepositorio, encryptador) }
+    val loginValidator = remember { LoginValidator(dependienteRepositorio, formularioLoginViewModel,encryptador) }
 
     // UI
     AppTheme(appViewModel.darkMode.collectAsState()) {
@@ -80,9 +84,9 @@ fun App(
 
             // LOGIN ADMIN
             composable(AppRoutes.AdministradorLogin) {
-                val loginViewModel = viewModel { ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLoginViewModel() }
+                val loginViewModel = viewModel { FormularioLoginViewModel() }
 
-                ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLogin(
+                FormularioLogin(
                     viewModel = loginViewModel,
                     onNavigateToHome = {
                         navController.navigate(AppRoutes.Administrador) {
@@ -132,8 +136,8 @@ fun App(
                     appViewModel,
                     mainDependienteViewModel,
                     dependienteViewModel,
-                    pedidosViewModel,
-                    {
+                    pedidosViewModel, lineaPedidosViewModel,
+                    formularioLoginViewModel,{
                         navController.navigate(AppRoutes.Main) {
                             popUpTo(AppRoutes.Main)
                             launchSingleTop = true

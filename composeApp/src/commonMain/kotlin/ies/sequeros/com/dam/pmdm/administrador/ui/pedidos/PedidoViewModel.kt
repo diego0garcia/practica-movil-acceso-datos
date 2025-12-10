@@ -13,6 +13,8 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.activar.Activa
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoCommand
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.entregar.EntregarPedidoCommand
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.entregar.EntregarPedidoUseCase
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.listar.ListarPedidosUseCase
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.form.CategoriaFormState
@@ -36,6 +38,7 @@ class PedidoViewModel(
     private val crearPedidoUseCase: CrearPedidoUseCase
     private val listarPedidoUseUseCase: ListarPedidosUseCase
     private val activarPedidoUseUseCase: ActivarPedidoUseCase
+    private val entregarPedidoUseUseCase: EntregarPedidoUseCase
 
     private val _items = MutableStateFlow<MutableList<PedidoDTO>>(mutableListOf())
     val items: StateFlow<List<PedidoDTO>> = _items.asStateFlow()
@@ -47,6 +50,7 @@ class PedidoViewModel(
         crearPedidoUseCase = CrearPedidoUseCase(pedidoRepositorio, almacenDatos)
         listarPedidoUseUseCase = ListarPedidosUseCase(pedidoRepositorio,almacenDatos)
         activarPedidoUseUseCase = ActivarPedidoUseCase(pedidoRepositorio,almacenDatos)
+        entregarPedidoUseUseCase = EntregarPedidoUseCase(pedidoRepositorio,almacenDatos)
 
         viewModelScope.launch {
             var items = listarPedidoUseUseCase.invoke()
@@ -69,6 +73,26 @@ class PedidoViewModel(
 
         viewModelScope.launch {
             val item=activarPedidoUseUseCase.invoke(command)
+
+            _items.value = _items.value.map {
+                if (item.id == it.id)
+                    item
+                else
+                    it
+            } as MutableList<PedidoDTO>
+        }
+
+    }
+
+    fun deliverPedido(item: PedidoDTO, id_dependiente: String) {
+        val command= EntregarPedidoCommand(
+            item.id,
+            item.enable,
+            id_dependiente = id_dependiente
+        )
+
+        viewModelScope.launch {
+            val item=entregarPedidoUseUseCase.invoke(command)
 
             _items.value = _items.value.map {
                 if (item.id == it.id)
