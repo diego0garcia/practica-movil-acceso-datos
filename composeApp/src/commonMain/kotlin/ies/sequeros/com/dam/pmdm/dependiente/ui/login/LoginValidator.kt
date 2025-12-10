@@ -6,7 +6,6 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 class LoginValidator(
     private val dependienteRepositorio: IDependienteRepositorio,
     private val formularioLoginViewModel: FormularioLoginViewModel,
-    private val encrytador: IEncryptador
 ) {
 
     suspend fun validar(nombre: String, contraseña: String, soloAdmins: Boolean = false): String {

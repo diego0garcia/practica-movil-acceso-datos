@@ -59,6 +59,7 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.ui.unit.dp
 import ies.sequeros.com.dam.pmdm.commons.ui.ImagenDesdePath
 import ies.sequeros.com.dam.pmdm.commons.ui.SelectorImagenComposable
@@ -121,10 +122,7 @@ fun DependienteForm(
                     modifier = Modifier.size(40.dp)
                 )
                 Text(
-                    text = if (selected == null)
-                        "Crear nuevo usuario"
-                    else
-                        "Editar usuario",
+                    text = if (selected.value == null) "Crear nuevo usuario" else "Editar usuario",
                     style = MaterialTheme.typography.headlineSmall,
                     color = MaterialTheme.colorScheme.onSurface
                 )
@@ -298,7 +296,7 @@ fun DependienteForm(
                     //Text("Cancelar")
                 }
             }
-
+                /*
                 // Si se nos pasa un PedidoViewModel mostramos la lista de pedidos en modo lectura
                 pedidoViewModel?.let { pvm ->
                     Spacer(modifier = Modifier.height(8.dp))
@@ -312,7 +310,7 @@ fun DependienteForm(
                     // mostramos una grid similar a la vista de administrador pero con acciones vacías (solo ver)
                     LazyVerticalGrid(
                         columns = GridCells.Adaptive(minSize = 512.dp),
-                        modifier = Modifier.fillMaxSize()
+                        modifier = Modifier.heightIn(max = 500.dp)
                     ) {
                         items(pedidos.size) { index ->
                             val item: PedidoDTO = pedidos[index]
@@ -327,6 +325,8 @@ fun DependienteForm(
                         }
                     }
                 }
+
+                 */
         }
     }
 }

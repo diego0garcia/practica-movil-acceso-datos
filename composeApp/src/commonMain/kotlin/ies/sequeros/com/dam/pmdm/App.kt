@@ -41,7 +41,6 @@ fun App(
     categroiaRepositorio : ICategoriaRepositorio,
     productoRepostorio : IProductoRepositorio,
     pedidoRepositorio : IPedidoRepositorio,
-    encryptador: IEncryptador,
     almacenImagenes:AlmacenDatos
 ) {
 
@@ -51,7 +50,7 @@ fun App(
     val mainViewModel = remember { MainAdministradorViewModel() }
     val administradorViewModel = viewModel { AdministradorViewModel() }
     val lineaPedidosViewModel = viewModel{ LineaPedidoViewModel(lineaPedidoRepositorio, almacenImagenes) }
-    val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, encryptador,almacenImagenes) }
+    val dependientesViewModel = viewModel{ DependientesViewModel(dependienteRepositorio, almacenImagenes) }
     val categoriasViewModel = viewModel{ CategoriaViewModel(categroiaRepositorio, almacenImagenes) }
     val pedidosViewModel = viewModel{ PedidoViewModel(pedidoRepositorio, almacenImagenes) }
     val productosViewModel = viewModel{ ProductoViewModel(productoRepostorio, categroiaRepositorio, almacenImagenes) }
@@ -65,7 +64,7 @@ fun App(
     val formularioLoginViewModel = viewModel { FormularioLoginViewModel() }
 
     //Validacion del login
-    val loginValidator = remember { LoginValidator(dependienteRepositorio, formularioLoginViewModel,encryptador) }
+    val loginValidator = remember { LoginValidator(dependienteRepositorio, formularioLoginViewModel) }
 
     // UI
     AppTheme(appViewModel.darkMode.collectAsState()) {

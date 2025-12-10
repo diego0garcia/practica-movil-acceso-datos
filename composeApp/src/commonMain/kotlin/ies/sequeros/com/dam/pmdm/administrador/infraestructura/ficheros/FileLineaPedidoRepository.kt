@@ -1,16 +1,14 @@
 package ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros
 
-import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
-import ies.sequeros.com.dam.pmdm.administrador.modelo.Dependiente
-import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.LineaPedido
-import java.io.File
+import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
 import kotlinx.serialization.json.Json
+import java.io.File
 
 class FileLineaPedidoRepository(
     private val almacenDatos: AlmacenDatos,
-    private val fileName: String = "lineapedidos.json"
+    private val fileName: String = "lineapedido.json"
 ) : ILineaPedidoRepositorio {
 
     private val subdirectory="/data/"
@@ -25,7 +23,7 @@ class FileLineaPedidoRepository(
         return directory.absolutePath
     }
 
-    private suspend fun save(items: List<LineaPedido>) {
+    private suspend fun save(items: MutableList<LineaPedido>) {
         if(!File(this.getDirectoryPath()).exists())
             File(this.getDirectoryPath()).mkdirs()
         this.almacenDatos.writeFile(this.getDirectoryPath()+"/"+this.fileName, Json.encodeToString(items))
@@ -34,10 +32,10 @@ class FileLineaPedidoRepository(
     override suspend fun add(item: LineaPedido) {
         val items = this.getAll().toMutableList()
 
-        if (items.firstOrNull { it.id == item.id } == null) {
+        if (items.firstOrNull { it.product_name == item.product_name } == null) {
             items.add(item)
         } else {
-            throw IllegalArgumentException("ALTA:El usuario con id:" + item.id + " ya existe")
+            throw IllegalArgumentException("ALTA:El lineapedido con id:" + item.id + " ya existe")
         }
         this.save(items)
     }
@@ -56,7 +54,7 @@ class FileLineaPedidoRepository(
         } else {
             throw IllegalArgumentException(
                 "BORRADO:" +
-                        " El usuario con id:" + id + " NO  existe"
+                        " El lineapedido con id:" + id + " NO  existe"
             )
         }
         return true
@@ -85,7 +83,7 @@ class FileLineaPedidoRepository(
     override suspend fun findByName(name: String): LineaPedido? {
         val elements=this.getAll()
         for(element in elements){
-            if(element.id==name)
+            if(element.product_name==name)
                 return element
         }
         return null; //this.items.values.firstOrNull { it.name.equals(name) };

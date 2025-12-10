@@ -9,7 +9,7 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 import ies.sequeros.com.dam.pmdm.generateUUID
 
 
-class CrearDependienteUseCase(private val repositorio: IDependienteRepositorio,private val almacenDatos: AlmacenDatos, private val encryptador: IEncryptador)  {
+class CrearDependienteUseCase(private val repositorio: IDependienteRepositorio,private val almacenDatos: AlmacenDatos)  {
 
     suspend  fun invoke(createUserCommand: CrearDependienteCommand): DependienteDTO {
         //this.validateUser(user)
@@ -18,8 +18,6 @@ class CrearDependienteUseCase(private val repositorio: IDependienteRepositorio,p
         }
         val id=generateUUID()
 
-        val encryptedPassword = encryptador.encriptar(createUserCommand.password)
-        println(encryptedPassword)
 
         //se almacena el fichero
         val imageName=almacenDatos.copy(createUserCommand.imagePath,id,"/dependientes/")
@@ -28,7 +26,7 @@ class CrearDependienteUseCase(private val repositorio: IDependienteRepositorio,p
             name = createUserCommand.name,
             email = createUserCommand.email,
             imagePath = imageName,
-            password = encryptedPassword,
+            password = createUserCommand.password,
             enabled = createUserCommand.enabled,
             isAdmin = createUserCommand.admin
         )

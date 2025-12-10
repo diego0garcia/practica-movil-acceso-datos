@@ -10,6 +10,7 @@ import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileDepe
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileCategoriaRepository
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileLineaPedidoRepository
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FilePedidoRepository
@@ -21,6 +22,7 @@ import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
+import java.util.Base64
 
 
 class MainActivity : ComponentActivity() {
