@@ -10,15 +10,19 @@ import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileDepe
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.IEncryptador
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileCategoriaRepository
+import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileLineaPedidoRepository
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FilePedidoRepository
 import ies.sequeros.com.dam.pmdm.administrador.infraestructura.ficheros.FileProductoRepository
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ICategoriaRepositorio
 
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
+import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IProductoRepositorio
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
+import java.util.Base64
 
 
 class MainActivity : ComponentActivity() {
@@ -34,6 +38,8 @@ class MainActivity : ComponentActivity() {
             FileProductoRepository(almacenDatos)
         val pedidoRepositorio: IPedidoRepositorio =
             FilePedidoRepository(almacenDatos)
+        val lineaPedidoRepositorio: ILineaPedidoRepositorio =
+            FileLineaPedidoRepository(almacenDatos)
 
         enableEdgeToEdge()
         super.onCreate(savedInstanceState)
@@ -43,7 +49,7 @@ class MainActivity : ComponentActivity() {
             //pasan a la aplicación,
             val almacenImagenes:AlmacenDatos=  AlmacenDatos(this)
 
-            App(dependienteRepositorio, categoriaRepositorio, productoRepostorio, pedidoRepositorio, almacenImagenes)
+            App(lineaPedidoRepositorio,dependienteRepositorio, categoriaRepositorio, productoRepostorio, pedidoRepositorio,almacenImagenes)
 
         }
     }

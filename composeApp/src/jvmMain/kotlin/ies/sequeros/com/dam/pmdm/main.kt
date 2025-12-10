@@ -28,14 +28,12 @@ fun main() = application {
     val categoriaRepositorioJava= BBDDRepositorioCategoriaJava("/app.properties")
     val productoRepositorioJava= BBDDRepositorioProductoJava("/app.properties")
     val pedidoRepositorioJava= BBDDRepositorioPedidoJava("/app.properties")
-    val encryptadorJava = Encryptador()
 
     val lineaPedidoRepositorio: ILineaPedidoRepositorio = BBDDLineaPedidoRepository(lineaPedidoRepositorioJava)
     val dependienteRepositorio: IDependienteRepositorio = BBDDDependienteRepository(dependienteRepositorioJava )
     val categoriaRepositorio: ICategoriaRepositorio = BBDDCategoriaRepository(categoriaRepositorioJava)
     val productoRepositorio: IProductoRepositorio = BBDDProductoRepository(productoRepositorioJava)
     val pedidoRepositorio: IPedidoRepositorio = BBDDPedidoRepository(pedidoRepositorioJava)
-    val encryptador: IEncryptador = encryptadorJava
 
     configureExternalLogging("./logging.properties")
     Window(
@@ -46,7 +44,7 @@ fun main() = application {
         title = "VegaBurguer",
     ) {
         //se envuelve el repositorio en java en uno que exista en Kotlin
-        App(lineaPedidoRepositorio, dependienteRepositorio,categoriaRepositorio, productoRepositorio,pedidoRepositorio, encryptador,AlmacenDatos())
+        App(lineaPedidoRepositorio, dependienteRepositorio,categoriaRepositorio, productoRepositorio,pedidoRepositorio, AlmacenDatos())
     }
 }
 fun configureExternalLogging(path: String) {

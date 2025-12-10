@@ -28,7 +28,6 @@ import kotlinx.coroutines.launch
 class DependientesViewModel(
     //private val administradorViewModel: MainAdministradorViewModel,
     private val dependienteRepositorio: IDependienteRepositorio,
-    private val encryptador: IEncryptador,
      val almacenDatos: AlmacenDatos
 ) : ViewModel() {
     //los casos de uso se crean dentro para la recomposición
@@ -48,7 +47,7 @@ class DependientesViewModel(
     init {
         actualizarDependienteUseCase = ActualizarDependienteUseCase(dependienteRepositorio,almacenDatos)
         borrarDependienteUseCase = BorrarDependienteUseCase(dependienteRepositorio,almacenDatos)
-        crearDependienteUseCase = CrearDependienteUseCase(dependienteRepositorio,almacenDatos, encryptador)
+        crearDependienteUseCase = CrearDependienteUseCase(dependienteRepositorio,almacenDatos)
         listarDependientesUseCase = ListarDependientesUseCase(dependienteRepositorio,almacenDatos)
         activarDependienteUseCase = ActivarDependienteUseCase(dependienteRepositorio,almacenDatos)
         cambiarPermisosUseCase= CambiarPermisosUseCase(dependienteRepositorio,almacenDatos)
