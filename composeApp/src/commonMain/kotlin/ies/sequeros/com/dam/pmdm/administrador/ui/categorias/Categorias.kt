@@ -32,7 +32,7 @@ fun Categorias (
         }
     }
 
-    // Contenedor principal
+    // CONTENEDOR PRINCIPAL
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -83,7 +83,7 @@ fun Categorias (
                 minSize = 512.dp
             )
         ) {
-
+            //MUESTRA LA CARTA DE CATEGORIA
             items(filteredItems.size) { item ->
                 CategoriaCard(
                     filteredItems.get(item),

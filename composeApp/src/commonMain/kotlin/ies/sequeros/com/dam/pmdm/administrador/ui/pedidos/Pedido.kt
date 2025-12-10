@@ -66,7 +66,7 @@ fun Pedidos (
                 minSize = 512.dp
             )
         ) {
-
+            //MUESTRA LA CARTA DE PEDIDO
             items(filteredItems.size) { item ->
                 PedidoCard(
                     filteredItems.get(item),

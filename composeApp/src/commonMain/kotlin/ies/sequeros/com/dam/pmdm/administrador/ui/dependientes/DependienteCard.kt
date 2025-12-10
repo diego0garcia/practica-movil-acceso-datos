@@ -185,7 +185,7 @@ fun DependienteCard(
                     )
                 }
 
-                // Cambiar admin
+                // CAMBIAR A ADMIN
                 OutlinedIconButton(
                     onClick ={ onChangeAdmin(item)},
                     colors = IconButtonDefaults.filledTonalIconButtonColors(

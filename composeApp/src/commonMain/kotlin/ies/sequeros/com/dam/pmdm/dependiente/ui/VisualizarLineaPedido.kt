@@ -14,7 +14,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.lineapedido.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLoginViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.login.PedidoCardDependiente
@@ -39,7 +39,7 @@ fun VisualizarLineaPedido(
 
     val filteredPedidos = filteredItems.filter { it.enable }
 
-    // Contenedor principal
+    // CONTENEDOR PRINCIPAL
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -54,7 +54,7 @@ fun VisualizarLineaPedido(
 
         Spacer(modifier = Modifier.height(12.dp))
 
-        // Barra de búsqueda
+        // BARRA DE BUSQUEDA
         Row(
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
@@ -73,7 +73,7 @@ fun VisualizarLineaPedido(
             )
         }
 
-        // Grid de líneas de pedido
+        // GRID LINEAS DE PEDIDO
         LazyVerticalGrid(
             columns = GridCells.Adaptive(minSize = 512.dp)
         ) {

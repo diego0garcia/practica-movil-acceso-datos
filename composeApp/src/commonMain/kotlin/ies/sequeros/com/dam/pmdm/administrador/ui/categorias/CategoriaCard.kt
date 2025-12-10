@@ -102,7 +102,7 @@ fun CategoriaCard(
 
             }
 
-            //  Nombre y correo
+            //  NOMBRE Y DESCRIPCION
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = item.name,

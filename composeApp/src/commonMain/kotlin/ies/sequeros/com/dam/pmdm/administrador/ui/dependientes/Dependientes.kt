@@ -100,6 +100,7 @@ fun Dependientes(
                 minSize = 512.dp
             )
         ){
+            //MUESTRA LA CARTA DE DEPENDIENTE
             items(filteredItems.size) { item ->
                 DependienteCard(filteredItems.get(item),
                     {

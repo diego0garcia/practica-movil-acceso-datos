@@ -62,9 +62,8 @@ fun PrincipalAdministrador(){
             )
             Spacer(modifier = Modifier.height(4.dp))
 
-            // Título
+            // TITULO
             Text(
-
                 text = "VegaBurguer Administración",
                 fontSize = 26.sp, // tamaño grande
                 fontWeight = FontWeight.Bold,

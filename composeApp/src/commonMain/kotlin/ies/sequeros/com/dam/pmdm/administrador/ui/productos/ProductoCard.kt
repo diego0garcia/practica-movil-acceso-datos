@@ -90,7 +90,7 @@ fun ProductoCard(
             horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
-            // Imagen circular con borde
+            // IMAGEN CIRCULAR CON BORDE
             Box(
                 modifier = Modifier
                     .size(90.dp)
@@ -103,7 +103,7 @@ fun ProductoCard(
 
             }
 
-            //  Nombre y correo
+            // MOSTRAR INFO DE PRODUCTO
             Column(horizontalAlignment = Alignment.CenterHorizontally) {
                 Text(
                     text = item.name,
