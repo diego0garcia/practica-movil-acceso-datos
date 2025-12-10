@@ -19,7 +19,7 @@ import ies.sequeros.com.dam.pmdm.administrador.ui.MainAdministradorViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpv
 import ies.sequeros.com.dam.pmdm.administrador.ui.categorias.CategoriaViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.dependientes.DependientesViewModel
-import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.lineapedido.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.productos.ProductoViewModel
 
@@ -27,7 +27,9 @@ import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependiente
 import ies.sequeros.com.dam.pmdm.dependiente.ui.MainDependienteViewModel
 import ies.sequeros.com.dam.pmdm.tpv.ui.MainTpvViewModel
-import ies.sequeros.com.dam.pmdm.dependiente.ui.LoginValidator
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLogin
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLoginViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.validacion.LoginValidator
 import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
 
 @Suppress("ViewModelConstructorInComposable")
@@ -78,9 +80,9 @@ fun App(
 
             // LOGIN ADMIN
             composable(AppRoutes.AdministradorLogin) {
-                val loginViewModel = viewModel { ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLoginViewModel() }
+                val loginViewModel = viewModel { FormularioLoginViewModel() }
 
-                ies.sequeros.com.dam.pmdm.dependiente.ui.FormularioLogin(
+                FormularioLogin(
                     viewModel = loginViewModel,
                     onNavigateToHome = {
                         navController.navigate(AppRoutes.Administrador) {
@@ -124,7 +126,7 @@ fun App(
                     appViewModel,
                     mainDependienteViewModel,
                     dependienteViewModel,
-                    {
+                    principalTpvViewModel,pedidoRepositorio, lineaPedidosViewModel, onExit = {
                         navController.navigate(AppRoutes.Main) {
                             popUpTo(AppRoutes.Main)
                             launchSingleTop = true

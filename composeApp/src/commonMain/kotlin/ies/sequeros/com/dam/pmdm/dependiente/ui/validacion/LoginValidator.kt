@@ -1,4 +1,4 @@
-package ies.sequeros.com.dam.pmdm.dependiente.ui
+package ies.sequeros.com.dam.pmdm.dependiente.ui.validacion
 
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IDependienteRepositorio
 
@@ -12,11 +12,11 @@ class LoginValidator(
             .getAll()
             .firstOrNull { it.name.equals(nombre, true) || it.email.equals(nombre, true) }
 
-        if (user == null) return "Usuario o contraseña incorrectos"
-        if (!user.enabled) return "Usuario deshabilitado"
-        if (user.password != contraseña) return "Usuario o contraseña incorrectos"
+        //if (user == null) return "Usuario o contraseña incorrectos"
+        //if (!user.enabled) return "Usuario deshabilitado"
+        //if (user.password != contraseña) return "Usuario o contraseña incorrectos"
 
-        if (soloAdmins && !user.isAdmin) return "Este usuario no es administrador"
+        //if (soloAdmins && !user.isAdmin) return "Este usuario no es administrador"
 
         return ""
     }

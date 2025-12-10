@@ -14,7 +14,7 @@ import ies.sequeros.com.dam.pmdm.administrador.aplicacion.pedidos.crear.CrearPed
 import ies.sequeros.com.dam.pmdm.administrador.aplicacion.productos.ProductoDTO
 import ies.sequeros.com.dam.pmdm.administrador.modelo.ILineaPedidoRepositorio
 import ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio
-import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.LineaPedidoViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.lineapedido.LineaPedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.PedidoViewModel
 import ies.sequeros.com.dam.pmdm.administrador.ui.pedidos.form.PedidoFormState
 import ies.sequeros.com.dam.pmdm.commons.infraestructura.AlmacenDatos
@@ -66,6 +66,10 @@ class PrincipalTpvViewModel(
     }
 
     fun borrarPedido() {
+        _pedido.clear()
+    }
+
+    fun borrarLineaPedido() {
         _pedido.clear()
     }
 

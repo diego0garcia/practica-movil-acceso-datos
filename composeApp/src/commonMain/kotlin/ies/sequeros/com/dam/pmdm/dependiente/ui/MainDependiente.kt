@@ -30,12 +30,11 @@ import androidx.compose.material3.adaptive.currentWindowAdaptiveInfo
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
+import androidx.lifecycle.viewmodel.compose.viewModel
+import ies.sequeros.com.dam.pmdm.tpv.PrincipalTpvViewModel
+import ies.sequeros.com.dam.pmdm.administrador.ui.lineapedido.LineaPedidoViewModel
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -43,6 +42,9 @@ import androidx.navigation.compose.rememberNavController
 import androidx.window.core.layout.WindowWidthSizeClass
 import ies.sequeros.com.dam.pmdm.AppViewModel
 import ies.sequeros.com.dam.pmdm.dependiente.DependienteViewModel
+import ies.sequeros.com.dam.pmdm.dependiente.ui.lineapedido.VisualizarLineaPedido
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLogin
+import ies.sequeros.com.dam.pmdm.dependiente.ui.login.FormularioLoginViewModel
 
 
 @Suppress("ViewModelConstructorInComposable")
@@ -51,12 +53,15 @@ fun MainDependiente(
     appViewModel: AppViewModel,
     mainViewModel: MainDependienteViewModel,
     dependienteViewModel: DependienteViewModel,
+    principalTpvViewModel: PrincipalTpvViewModel,
+    pedidoRepositorio: ies.sequeros.com.dam.pmdm.administrador.modelo.IPedidoRepositorio,
+    lineaPedidoViewModel: LineaPedidoViewModel,
     onExit: () -> Unit,
     validator: (suspend (String, String) -> String)? = null
 ) {
 
     val navController = rememberNavController()
-    val options by mainViewModel.filteredItems.collectAsState() //
+    val options by mainViewModel.filteredItems.collectAsState()
 
     val wai by appViewModel.windowsAdaptativeInfo.collectAsState();
     mainViewModel.setOptions(
@@ -86,11 +91,7 @@ fun MainDependiente(
         )
     )
 
-    //icono seleccionado
-    //var selected by remember { mutableStateOf(items[0]) }
-
     val adaptiveInfo = currentWindowAdaptiveInfo()
-
 
     val loginViewModel = viewModel { FormularioLoginViewModel() }
 
@@ -99,7 +100,6 @@ fun MainDependiente(
             navController,
             startDestination = DependienteRoutes.Login
         ) {
-            //Para que se inicie el Login
             composable(DependienteRoutes.Login) {
                 FormularioLogin(
                     viewModel = loginViewModel,
@@ -110,36 +110,31 @@ fun MainDependiente(
                 )
             }
             composable(DependienteRoutes.Main) {
-                PrincipalDependiente()
+                PrincipalDependiente(principalTpvViewModel,lineaPedidoViewModel)
+            }
+            composable(DependienteRoutes.Main) {
+                VisualizarLineaPedido(lineaPedidoViewModel)
             }
         }
     }
 
     val currentRoute = navController.currentBackStackEntryAsState().value?.destination?.route
 
-    //Si estas en login no abre la pantalla principal
     if (currentRoute == DependienteRoutes.Login) {
         navegador()
         return
     }
 
-
-
     if (wai?.windowSizeClass?.windowWidthSizeClass == WindowWidthSizeClass.COMPACT) {
         Scaffold(
             bottomBar = {
-
                 NavigationBar {
                     mainViewModel.filteredItems.collectAsState().value.forEach { item ->
-                        // if(!item.admin || (item.admin && appViewModel.hasPermission()))
                         NavigationBarItem(
-
                             selected = true,
                             onClick = { item.action() },
-
                             icon = { Icon(item.icon, contentDescription = item.name) },
-
-                            )
+                        )
                     }
                 }
             }
@@ -149,7 +144,6 @@ fun MainDependiente(
             }
         }
     } else {
-
         PermanentNavigationDrawer(
             drawerContent = {
                 PermanentDrawerSheet(
@@ -160,12 +154,11 @@ fun MainDependiente(
                     )
                 ) {
                     Column(
-                        modifier = Modifier.fillMaxHeight()  // ocupa todo el alto del drawer
+                        modifier = Modifier.fillMaxHeight()
                             .padding(vertical = 16.dp),
-                        verticalArrangement = Arrangement.Center,  // centra verticalmente
-                        horizontalAlignment = Alignment.CenterHorizontally  // opcional: centra horizontalmente
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
                     ) {
-
                         Spacer(Modifier.height(16.dp))
                         options.forEach { item ->
                             NavigationDrawerItem(
@@ -173,8 +166,7 @@ fun MainDependiente(
                                     Box(
                                         modifier = Modifier.fillMaxWidth(),
                                         contentAlignment = Alignment.Center,
-
-                                        ) {
+                                    ) {
                                         Icon(
                                             item.icon,
                                             tint = MaterialTheme.colorScheme.primary,
@@ -182,12 +174,10 @@ fun MainDependiente(
                                         )
                                     }
                                 },
-                                label = { appViewModel.windowsAdaptativeInfo.collectAsState().value?.windowSizeClass.toString() }, // sin texto
+                                label = { appViewModel.windowsAdaptativeInfo.collectAsState().value?.windowSizeClass.toString() },
                                 selected = false,
                                 onClick = { item.action() },
-                                modifier = Modifier
-                                    .padding(vertical = 4.dp) // espaciado entre items
-
+                                modifier = Modifier.padding(vertical = 4.dp)
                             )
                         }
                     }
@@ -203,13 +193,8 @@ fun MainDependiente(
                     verticalArrangement = Arrangement.Center
                 ) {
                     navegador()
-
                 }
             }
         )
     }
-
-
 }
-
-

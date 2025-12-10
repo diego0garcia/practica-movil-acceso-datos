@@ -1,4 +1,4 @@
-package ies.sequeros.com.dam.pmdm.dependiente.ui
+package ies.sequeros.com.dam.pmdm.dependiente.ui.login
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -90,16 +90,9 @@ fun PedidoCard(
             verticalArrangement = Arrangement.spacedBy(12.dp)
         ) {
             // Imagen circular con borde
-            Box(
-                modifier = Modifier
-                    .size(90.dp)
-                    .clip(CircleShape)
-                    .border(3.dp, borderColor, CircleShape)
-                    .background(MaterialTheme.colorScheme.surfaceVariant),
-                contentAlignment = Alignment.Center
-            ) {
-
-            }
+           Text(
+               item.date.toString(),
+           )
 
             // 🧩 Estado y rol
             Row(
